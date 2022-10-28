@@ -202,7 +202,7 @@ const Homepage = () => {
                   <span className="mx-2 fw-bold">Tag</span>
                 </li>
                 <li className="middletopbottomli">
-                  <i class="fa-solid fa-location-dot"></i>
+                  <i className="fa-solid fa-location-dot"></i>
                   <span className="mx-2 fw-bold">Location</span>
                 </li>
               </ul>
@@ -210,7 +210,7 @@ const Homepage = () => {
           </div>
           {post.map((element) => {
             return (
-              <div className="middlebottom">
+              <div className="middlebottom" key={element.imageUrl}>
                 <Postdetails
                   sendName={element.sendName}
                   time={element.time}

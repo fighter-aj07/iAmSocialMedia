@@ -5,15 +5,20 @@ const Postdetails = (props) => {
   let { sendName, time, description, imageUrl, likes, comments } = props;
   const [likecounter, setLikecounter] = useState(likes);
   const [kvalue, setKvalue] = useState(0);
+  let [likecolor, setLikecolor] = useState("dark");
+
   const likeHandler = () => {
     if (kvalue === 0) {
       setLikecounter(likecounter + 1);
       setKvalue(1);
+      setLikecolor("primary");
     } else {
       setLikecounter(likecounter - 1);
       setKvalue(0);
+      setLikecolor("dark");
     }
   };
+
   return (
     <div className="postcontainer">
       <div className="posttopbar">
@@ -39,7 +44,10 @@ const Postdetails = (props) => {
       </div>
       <div className="containasset">
         <div className="postbottombar">
-          <div className="postleftsidetop" onClick={likeHandler}>
+          <div
+            className={`postleftsidetop text-${likecolor}`}
+            onClick={likeHandler}
+          >
             <i className="fa-regular fa-thumbs-up"></i>
           </div>
           <div className="likerighttime">
@@ -48,7 +56,7 @@ const Postdetails = (props) => {
         </div>
         <div className="comment">
           <div className="postleftsidetop commenttop">
-            <i class="fa-regular fa-comment"></i>
+            <i className="fa-regular fa-comment"></i>
           </div>
           <div className="likerighttime commentpost">
             <p className="text-muted">{comments} Comments</p>
