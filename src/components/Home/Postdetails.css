@@ -1,0 +1,73 @@
+.postrightsidetop {
+  margin-left: 10px;
+  transform: translateY(20%);
+}
+
+.postimageleft {
+  height: 37px;
+  width: 37px;
+  border-radius: 30px;
+}
+
+.posttopbar {
+  display: flex;
+  flex-direction: row;
+}
+
+.postbottombar {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1.5rem;
+}
+
+.postleftsidetop {
+  cursor: pointer;
+}
+
+.postrighttime {
+  margin-left: 15px;
+  font-size: 0.85rem;
+  transform: translateY(25%);
+}
+
+.likerighttime {
+  margin-left: 10px;
+  font-size: 0.85rem;
+}
+
+.assets {
+  display: flex;
+  flex-direction: row;
+}
+
+.containasset {
+  display: flex;
+  flex-direction: row;
+}
+
+.comment {
+  display: flex;
+  margin-left: 1rem;
+  margin-top: 1.5rem;
+}
+
+.postimage {
+  display: flex;
+  justify-content: center;
+}
+
+.postimagecon {
+  padding: 2px;
+  width: 100%;
+}
+
+.fa-thumbs-up {
+  margin-left: 0.75rem;
+  font-size: 1.5rem;
+  color: rgb(10, 133, 233);
+}
+
+.fa-comment {
+  margin-left: 0.75rem;
+  font-size: 1.5rem;
+}
