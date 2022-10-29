@@ -50,7 +50,7 @@ const Middlebar = () => {
       imageUrl:
         "https://tse1.mm.bing.net/th?id=OIP.7bU94r8pJwC2OTmyaidv9wHaE4&pid=Api&P=0",
       likes: 11,
-      comments: 0,
+      comments: 3,
     },
   ];
 

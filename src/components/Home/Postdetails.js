@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import "./Postdetails.css";
+import Comment from "./Comment";
 
 const Postdetails = (props) => {
   let { sendName, time, description, imageUrl, likes, comments } = props;
   const [likecounter, setLikecounter] = useState(likes);
   const [kvalue, setKvalue] = useState(0);
+  const [lvalue, setLvalue] = useState(0);
   let [likecolor, setLikecolor] = useState("dark");
+  let [dispcomment, setDispcomment] = useState("none");
 
   const likeHandler = () => {
     if (kvalue === 0) {
@@ -16,6 +19,16 @@ const Postdetails = (props) => {
       setLikecounter(likecounter - 1);
       setKvalue(0);
       setLikecolor("dark");
+    }
+  };
+
+  const commentHandler = () => {
+    if (lvalue === 0) {
+      setLvalue(1);
+      setDispcomment("block");
+    } else {
+      setLvalue(0);
+      setDispcomment("none");
     }
   };
 
@@ -55,13 +68,26 @@ const Postdetails = (props) => {
           </div>
         </div>
         <div className="comment">
-          <div className="postleftsidetop commenttop">
+          <div className="postleftsidetop commenttop" onClick={commentHandler}>
             <i className="fa-regular fa-comment"></i>
           </div>
           <div className="likerighttime commentpost">
             <p className="text-muted">{comments} Comments</p>
           </div>
         </div>
+      </div>
+      <div className={`commentboxx my-2 d-${dispcomment}`}>
+        <ul className="displaycomment">
+          <li className="commentitems">
+            <Comment />
+          </li>
+          <li className="commentitems">
+            <Comment />
+          </li>
+          <li className="commentitems">
+            <Comment />
+          </li>
+        </ul>
       </div>
     </div>
   );
