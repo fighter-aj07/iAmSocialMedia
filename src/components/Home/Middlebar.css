@@ -21,6 +21,31 @@
   flex: 6;
 }
 
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  box-shadow: 0 0 10px rgb(0, 0, 0, 0.25);
+  border-radius: 2px;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.addpost {
+  transform: translateX(430%);
+}
+
+.postdesc2 {
+  width: 300%;
+  padding: 10px;
+  border: none;
+  box-shadow: 0 0 10px rgb(0, 0, 0, 0.2);
+  border-radius: 8px;
+  transform: translateY(-25%);
+}
+
 .middletop {
   padding: 1rem;
   box-shadow: 0 0 10px rgb(0, 0, 0, 0.2);

@@ -59,6 +59,7 @@
 .postimagecon {
   padding: 2px;
   width: 100%;
+  max-height: 45rem;
 }
 
 .fa-thumbs-up {
