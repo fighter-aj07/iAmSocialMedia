@@ -1,9 +1,12 @@
 .left {
+  flex: 2;
+  height: calc(100vh - 50px);
+  overflow-y: scroll;
+  position: sticky;
+  top: 50px;
   margin: 0.5rem;
   padding: 1rem;
   width: 45%;
-  height: calc(100vh);
-  overflow-y: scroll;
 }
 
 ::-webkit-scrollbar {
