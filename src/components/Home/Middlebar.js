@@ -77,15 +77,18 @@ const Middlebar = () => {
     console.log(image);
     e.preventDefault();
     setPost((prevstate) => {
-      let newState = [...prevstate];
-      newState.push({
-        sendName: "Meet Jain",
-        time: 0,
-        description: text,
-        imageUrl: image,
-        likes: 0,
-        comments: 0,
-      });
+      let newState = [
+        {
+          sendName: "Meet Jain",
+          time: 0,
+          description: text,
+          imageUrl: image,
+          likes: 0,
+          comments: 0,
+        },
+        ...prevstate,
+      ];
+
       return newState;
     });
   };
