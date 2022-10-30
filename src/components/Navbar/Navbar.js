@@ -1,9 +1,13 @@
 import React from "react";
 import "./Navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import { Search, Person, Chat, Notifications } from "@material-ui/icons";
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const logoutHandler = () => {
+    navigate("/login");
+  };
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
@@ -45,6 +49,9 @@ export default function Navbar() {
             {/* <Notifications /> */}
             <i className="fa-solid fa-bell"></i>
             <span className="topbarIconBadge">3</span>
+          </div>
+          <div className="topbarIconItem" onClick={logoutHandler}>
+            <i className="fa-solid fa-right-from-bracket"></i>
           </div>
         </div>
         <Link to="/profile/:username">
