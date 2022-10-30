@@ -11,7 +11,30 @@ const Middlebar = () => {
       imageUrl:
         "https://tse4.mm.bing.net/th?id=OIP.bQQVbujEsBtUk0iWDUEHJAHaEg&pid=Api&P=0",
       likes: 61,
-      comments: 9,
+      comments: 5,
+      comment: [
+        {
+          id: "1667131239361",
+          content: "Wow omg so good!",
+        },
+        {
+          id: "1667152034165",
+          content: "So gooood!",
+        },
+        {
+          id: "16671520845708545",
+          content: "So nice!",
+        },
+        {
+          id: "1667152611328",
+          content: "So good!",
+        },
+        {
+          id: "1667152794902",
+          content: "So niceeeeeeeeee!",
+        }
+
+      ],
     },
     {
       sendName: "Aman",
