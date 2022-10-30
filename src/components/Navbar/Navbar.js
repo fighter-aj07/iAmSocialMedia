@@ -7,7 +7,7 @@ export default function Navbar() {
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
-        <Link to="/">
+        <Link to="/" style={{ textDecoration: "none" }}>
           <span className="logo">IAmSocial</span>
         </Link>
       </div>
@@ -25,7 +25,7 @@ export default function Navbar() {
 
       <div className="topbarRight">
         <div className="topbarLinks">
-          <Link to="/">
+          <Link to="/" style={{ textDecoration: "none" }}>
             <span className="topbarLink">Homepage</span>
           </Link>
           <span className="topbarLink">Timeline</span>

@@ -1,5 +1,6 @@
 import React from "react";
 import "./Leftsidebar.css";
+import { Link } from "react-router-dom";
 
 const Leftsidebar = () => {
   return (
@@ -27,7 +28,9 @@ const Leftsidebar = () => {
         </li>
         <li className="leftitems quest">
           <i className="iconsss fa-regular fa-question"></i>
-          <span className="leftitemsname">Questions</span>
+          <Link to="/questions" style={{ textDecoration: "none" }}>
+            <span className="leftitemsname">Questions</span>
+          </Link>
         </li>
       </ul>
       <ul className="leftsidebottom">
