@@ -3,8 +3,13 @@ import "./Profile.css";
 import Leftsidebar from "../../components/Home/Leftsidebar";
 import Middlebar from "../../components/Home/Middlebar";
 import ProfileRightBar from "../../components/Profile/ProfileRightBar";
+import { useEffect, useState } from "react";
 
 export default function Profile() {
+  const [myname, setMyname] = useState("Meet Jain");
+  const handleNameChange = (name) => {
+    setMyname(name);
+  };
   return (
     <>
       <div className="profile">
@@ -24,13 +29,13 @@ export default function Profile() {
               />
             </div>
             <div className="profileInfo">
-                <h4 className="profileInfoName">Meet Jain</h4>
+                <h4 className="profileInfoName">{myname}</h4>
                 <span className="profileInfoDesc">Hello my friends!</span>
             </div>
           </div>
           <div className="profileRightBottom">
             <Middlebar />
-            <ProfileRightBar profile/>
+            <ProfileRightBar handleNameChange={handleNameChange} profile/>
           </div>
         </div>
       </div>
