@@ -38,6 +38,7 @@ export default function Signup() {
                     else{
                     //hash password and save to database
                     console.log(hashedPassword);
+
                     //save to database
                     //insert into login object
                     //generate userid from time

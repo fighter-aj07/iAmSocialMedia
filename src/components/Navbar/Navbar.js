@@ -6,7 +6,10 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Navbar() {
   const navigate = useNavigate();
   const logoutHandler = () => {
+    localStorage.removeItem("user");
+
     navigate("/login");
+    window.location.reload();
   };
   return (
     <div className="topbarContainer">
@@ -33,7 +36,7 @@ export default function Navbar() {
             <span className="topbarLink">Homepage</span>
           </Link>
           <Link to="/timeline" style={{ textDecoration: "none" }}>
-          <span className="topbarLink">Timeline</span>
+            <span className="topbarLink">Timeline</span>
           </Link>
         </div>
         <div className="topbarIcons">
