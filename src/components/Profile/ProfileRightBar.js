@@ -1,17 +1,38 @@
 import "./ProfileRightBar.css";
 import EditDetails from "./EditDetails"
 import React from "react";
+import users from "../../Database/profile";
 
 export default class Rightbar extends React.Component{
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
+    this.currentUser = users.find(user => user.userid === this.props.id);
+    this.friends = [];
+    this.currentUser.friends.map((friend) => {
+      this.friends.push(users.find((user) => user.userid === friend));
+    });
+    console.log(this.friends);
+    this.friendslist = [];
+    this.friends.map((friend) => {
+      this.friendslist.push(
+        <div className="rightbarFollowing">
+              <img
+                src={friend.profilePicture}
+                alt=""
+                className="rightbarFollowingImg"
+              />
+              <span className="rightbarFollowingName">{friend.name}</span>
+        </div>
+      )
+    })
+
     this.state = {
       show: false,
-      Relationship: "Not set",
-      City: "Not set",
-      From: "Not set",
-      Name: "Meet Jain",
-      dob: "Not set"
+      Relationship: this.currentUser.relationship,
+      City: this.currentUser.city,
+      From: this.currentUser.from,
+      Name: this.currentUser.name,
+      dob: this.currentUser.dob
     };
     this.showModal = e => {
       this.setState({
@@ -57,50 +78,12 @@ export default class Rightbar extends React.Component{
                 this.showModal();
           }}
             > Edit details </button>
-            <EditDetails onClose={this.showModal} show={this.state.show} handleChanges={this.handleChanges}/>
+            <EditDetails onClose={this.showModal} show={this.state.show} handleChanges={this.handleChanges} id={this.props.id}/>
           </div>
           <h4 className="rightbarTitle">User friends</h4>
           <div className="rightbarFollowings">
-            <div className="rightbarFollowing">
-              <img
-                src="https://tse3.mm.bing.net/th?id=OIP.WkuGv4-iR5uPKZFcs7UjvAHaHs&pid=Api&P=0"
-                alt=""
-                className="rightbarFollowingImg"
-              />
-              <span className="rightbarFollowingName">Meet Jain</span>
-            </div>
-            <div className="rightbarFollowing">
-              <img
-                src="https://tse3.mm.bing.net/th?id=OIP.WkuGv4-iR5uPKZFcs7UjvAHaHs&pid=Api&P=0"
-                alt=""
-                className="rightbarFollowingImg"
-              />
-              <span className="rightbarFollowingName">Meet Jain</span>
-            </div>
-            <div className="rightbarFollowing">
-              <img
-                src="https://tse3.mm.bing.net/th?id=OIP.WkuGv4-iR5uPKZFcs7UjvAHaHs&pid=Api&P=0"
-                alt=""
-                className="rightbarFollowingImg"
-              />
-              <span className="rightbarFollowingName">Meet Jain</span>
-            </div>
-            <div className="rightbarFollowing">
-              <img
-                src="https://tse3.mm.bing.net/th?id=OIP.WkuGv4-iR5uPKZFcs7UjvAHaHs&pid=Api&P=0"
-                alt=""
-                className="rightbarFollowingImg"
-              />
-              <span className="rightbarFollowingName">Meet Jain</span>
-            </div>
-            <div className="rightbarFollowing">
-              <img
-                src="https://tse3.mm.bing.net/th?id=OIP.WkuGv4-iR5uPKZFcs7UjvAHaHs&pid=Api&P=0"
-                alt=""
-                className="rightbarFollowingImg"
-              />
-              <span className="rightbarFollowingName">Meet Jain</span>
-            </div>
+
+            {this.friendslist}
           </div>
         </>
         </div>

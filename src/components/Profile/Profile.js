@@ -5,9 +5,12 @@ import Middlebar from "../../components/Home/Middlebar";
 import ProfileRightBar from "../../components/Profile/ProfileRightBar";
 import { useEffect, useState } from "react";
 import Navbar from "../Navbar/Navbar";
+import users from "../../Database/profile";
 
 export default function Profile() {
-  const [myname, setMyname] = useState("Meet Jain");
+  const id = JSON.parse(localStorage.getItem("user")).userid;
+  const currentUser = users.find((user) => user.userid === id);
+  const [myname, setMyname] = useState(currentUser.name);
   const handleNameChange = (name) => {
     setMyname(name);
   };
@@ -21,12 +24,12 @@ export default function Profile() {
             <div className="profileCover">
               <img
                 className="profileCoverImg"
-                src="https://tse4.mm.bing.net/th?id=OIP.bQQVbujEsBtUk0iWDUEHJAHaEg&pid=Api&P=0"
+                src={"https://tse4.mm.bing.net/th?id=OIP.bQQVbujEsBtUk0iWDUEHJAHaEg&pid=Api&P=0"}
                 alt=""
               />
               <img
                 className="profileUserImg"
-                src="https://tse4.mm.bing.net/th?id=OIP.bQQVbujEsBtUk0iWDUEHJAHaEg&pid=Api&P=0"
+                src={currentUser.profilePicture}
                 alt=""
               />
             </div>
@@ -37,7 +40,7 @@ export default function Profile() {
           </div>
           <div className="profileRightBottom">
             <Middlebar />
-            <ProfileRightBar handleNameChange={handleNameChange} profile />
+            <ProfileRightBar handleNameChange={handleNameChange} id={id} profile />
           </div>
         </div>
       </div>

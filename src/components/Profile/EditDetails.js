@@ -1,5 +1,6 @@
 import React from "react";
 import "./EditDetails.css"
+import users from "../../Database/profile";
 
 export default class Modal extends React.Component {
     constructor(props){
@@ -9,12 +10,13 @@ export default class Modal extends React.Component {
             console.log("Form submitted");
             this.props.handleChanges(this.state);
         }
+        this.currentUser = users.find(user => user.userid === this.props.id);
         this.state = {
-            Relationship: "Not set",
-            City: "Not set",
-            From: "Not set",
-            Name: "Meet Jain",
-            dob: "Not set"
+            Relationship: this.currentUser.relationship,
+            City: this.currentUser.city,
+            From: this.currentUser.from,
+            Name: this.currentUser.name,
+            dob: this.currentUser.dob
         }
     }
     render() {
