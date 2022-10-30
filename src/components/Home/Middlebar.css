@@ -14,7 +14,7 @@
   margin: 0.5rem;
   padding: 1rem;
   width: 100%;
-  height: calc(100vh);
+  height: calc(100vh - 69px);
   overflow-y: scroll;
   display: flex;
   flex-direction: column;

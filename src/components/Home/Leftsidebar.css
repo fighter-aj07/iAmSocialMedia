@@ -1,6 +1,6 @@
 .left {
   flex: 2;
-  height: calc(100vh - 50px);
+  height: calc(100vh - 69px);
   overflow-y: scroll;
   position: sticky;
   margin: 0.5rem;
