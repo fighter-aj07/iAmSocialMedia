@@ -11,15 +11,63 @@ import {
   Link,
   Navigate,
 } from "react-router-dom";
+import Timeline from "./components/Timeline/Timeline";
 function App() {
-  return ( 
+  return (
     <Router>
       <Routes>
-        <Route path="/" element={localStorage.getItem("user") ? <Homepage /> : <Navigate to="/login" />}/>
-        <Route path="/profile" element={localStorage.getItem("user") ? <Profile /> : <Navigate to="/login" />}/>
-        <Route path="/login" element={localStorage.getItem("user") ? <Navigate to="/" /> : <Login />} />
-        <Route path="/signup" element={localStorage.getItem("user") ? <Navigate to="/" /> : <Signup />} />
-        <Route path="/questions" element={localStorage.getItem("user") ? <Questions /> : <Navigate to="/login" />}/>
+        <Route
+          path="/"
+          element={
+            localStorage.getItem("user") ? (
+              <Homepage />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            localStorage.getItem("user") ? (
+              <Profile />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/timeline"
+          element={
+            localStorage.getItem("user") ? (
+              <Timeline />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            localStorage.getItem("user") ? <Navigate to="/" /> : <Login />
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            localStorage.getItem("user") ? <Navigate to="/" /> : <Signup />
+          }
+        />
+        <Route
+          path="/questions"
+          element={
+            localStorage.getItem("user") ? (
+              <Questions />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
       </Routes>
     </Router>
   );

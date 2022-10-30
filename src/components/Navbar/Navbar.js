@@ -32,7 +32,9 @@ export default function Navbar() {
           <Link to="/" style={{ textDecoration: "none" }}>
             <span className="topbarLink">Homepage</span>
           </Link>
+          <Link to="/timeline" style={{ textDecoration: "none" }}>
           <span className="topbarLink">Timeline</span>
+          </Link>
         </div>
         <div className="topbarIcons">
           <div className="topbarIconItem">
