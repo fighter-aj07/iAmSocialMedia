@@ -41,7 +41,10 @@ export default function Signup() {
                     //save to database
                     //insert into login object
                     //generate userid from time
-                    const userid = Date.now() + Math.random();
+                    const userid = (Date.now() + Math.random()).toString().split(".")[0];
+
+                    console.log(userid, username, email, hashedPassword);
+
                     login.push({
                         "userid": userid,
                         "username": username,
