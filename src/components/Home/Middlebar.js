@@ -116,7 +116,6 @@ const Middlebar = () => {
             />
           </div>
           <div className="middlerightsidetop">
-            {/* <p className="text-muted">Want to share anything ?</p> */}
             <textarea
               type="text"
               placeholder="Want to share anything ?"
