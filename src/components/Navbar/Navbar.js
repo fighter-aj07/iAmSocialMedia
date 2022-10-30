@@ -54,7 +54,7 @@ export default function Navbar() {
             <i className="fa-solid fa-right-from-bracket"></i>
           </div>
         </div>
-        <Link to="/profile/:username">
+        <Link to="/profile">
           <img
             src="https://tse3.mm.bing.net/th?id=OIP.WkuGv4-iR5uPKZFcs7UjvAHaHs&pid=Api&P=0"
             alt=""
