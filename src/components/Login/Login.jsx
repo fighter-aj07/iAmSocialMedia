@@ -25,7 +25,7 @@ export default function Login() {
             if(user){
                 setError("");
                 setisError(false);
-                window.location.replace("/profile");
+                window.location.replace("/");
                 //set user to local storage
                 localStorage.setItem("user", JSON.stringify(
                     {
