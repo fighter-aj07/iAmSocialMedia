@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Middlebar.css";
 import Postdetails from "./Postdetails";
 
@@ -74,7 +74,7 @@ const Middlebar = () => {
     }
   };
   const addpostHandller = (e) => {
-    console.log(image);
+    // console.log(image);
     e.preventDefault();
     setPost((prevstate) => {
       let newState = [
@@ -88,7 +88,8 @@ const Middlebar = () => {
         },
         ...prevstate,
       ];
-
+      setText("");
+      setImage(null);
       return newState;
     });
   };

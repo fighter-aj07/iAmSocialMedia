@@ -1,0 +1,131 @@
+/* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+} */
+
+header {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 15px;
+  background-color: lightgray;
+  border-bottom: 3px solid #56e3b8;
+}
+
+header h1 {
+  color: rgb(8, 132, 181);
+  font-size: 28px;
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow: inset;
+}
+
+.faqs {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 25px;
+}
+
+.faqs .faq {
+  margin: 25px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+}
+
+.faqs .faq .faq-question {
+  position: relative;
+  font-size: 20px;
+  padding-right: 80px;
+
+  transition: all 0.4s ease;
+}
+
+.faqs .faq .faq-question::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+
+  background-image: url("./arrow-down-mint.svg");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  transition: all 0.4s ease-out;
+}
+
+.faqs .faq .faq-answer {
+  opacity: 0;
+  max-height: 0;
+  overflow-y: hidden;
+  transition: all 0.4s ease-out;
+}
+
+.faqs .faq.open .faq-question {
+  margin-bottom: 15px;
+}
+
+.faqs .faq.open .faq-question::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.faqs .faq.open .faq-answer {
+  max-height: 1000px;
+  opacity: 1;
+}
+
+.conatct_form .form-control {
+  padding: 1.375rem 0.75rem;
+  line-height: 1.5;
+  color: white;
+  background-color: #252525;
+  border-radius: 0 !important;
+  border: 3px solid white;
+  width: 500px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+  justify-content: center;
+}
+
+.conatct_form input.form-control {
+  margin-bottom: 2em;
+  height: calc(2.5rem + 0.75rem + 2px);
+}
+
+.subbuttt {
+  padding: 10px 20px;
+  color: #252525;
+  border: 2px solid #000;
+  margin-left: 31.5%;
+  margin-bottom: 2rem;
+}
+
+/* .btn {
+  color: #252525;
+  border: 2px solid #000;
+  margin-left: 34%;
+  margin-bottom: 2rem;
+} */
+
+/* .btn:hover {
+  color: #000;
+} */
