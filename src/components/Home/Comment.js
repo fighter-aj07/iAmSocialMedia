@@ -1,7 +1,7 @@
 import React from "react";
 import "./Comment.css";
 
-const Comment = () => {
+const Comment = (props) => {
   return (
     <>
       <div className="commentimg">

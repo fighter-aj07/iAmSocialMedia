@@ -3,7 +3,8 @@ import "./Postdetails.css";
 import Comment from "./Comment";
 
 const Postdetails = (props) => {
-  let { sendName, time, description, imageUrl, likes, comments } = props;
+  let { sendName, time, description, imageUrl, likes, comments, comment } =
+    props;
   const [likecounter, setLikecounter] = useState(likes);
   const [kvalue, setKvalue] = useState(0);
   const [lvalue, setLvalue] = useState(0);
@@ -78,15 +79,13 @@ const Postdetails = (props) => {
       </div>
       <div className={`commentboxx my-2 d-${dispcomment}`}>
         <ul className="displaycomment">
-          <li className="commentitems">
-            <Comment />
-          </li>
-          <li className="commentitems">
-            <Comment />
-          </li>
-          <li className="commentitems">
-            <Comment />
-          </li>
+          {comment.map((element) => {
+            return (
+              <li className="commentitems">
+                <Comment />
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>

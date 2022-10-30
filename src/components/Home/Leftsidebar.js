@@ -1,8 +1,26 @@
 import React from "react";
 import "./Leftsidebar.css";
 import { Link } from "react-router-dom";
+import users from "../../Database/profile";
+import login from "../../Database/login";
 
 const Leftsidebar = () => {
+  let userprof = localStorage.getItem("user");
+
+  const userDet = users.find((user) => user.userid === userprof);
+  const friends = userDet.friends;
+  // console.log(friends);
+  let userImages = [];
+  let userNames = [];
+  for (let i = 0; i < friends.length; i++) {
+    const userImg = users.find((user) => user.userid === friends[i]);
+    const username = login.find((user) => user.userid === friends[i]);
+    userNames.push(username.username);
+    userImages.push(userImg.profilePicture);
+  }
+  console.log(userNames);
+  console.log(userImages);
+  let k = 0;
   return (
     <div className="left">
       <ul className="leftside">
@@ -35,96 +53,16 @@ const Leftsidebar = () => {
       </ul>
       <ul className="leftsidebottom">
         <li className="leftitems friends">Friends</li>
-        <li className="leftitemsbottom">
-          <div className="imgsrc">
-            <img
-              src="https://tse3.mm.bing.net/th?id=OIP.WkuGv4-iR5uPKZFcs7UjvAHaHs&pid=Api&P=0"
-              alt="Loading"
-              className="profimg"
-            />
-            <span className="leftitemsname2">Meet Jain</span>
-          </div>
-        </li>
-        <li className="leftitemsbottom">
-          <div className="imgsrc">
-            <img
-              src="https://tse3.mm.bing.net/th?id=OIP.WkuGv4-iR5uPKZFcs7UjvAHaHs&pid=Api&P=0"
-              alt="Loading"
-              className="profimg"
-            />
-            <span className="leftitemsname2">Meet Jain</span>
-          </div>
-        </li>
-        <li className="leftitemsbottom">
-          <div className="imgsrc">
-            <img
-              src="https://tse3.mm.bing.net/th?id=OIP.WkuGv4-iR5uPKZFcs7UjvAHaHs&pid=Api&P=0"
-              alt="Loading"
-              className="profimg"
-            />
-            <span className="leftitemsname2">Meet Jain</span>
-          </div>
-        </li>
-        <li className="leftitemsbottom">
-          <div className="imgsrc">
-            <img
-              src="https://tse3.mm.bing.net/th?id=OIP.WkuGv4-iR5uPKZFcs7UjvAHaHs&pid=Api&P=0"
-              alt="Loading"
-              className="profimg"
-            />
-            <span className="leftitemsname2">Meet Jain</span>
-          </div>
-        </li>
-        <li className="leftitemsbottom">
-          <div className="imgsrc">
-            <img
-              src="https://tse3.mm.bing.net/th?id=OIP.WkuGv4-iR5uPKZFcs7UjvAHaHs&pid=Api&P=0"
-              alt="Loading"
-              className="profimg"
-            />
-            <span className="leftitemsname2">Meet Jain</span>
-          </div>
-        </li>
-        <li className="leftitemsbottom">
-          <div className="imgsrc">
-            <img
-              src="https://tse3.mm.bing.net/th?id=OIP.WkuGv4-iR5uPKZFcs7UjvAHaHs&pid=Api&P=0"
-              alt="Loading"
-              className="profimg"
-            />
-            <span className="leftitemsname2">Meet Jain</span>
-          </div>
-        </li>
-        <li className="leftitemsbottom">
-          <div className="imgsrc">
-            <img
-              src="https://tse3.mm.bing.net/th?id=OIP.WkuGv4-iR5uPKZFcs7UjvAHaHs&pid=Api&P=0"
-              alt="Loading"
-              className="profimg"
-            />
-            <span className="leftitemsname2">Meet Jain</span>
-          </div>
-        </li>
-        <li className="leftitemsbottom">
-          <div className="imgsrc">
-            <img
-              src="https://tse3.mm.bing.net/th?id=OIP.WkuGv4-iR5uPKZFcs7UjvAHaHs&pid=Api&P=0"
-              alt="Loading"
-              className="profimg"
-            />
-            <span className="leftitemsname2">Meet Jain</span>
-          </div>
-        </li>
-        <li className="leftitemsbottom">
-          <div className="imgsrc">
-            <img
-              src="https://tse3.mm.bing.net/th?id=OIP.WkuGv4-iR5uPKZFcs7UjvAHaHs&pid=Api&P=0"
-              alt="Loading"
-              className="profimg"
-            />
-            <span className="leftitemsname2">Meet Jain</span>
-          </div>
-        </li>
+        {userImages.map((element) => {
+          return (
+            <li className="leftitemsbottom">
+              <div className="imgsrc">
+                <img src={element} className="profimg" />
+                <span className="leftitemsname2">{userNames[k++]}</span>
+              </div>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

@@ -27,11 +27,7 @@ export default function Login() {
                 setisError(false);
                 window.location.replace("/");
                 //set user to local storage
-                localStorage.setItem("user", JSON.stringify(
-                    {
-                        "userid": user.userid,
-                    }
-                ));
+                localStorage.setItem("user", user.userid);
             }
             else{
                 setError("Invalid email or password");
