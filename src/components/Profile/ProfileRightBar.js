@@ -1,7 +1,6 @@
 import "./ProfileRightBar.css";
 import EditDetails from "./EditDetails"
 import React from "react";
-import { render } from "@testing-library/react";
 
 export default class Rightbar extends React.Component{
   constructor(){
@@ -12,6 +11,7 @@ export default class Rightbar extends React.Component{
       City: "Not set",
       From: "Not set",
       Name: "Meet Jain",
+      dob: "Not set"
     };
     this.showModal = e => {
       this.setState({
@@ -19,12 +19,13 @@ export default class Rightbar extends React.Component{
       });
     };
     this.handleChanges = (values) => {
-      console.log("Form submitted");
+      console.log(values.dob);
       this.setState({
         Relationship: values.Relationship,
         City: values.City,
         From: values.From,
         Name: values.Name,
+        dob: values.dob
       })
       this.props.handleNameChange(values.Name);
     }
@@ -45,8 +46,12 @@ export default class Rightbar extends React.Component{
               <span className="rightbarInfoValue">{this.state.From}</span>
             </div>
             <div className="rightbarInfoItem">
-              <span className="rightbarInfoKey">Relationship:</span>
+              <span className="rightbarInfoKey">Relationship status:</span>
               <span className="rightbarInfoValue">{this.state.Relationship}</span>
+            </div>
+            <div className="rightbarInfoItem">
+              <span className="rightbarInfoKey">Date of Birth:</span>
+              <span className="rightbarInfoValue">{this.state.dob}</span>
             </div>
             <button className="edit-btn-rightbar"  onClick={e => {
                 this.showModal();
