@@ -36,14 +36,16 @@ export default class Modal extends React.Component {
                     <input className="edit-form-input" type = "text" value={this.state.Relationship} onChange={(e)=>{this.setState({Relationship: e.target.value})}} /> <br/>
                     <label>Date of Birth: </label>
                     <input className="edit-form-input" type = "date" /> <br />
-                    <input className="edit-btns submit-btn" type="submit" value="Save Changes" />
-                    <button className="close-btn edit-btns"
-                        onClick={e => {
-                            this.props.onClose && this.props.onClose(e);
-                        }}
-                    >
-                        Close
-                    </button>
+                    <div className="edit-form-btns">
+                        <input className="edit-btns submit-btn" type="submit" value="Save Changes" />
+                        <button className="close-btn edit-btns"
+                            onClick={e => {
+                                this.props.onClose && this.props.onClose(e);
+                            }}
+                        >
+                            Close
+                        </button>
+                    </div>
                 </form>
             </div>
           </div>
