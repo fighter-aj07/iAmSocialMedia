@@ -1,7 +1,7 @@
 import React from "react";
 import "./Navbar.css";
 import { Link, useNavigate } from "react-router-dom";
-// import { Search, Person, Chat, Notifications } from "@material-ui/icons";
+import users from "../../Database/profile";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -10,6 +10,9 @@ export default function Navbar() {
     navigate("/login");
     window.location.reload();
   };
+  const userDet = users.find(
+    (user) => user.userid === localStorage.getItem("user")
+  );
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
@@ -60,8 +63,8 @@ export default function Navbar() {
         </div>
         <Link to="/profile">
           <img
-            src="https://tse3.mm.bing.net/th?id=OIP.WkuGv4-iR5uPKZFcs7UjvAHaHs&pid=Api&P=0"
-            alt=""
+            src={userDet.profilePicture}
+            alt="Loading"
             className="topbarImg"
           />
         </Link>

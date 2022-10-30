@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Postdetails.css";
 import Comment from "./Comment";
+import users from "../../Database/profile";
 
 const Postdetails = (props) => {
   let { sendName, time, description, imageUrl, likes, comments, comment } =
@@ -10,6 +11,8 @@ const Postdetails = (props) => {
   const [lvalue, setLvalue] = useState(0);
   let [likecolor, setLikecolor] = useState("dark");
   let [dispcomment, setDispcomment] = useState("none");
+
+  const userDet = users.find((user) => user.name === sendName);
 
   const likeHandler = () => {
     if (kvalue === 0) {
@@ -32,13 +35,14 @@ const Postdetails = (props) => {
       setDispcomment("none");
     }
   };
-
+  let k = 0;
+  let m = 0;
   return (
     <div className="postcontainer">
       <div className="posttopbar">
         <div className="postleftsidetop">
           <img
-            src="https://tse3.mm.bing.net/th?id=OIP.WkuGv4-iR5uPKZFcs7UjvAHaHs&pid=Api&P=0"
+            src={userDet.profilePicture}
             alt="Loading"
             className="postimageleft"
           />
@@ -82,7 +86,10 @@ const Postdetails = (props) => {
           {comment.map((element) => {
             return (
               <li className="commentitems">
-                <Comment />
+                <Comment
+                  comdescrip={comment[k++].content}
+                  userId={comment[m++].id}
+                />
               </li>
             );
           })}

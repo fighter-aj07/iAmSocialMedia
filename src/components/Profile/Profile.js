@@ -8,7 +8,7 @@ import Navbar from "../Navbar/Navbar";
 import users from "../../Database/profile";
 
 export default function Profile() {
-  const id = JSON.parse(localStorage.getItem("user")).userid;
+  const id = localStorage.getItem("user");
   const currentUser = users.find((user) => user.userid === id);
   const [myname, setMyname] = useState(currentUser.name);
   const handleNameChange = (name) => {
@@ -24,7 +24,9 @@ export default function Profile() {
             <div className="profileCover">
               <img
                 className="profileCoverImg"
-                src={"https://tse4.mm.bing.net/th?id=OIP.bQQVbujEsBtUk0iWDUEHJAHaEg&pid=Api&P=0"}
+                src={
+                  "https://tse4.mm.bing.net/th?id=OIP.bQQVbujEsBtUk0iWDUEHJAHaEg&pid=Api&P=0"
+                }
                 alt=""
               />
               <img
@@ -40,7 +42,11 @@ export default function Profile() {
           </div>
           <div className="profileRightBottom">
             <Middlebar />
-            <ProfileRightBar handleNameChange={handleNameChange} id={id} profile />
+            <ProfileRightBar
+              handleNameChange={handleNameChange}
+              id={id}
+              profile
+            />
           </div>
         </div>
       </div>

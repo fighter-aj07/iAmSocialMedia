@@ -6,12 +6,8 @@ let posts = [
     imageUrl:
       "https://tse4.mm.bing.net/th?id=OIP.bQQVbujEsBtUk0iWDUEHJAHaEg&pid=Api&P=0",
     likes: 61,
-    comments: 5,
+    comments: 4,
     comment: [
-      {
-        id: "1667131239361",
-        content: "Wow omg so good!",
-      },
       {
         id: "1667152034165",
         content: "nice post but keep it clean !",
@@ -47,7 +43,7 @@ let posts = [
     ],
   },
   {
-    sendName: "Ajay Babu",
+    sendName: "Ajay",
     time: 10,
     description:
       "Instead of worrying about what you cannot control, shift your energy to what you can create !",
@@ -77,23 +73,23 @@ let posts = [
     comments: 2,
     comment: [
       {
-        id: "1667131239361",
+        id: "16671520845708545",
         content: "lol!",
       },
       {
-        id: "1667152034165",
+        id: "1667152611328",
         content: "Aap kahan the prabhu!",
       },
     ],
   },
   {
-    sendName: "Meet",
+    sendName: "Meet Jain",
     time: 2,
     description: "Be mindful. Be grateful. Be positive. Be true. Be kind !",
     imageUrl:
       "https://tse1.mm.bing.net/th?id=OIP.7bU94r8pJwC2OTmyaidv9wHaE4&pid=Api&P=0",
     likes: 11,
-    comments: 4,
+    comments: 3,
     comment: [
       {
         id: "1667131239361",
@@ -102,10 +98,6 @@ let posts = [
       {
         id: "1667152034165",
         content: "yes you made it!",
-      },
-      {
-        id: "16671520845708545",
-        content: "congratulations!",
       },
       {
         id: "1667152611328",

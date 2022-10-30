@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Middlebar.css";
 import Postdetails from "./Postdetails";
 import posts from "../../Database/posts";
+import users from "../../Database/profile";
 
 const Middlebar = () => {
   const [post, setPost] = useState(posts);
@@ -38,13 +39,17 @@ const Middlebar = () => {
     });
   };
 
+  const userDet = users.find(
+    (user) => user.userid === localStorage.getItem("user")
+  );
+
   return (
     <div className="middle container">
       <div className="middletop my-1">
         <div className="middletopbar">
           <div className="middleleftsidetop">
             <img
-              src="https://tse3.mm.bing.net/th?id=OIP.WkuGv4-iR5uPKZFcs7UjvAHaHs&pid=Api&P=0"
+              src={userDet.profilePicture}
               alt="Loading"
               className="middleimageleft"
             />
