@@ -5,7 +5,7 @@ import "./Questions.css";
 
 function Contact() {
   return (
-    <div style={{ marginLeft: "30%" }}>
+    <div style={{ marginLeft: "27%" }}>
       <Row className="mb-3 mt-3">
         <Col lg="8">
           <h1 className="display-8 mb-4">Contact US</h1>
