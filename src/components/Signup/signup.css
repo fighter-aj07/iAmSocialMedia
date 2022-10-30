@@ -8,7 +8,7 @@
 }
 .error{
   color: red;
-    
+  margin-bottom: 10px;   
 }
 .loginWrapper {
   width: 70%;
@@ -74,9 +74,9 @@
 }
 
 .loginRegisterButton{
-    width: 60%;
+    width: 40%;
     align-self: center;
-    height: 50px;
+    height: 35px;
     border-radius: 10px;
     border: none;
     background-color: #42b72a;

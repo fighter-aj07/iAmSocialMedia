@@ -23,6 +23,7 @@ export default function Signup() {
         setFetching(true);
         e.preventDefault();
         if(email && password && username && passwordAgain){
+            
             if(validateEmail(email)){
                 if(password === passwordAgain){
                     setError("");
@@ -66,7 +67,16 @@ export default function Signup() {
                 setError("Invalid email");
                 setisError(true);
             }
-        }   
+
+        }
+        else if(email === "" || password === "" || username === "" || passwordAgain === ""){
+            setError("Please fill in all fields");
+            setisError(true);
+        }
+        else if(password.length < 6){
+            setError("Password must be at least 6 characters");
+            setisError(true);
+        }
 
         setFetching(false);
     }
@@ -74,14 +84,14 @@ export default function Signup() {
     return (
         <div className="login">
             <div className="loginWrapper">
-                <div className="loginLeft">
-                    <h3 className="loginLogo">IamSocial</h3>
-                    <span className="loginDesc">
-                        Connect with friends and the world around you on IamSocial.
-                    </span>
-                </div>
-                <div className="loginRight">
-                    <div className="loginBox">
+            <div className="loginLeft">
+            <h3 className="loginLogo">Sign-Up</h3>
+            <span className="loginDesc">
+            Connect with friends and the world around you on IamSocial.
+            </span>
+            </div>
+            <div className="loginRight">
+            <div className="loginBox">
                         <input 
                         placeholder="Username" 
                         className="loginInput" 
@@ -131,7 +141,7 @@ export default function Signup() {
 
                         <Link to="/login" style = {{textDecoration: "none",textAlign: "center"}}>
                         <button className="loginRegisterButton">
-                            Log into Account
+                            Log-In
                         </button>
                         </Link>
                     </div>

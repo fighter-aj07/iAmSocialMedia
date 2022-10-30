@@ -43,6 +43,12 @@ export default function Login() {
             setisError(true);
         }
         }
+        else if(email === "" || password === ""){
+            setError("Please fill in all fields");
+            setisError(true);
+        }
+
+        
         setFetching(false);
     }
     //function to check email fromat and return true or false
