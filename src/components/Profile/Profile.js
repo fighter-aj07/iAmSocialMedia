@@ -4,6 +4,7 @@ import Leftsidebar from "../../components/Home/Leftsidebar";
 import Middlebar from "../../components/Home/Middlebar";
 import ProfileRightBar from "../../components/Profile/ProfileRightBar";
 import { useEffect, useState } from "react";
+import Navbar from "../Navbar/Navbar";
 
 export default function Profile() {
   const [myname, setMyname] = useState("Meet Jain");
@@ -12,6 +13,7 @@ export default function Profile() {
   };
   return (
     <>
+      <Navbar />
       <div className="profile">
         <Leftsidebar />
         <div className="profileRight">
@@ -29,13 +31,13 @@ export default function Profile() {
               />
             </div>
             <div className="profileInfo">
-                <h4 className="profileInfoName">{myname}</h4>
-                <span className="profileInfoDesc">Hello my friends!</span>
+              <h4 className="profileInfoName">{myname}</h4>
+              <span className="profileInfoDesc">Hello my friends!</span>
             </div>
           </div>
           <div className="profileRightBottom">
             <Middlebar />
-            <ProfileRightBar handleNameChange={handleNameChange} profile/>
+            <ProfileRightBar handleNameChange={handleNameChange} profile />
           </div>
         </div>
       </div>
