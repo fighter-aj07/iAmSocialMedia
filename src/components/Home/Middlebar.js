@@ -11,7 +11,30 @@ const Middlebar = () => {
       imageUrl:
         "https://tse4.mm.bing.net/th?id=OIP.bQQVbujEsBtUk0iWDUEHJAHaEg&pid=Api&P=0",
       likes: 61,
-      comments: 9,
+      comments: 5,
+      comment: [
+        {
+          id: "1667131239361",
+          content: "Wow omg so good!",
+        },
+        {
+          id: "1667152034165",
+          content: "nice post but keep it clean !",
+        },
+        {
+          id: "16671520845708545",
+          content: "light weight baby!",
+        },
+        {
+          id: "1667152611328",
+          content: "yeah buddy!",
+        },
+        {
+          id: "1667152794902",
+          content: "boooo yeah!",
+        }
+
+      ],
     },
     {
       sendName: "Aman",
@@ -21,7 +44,15 @@ const Middlebar = () => {
       imageUrl:
         "https://tse2.mm.bing.net/th?id=OIP.WDbiE3jHbfYDlgg1Zt-5MAHaEK&pid=Api&P=0",
       likes: 56,
-      comments: 5,
+      comments: 1,
+      comment: [
+        {
+          id: "1667131239361",
+          content: "nice post keep it up!",
+        },
+
+
+      ],
     },
     {
       sendName: "Ajay Babu",
@@ -31,7 +62,18 @@ const Middlebar = () => {
       imageUrl:
         "https://tse4.mm.bing.net/th?id=OIP.w9aIHhxP0FGwBJDKvo6K2wHaE7&pid=Api&P=0",
       likes: 69,
-      comments: 11,
+      comments: 2,
+      comment: [
+        {
+          id: "1667131239361",
+          content: "i am good comment creator!",
+        },
+        {
+          id: "1667152794902",
+          content: "kya bat hai!",
+        }
+
+      ]
     },
     {
       sendName: "Darshak",
@@ -42,6 +84,17 @@ const Middlebar = () => {
         "https://tse4.mm.bing.net/th?id=OIP.fyTCzyCoP7Iw44q9fedS2QHaE8&pid=Api&P=0",
       likes: 31,
       comments: 2,
+      comment: [
+        {
+          id: "1667131239361",
+          content: "lol!",
+        },
+        {
+          id: "1667152034165",
+          content: "Aap kahan the prabhu!",
+        },
+
+      ]
     },
     {
       sendName: "Meet",
@@ -50,7 +103,27 @@ const Middlebar = () => {
       imageUrl:
         "https://tse1.mm.bing.net/th?id=OIP.7bU94r8pJwC2OTmyaidv9wHaE4&pid=Api&P=0",
       likes: 11,
-      comments: 3,
+      comments: 4,
+      comment: [
+        {
+          id: "1667131239361",
+          content: "amazing post!",
+        },
+        {
+          id: "1667152034165",
+          content: "yeas you made it!",
+        },
+        {
+          id: "16671520845708545",
+          content: "congratulations!",
+        },
+        {
+          id: "1667152611328",
+          content: "congo buddy!",
+        },
+
+
+      ]
     },
     // {
     //   sendName: "Arun PV",
@@ -116,7 +189,6 @@ const Middlebar = () => {
             />
           </div>
           <div className="middlerightsidetop">
-            {/* <p className="text-muted">Want to share anything ?</p> */}
             <textarea
               type="text"
               placeholder="Want to share anything ?"
