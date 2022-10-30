@@ -17,6 +17,18 @@ let login = [
     password: "$2a$10$CwTycUXWue0Thq9StjUM0u3IaVhonkWWCaPYGbaWUtuGyQ7UIIFqe",
     email: "meet20@gmail.com",
   },
+  {
+    userid: "1667152611328",
+    username: "Ajay",
+    password: "$2a$10$CwTycUXWue0Thq9StjUM0usExgXm6JtIzUMwZq37OC56co61YAQbC",
+    email: "ajay@gmail.com",
+  },
+  {
+    userid: "1667152794902",
+    username: "Aman",
+    password: "$2a$10$CwTycUXWue0Thq9StjUM0uzG6Frod9TfMAPZga4stuugpRQPsu82C",
+    email: "aman@gmail.com",
+  }
 ];
 
 export default login;
