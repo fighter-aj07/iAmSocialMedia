@@ -33,8 +33,14 @@ input[type="file"] {
   cursor: pointer;
 }
 
-.addpost {
+/* .addpost {
   transform: translateX(430%);
+} */
+
+.middletopbottomul {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .postdesc2 {
@@ -68,6 +74,9 @@ input[type="file"] {
 .middlerightsidetop {
   margin-left: 10px;
   transform: translateY(25%);
+  width: 90%;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .middletopbottom {
