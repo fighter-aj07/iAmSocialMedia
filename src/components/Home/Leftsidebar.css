@@ -1,9 +1,8 @@
 .left {
   flex: 2;
-  height: calc(100vh - 50px);
+  height: calc(100vh - 69px);
   overflow-y: scroll;
   position: sticky;
-  top: 50px;
   margin: 0.5rem;
   padding: 1rem;
   width: 45%;

@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Middlebar.css";
 import Postdetails from "./Postdetails";
 
 const Middlebar = () => {
-  let post = [
+  const [post, setPost] = useState([
     {
       sendName: "Anand Thakur",
       time: 5,
@@ -52,7 +52,46 @@ const Middlebar = () => {
       likes: 11,
       comments: 3,
     },
-  ];
+    // {
+    //   sendName: "Meet",
+    //   time: 2,
+    //   description: "Be mindful. Be grateful. Be positive. Be true. Be kind !",
+    //   imageUrl:
+    //     "blob:http://localhost:3000/36b0a8c8-6ef8-424c-b146-52ecb67513ad",
+    //   likes: 11,
+    //   comments: 3,
+    // },
+  ]);
+
+  const [image, setImage] = useState(null);
+  const [text, setText] = useState("");
+  const handleOnChange = (event) => {
+    setText(event.target.value);
+  };
+  const onImageChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      setImage(URL.createObjectURL(event.target.files[0]));
+    }
+  };
+  const addpostHandller = (e) => {
+    console.log(image);
+    e.preventDefault();
+    setPost((prevstate) => {
+      let newState = [
+        {
+          sendName: "Meet Jain",
+          time: 0,
+          description: text,
+          imageUrl: image,
+          likes: 0,
+          comments: 0,
+        },
+        ...prevstate,
+      ];
+
+      return newState;
+    });
+  };
 
   return (
     <div className="middle container">
@@ -66,23 +105,46 @@ const Middlebar = () => {
             />
           </div>
           <div className="middlerightsidetop">
-            <p className="text-muted">Want to share anything ?</p>
+            {/* <p className="text-muted">Want to share anything ?</p> */}
+            <textarea
+              type="text"
+              placeholder="Want to share anything ?"
+              className="postdesc2"
+              rows="4"
+              onChange={handleOnChange}
+            ></textarea>
           </div>
         </div>
         <div className="middletopbottom">
           <ul className="middletopbottomul">
             <li className="middletopbottomli">
               <i className="fa-solid fa-photo-film"></i>
-              <span className="mx-2 fw-bold">Photo or Video</span>
+              <span className="mx-2 fw-bold">
+                <label className="custom-file-upload">
+                  <input
+                    type="file"
+                    className="mx-2"
+                    onChange={onImageChange}
+                  />
+                  Add Photo or Video
+                </label>
+              </span>
             </li>
             <li className="middletopbottomli">
-              <i className="fa-solid fa-tag"></i>
-              <span className="mx-2 fw-bold">Tag</span>
+              {/* <i className="fa-solid fa-tag"></i>
+              <span className="mx-2 fw-bold">Tag</span> */}
+              <button
+                className="addpost btn btn-outline-info"
+                onClick={addpostHandller}
+                disabled={image ? false : true}
+              >
+                Add Post
+              </button>
             </li>
-            <li className="middletopbottomli">
+            {/* <li className="middletopbottomli">
               <i className="fa-solid fa-location-dot"></i>
               <span className="mx-2 fw-bold">Location</span>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>
