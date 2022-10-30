@@ -1,9 +1,37 @@
 import React from "react";
+import {useState} from 'react';
 import { Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import "./Questions.css";
 
 function Contact() {
+  const [name, setName] = useState('')
+  const [number, setNumber] = useState('')
+  const [email, setEmail] = useState('')
+  const [message, setMessage] = useState('')
+  const handleName = (e) => {
+    setName(e.target.value);
+  }
+  const handleEmail = (e) => {
+    setEmail(e.target.value)
+  }
+  const handleMessage = (e) => {
+    setMessage(e.target.value)
+  }
+  const handleNumber = (e) => {
+    setNumber(e.target.value)
+  }
+  const submitHandler = () => {
+     if(name.length > 20 || !email.includes('@') || message == '' || number.length > 10) {
+       console.log('ERROR')
+     }
+     else {
+      setEmail('');
+      setMessage('');
+      setName('');
+      setNumber('');
+     }
+  }
   return (
     <div style={{ marginLeft: "27%" }}>
       <Row className="mb-3 mt-3">
@@ -32,6 +60,8 @@ function Contact() {
                   name="name"
                   placeholder="Name"
                   type="Name"
+                  onChange={handleName}
+                  value={name}
                 />
               </Col>
 
@@ -42,6 +72,8 @@ function Contact() {
                   name="email"
                   placeholder="Email"
                   type="email"
+                  onChange={handleEmail}
+                  value={email}
                 />
               </Col>
 
@@ -52,6 +84,8 @@ function Contact() {
                   name="number"
                   placeholder="Phone-Number"
                   type="text"
+                  onChange={handleNumber}
+                  value={number}
                 />
               </Col>
             </Col>
@@ -62,11 +96,13 @@ function Contact() {
               placeholder="Message"
               rows="5"
               style={{ resize: "none" }}
+              onChange={handleMessage}
+              value={message}
             ></textarea>
             <br />
             <Row>
               <Col lg="12" className="form-group">
-                <Button className="subbuttt" variant="primary" size="sm">
+                <Button className="subbuttt" variant="primary" size="sm" onClick={submitHandler}>
                   Submit
                 </Button>
               </Col>
