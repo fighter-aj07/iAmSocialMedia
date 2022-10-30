@@ -14,7 +14,7 @@ export default class Modal extends React.Component {
             City: "Not set",
             From: "Not set",
             Name: "Meet Jain",
-            DOB: "Not set"
+            dob: "Not set"
         }
     }
     render() {
@@ -35,7 +35,7 @@ export default class Modal extends React.Component {
                     <label>Relationship status: </label>
                     <input className="edit-form-input" type = "text" value={this.state.Relationship} onChange={(e)=>{this.setState({Relationship: e.target.value})}} /> <br/>
                     <label>Date of Birth: </label>
-                    <input className="edit-form-input" type = "date" /> <br />
+                    <input className="edit-form-input" type = "date" onChange={(e)=>{this.setState({dob: e.target.value})}} /> <br />
                     <div className="edit-form-btns">
                         <input className="edit-btns submit-btn" type="submit" value="Save Changes" />
                         <button className="close-btn edit-btns"
