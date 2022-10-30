@@ -38,10 +38,12 @@ export default function Signup() {
                     else{
                     //hash password and save to database
                     console.log(hashedPassword);
+
                     //save to database
                     //insert into login object
                     //generate userid from time
                     const userid = Date.now() + Math.random();
+                    console.log(userid);
                     login.push({
                         "userid": userid,
                         "username": username,
