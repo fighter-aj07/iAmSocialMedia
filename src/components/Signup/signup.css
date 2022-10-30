@@ -6,7 +6,10 @@
   align-items: center;
   justify-content: center;
 }
-
+.error{
+  color: red;
+    
+}
 .loginWrapper {
   width: 70%;
   height: 70%;
