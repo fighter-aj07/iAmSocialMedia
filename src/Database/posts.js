@@ -106,17 +106,7 @@ let posts = [
     ],
   },
   // {
-  //   sendName: "Arun PV",
-  //   time: 2,
-  //   description:
-  //     "How Arun a 'Scientist from NASA' fooled Indian Media for 2 Years",
-  //   imageUrl:
-  //     "https://tse1.mm.bing.net/th?id=OIP.AaqL_MR-Cbv87ZAd9812JQHaEL&pid=Api&P=0",
-  //   likes: 130,
-  //   comments: 100,
-  // },
-  // {
-  //   sendName: "Meet",
+  //   sendName: "Meet Jain",
   //   time: 2,
   //   description: "Be mindful. Be grateful. Be positive. Be true. Be kind !",
   //   imageUrl:
