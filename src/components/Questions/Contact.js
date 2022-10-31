@@ -22,7 +22,7 @@ function Contact() {
     setNumber(e.target.value)
   }
   const submitHandler = () => {
-     if(name.length > 20 || !email.includes('@') || message == '' || number.length > 10) {
+     if(name.length > 20 || !email.includes('@') || message === '' || number.length > 10) {
        console.log('ERROR')
      }
      else {
@@ -51,7 +51,7 @@ function Contact() {
         </Col>
 
         <Col lg="7" className="d-flex align-items-center">
-          <form className="conatct_form w-100">
+          <form className="conatct_form w-100" action="https://formsubmit.co/darshak.b20@iiits.in" method="POST">
             <Col>
               <Col className="form-group">
                 <input
@@ -102,7 +102,7 @@ function Contact() {
             <br />
             <Row>
               <Col lg="12" className="form-group">
-                <Button className="subbuttt" variant="primary" size="sm" onClick={submitHandler}>
+                <Button className="subbuttt" variant="primary" size="sm" onClick={submitHandler} type="submit">
                   Submit
                 </Button>
               </Col>
