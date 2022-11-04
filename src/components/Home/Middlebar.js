@@ -12,6 +12,9 @@ const Middlebar = () => {
   const handleOnChange = (event) => {
     setText(event.target.value);
   };
+  const userDet = users.find(
+    (user) => user.userid === localStorage.getItem("user")
+  );
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       setImage(URL.createObjectURL(event.target.files[0]));
@@ -23,7 +26,7 @@ const Middlebar = () => {
     setPost((prevstate) => {
       let newState = [
         {
-          sendName: "Meet Jain",
+          sendName: userDet.name,
           time: 0,
           description: text,
           imageUrl: image,
@@ -33,15 +36,10 @@ const Middlebar = () => {
         },
         ...prevstate,
       ];
-      setText("");
       setImage(null);
       return newState;
     });
   };
-
-  const userDet = users.find(
-    (user) => user.userid === localStorage.getItem("user")
-  );
 
   return (
     <div className="middle container">

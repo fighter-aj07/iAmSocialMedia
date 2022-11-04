@@ -1,11 +1,11 @@
 import React from "react";
 import Navbar from "../Navbar/Navbar";
+import Middlebartimeline from "./Middlebartimeline";
 
 const Timeline = () => {
   return (
     <div>
-      <Navbar />
-      <div className="container">This is Timeline</div>
+      <Middlebartimeline />
     </div>
   );
 };
