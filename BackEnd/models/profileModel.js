@@ -8,6 +8,8 @@ const profileSchema = new Schema({
     from: { type: String, required: true },
     dob: { type: String, required: true },
     relationship: { type: String, required: true },
-    // profilePicture: { type: String, required: true },
+    profilePicture: { type: String, required: true },
     friends: { type: Array },
 });
+
+module.exports = mongoose.model("profileModel", profileSchema);

@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const postRoutes = require("./routes/posts");
+const profileRoutes = require("./routes/profile");
 // const skillRoutes = require("./routes/skills");
 // const usersRoutes = require("./routes/user");
 // const HttpError = require("./models/http-error");
@@ -23,6 +24,7 @@ app.use((req, res, next) => {
 }); //cors error
 
 app.use("/posts", postRoutes);
+app.use("/profile", profileRoutes);
 // app.use("/nontc", nontechnical);
 // app.use("/jobs", jobRoutes);
 // app.use("/skills", skillRoutes);
