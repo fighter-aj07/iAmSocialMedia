@@ -14,7 +14,7 @@ const Leftsidebar = () => {
           "http://localhost:5002/userdata/getdetails",
           "POST",
           JSON.stringify({
-            userid: localStorage.getItem("user")
+            userid: localStorage.getItem("user"),
           }),
           {
             "Content-Type": "application/json",
