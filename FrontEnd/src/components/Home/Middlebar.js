@@ -29,7 +29,7 @@ const Middlebar = () => {
         "http://localhost:5002/posts/addpost",
         "POST",
         JSON.stringify({
-          userid: localStorage.getItem("userid"),
+          userid: localStorage.getItem("user"),
           sendName: userDet.name,
           time: 0,
           description: text,
@@ -43,6 +43,7 @@ const Middlebar = () => {
         }
       );
     }
+    window.location.reload(true);
   };
 
   useEffect(() => {
@@ -51,9 +52,7 @@ const Middlebar = () => {
         const responseData = await sendRequest(
           "http://localhost:5002/posts/getposts",
           "POST",
-          JSON.stringify({
-            category: "fruit",
-          }),
+          JSON.stringify({}),
           {
             "Content-Type": "application/json",
           }

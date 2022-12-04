@@ -1,26 +1,42 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Leftsidebar.css";
 import { Link } from "react-router-dom";
-import users from "../../Database/profile";
-import login from "../../Database/login";
+import { useRequest } from "../../hooks/request-hook";
 
 const Leftsidebar = () => {
   let userprof = localStorage.getItem("user");
-
-  const userDet = users.find((user) => user.userid === userprof);
-  const friends = userDet.friends;
+  const { sendRequest } = useRequest();
+  const [userdata, setUserdata] = useState([]);
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:5002/userdata/getdetails",
+          "POST",
+          JSON.stringify({
+            userid: localStorage.getItem("user")
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+        setUserdata(responseData);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchItems();
+  }, [sendRequest]);
   // console.log(friends);
-  let userImages = [];
-  let userNames = [];
-  for (let i = 0; i < friends.length; i++) {
-    const userImg = users.find((user) => user.userid === friends[i]);
-    const username = login.find((user) => user.userid === friends[i]);
-    userNames.push(username.username);
-    userImages.push(userImg.profilePicture);
-  }
-  console.log(userNames);
-  console.log(userImages);
-  let k = 0;
+  // for (let i = 0; i < friends.length; i++) {
+  //   const userImg = users.find((user) => user.userid === friends[i]);
+  //   const username = login.find((user) => user.userid === friends[i]);
+  //   userNames.push(username.username);
+  //   userImages.push(userImg.profilePicture);
+  // }
+  // console.log(userNames);
+  // console.log(userImages);
+  // let k = 0;
   return (
     <div className="left">
       <ul className="leftside">
@@ -53,12 +69,12 @@ const Leftsidebar = () => {
       </ul>
       <ul className="leftsidebottom">
         <li className="leftitems friends">Friends</li>
-        {userImages.map((element) => {
+        {userdata.map((element) => {
           return (
             <li className="leftitemsbottom">
               <div className="imgsrc">
-                <img src={element} className="profimg" />
-                <span className="leftitemsname2">{userNames[k++]}</span>
+                <img src={element.profilePicture} className="profimg" />
+                <span className="leftitemsname2">{element.name}</span>
               </div>
             </li>
           );
