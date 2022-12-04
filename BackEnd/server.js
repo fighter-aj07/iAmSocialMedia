@@ -3,11 +3,8 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const postRoutes = require("./routes/posts");
 const profileRoutes = require("./routes/profile");
-// const skillRoutes = require("./routes/skills");
-// const usersRoutes = require("./routes/user");
-// const HttpError = require("./models/http-error");
-// const jobscore = require("./routes/jobScore")
-// const nontechnical = require("./routes/nontech")
+const loginRoutes = require("./routes/login");
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -25,10 +22,7 @@ app.use((req, res, next) => {
 
 app.use("/posts", postRoutes);
 app.use("/profile", profileRoutes);
-// app.use("/nontc", nontechnical);
-// app.use("/jobs", jobRoutes);
-// app.use("/skills", skillRoutes);
-// app.use("/jobScore", jobscore);
+app.use("/login", loginRoutes);
 
 app.use((req, res, next) => {
   const error = new HttpError("Could not find this route.", 404);
