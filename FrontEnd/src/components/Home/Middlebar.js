@@ -21,12 +21,15 @@ const Middlebar = () => {
       setImage(URL.createObjectURL(event.target.files[0]));
     }
   };
-  const addpostHandller = (e) => {
+  const addpostHandller = async (e) => {
     // console.log(image);
     e.preventDefault();
-    setPost((prevstate) => {
-      let newState = [
-        {
+    if (localStorage.hasOwnProperty("userid")) {
+      const response = await sendRequest(
+        "http://localhost:5002/posts/addpost",
+        "POST",
+        JSON.stringify({
+          userid: localStorage.getItem("userid"),
           sendName: userDet.name,
           time: 0,
           description: text,
@@ -34,12 +37,12 @@ const Middlebar = () => {
           likes: 0,
           comments: 0,
           comment: [],
-        },
-        ...prevstate,
-      ];
-      setImage(null);
-      return newState;
-    });
+        }),
+        {
+          "Content-Type": "application/json",
+        }
+      );
+    }
   };
 
   useEffect(() => {
