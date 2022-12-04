@@ -18,8 +18,6 @@ const Leftsidebar = () => {
     userNames.push(username.username);
     userImages.push(userImg.profilePicture);
   }
-  console.log(userNames);
-  console.log(userImages);
   let k = 0;
   return (
     <div className="left">
