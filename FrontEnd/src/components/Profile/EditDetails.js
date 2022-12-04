@@ -11,12 +11,13 @@ export default class Modal extends React.Component {
             this.props.handleChanges(this.state);
         }
         this.currentUser = users.find(user => user.userid === this.props.id);
+        console.log(this.props);
         this.state = {
-            Relationship: this.currentUser.relationship,
-            City: this.currentUser.city,
-            From: this.currentUser.from,
-            Name: this.currentUser.name,
-            dob: this.currentUser.dob
+            Relationship: this.props.rel,
+            City: this.props.city,
+            From: this.props.from,
+            Name: this.props.name,
+            dob: this.props.dob
         }
     }
     render() {
