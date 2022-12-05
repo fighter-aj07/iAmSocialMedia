@@ -33,6 +33,7 @@ const Middlebar = () => {
           likes: 0,
           comments: 0,
           comment: [],
+          likeArr: [],
         }),
         {
           "Content-Type": "application/json",
@@ -144,6 +145,7 @@ const Middlebar = () => {
               comments={element.comments}
               comment={element.comment}
               userid={element.userid}
+              likeArr = {element.likeArr}
             />
           </div>
         );
