@@ -56,19 +56,46 @@ const addpost = async (req, res, next) => {
 
 const likeupdate = async (req, res) => {
   try {
-    const {userid} = req.body;
-    const post = await postSc.findById({userid: userid});
-    if (!post.likeArr.includes(userid)) {
-      await post.updateOne({ $push: { likeArr: userid } });
-      res.status(200).json("The post has been liked");
-    } else {
-      await post.updateOne({ $pull: { likeArr: userid } });
-      res.status(200).json("The post has been disliked");
+    const {postid, userid} = req.body;
+    console.log(req.body);
+
+    const post = await postSc.find({userid: postid});
+    //sTORE OBJ ID FROM POST 
+    const objId = post[0]._id;
+    console.log("----------")
+    
+    //check likeArr if it contains userid or it is empty
+    if(post[0].likeArr.includes(userid)){
+      //if it contains userid then remove it
+      const updatedPost = await postSc.findByIdAndUpdate
+      (
+        objId,
+        {
+          $pull: {likeArr: userid},
+          $inc: {likes: -1}
+        },
+        {new: true}
+      );
+      res.status(200).json(updatedPost);
+    }else{
+      //if it does not contain userid then add it
+      const updatedPost = await postSc.findByIdAndUpdate
+      (
+        objId,
+        {
+          $push: {likeArr: userid},
+          $inc: {likes: 1}
+        },
+        {new: true}
+      );
+      res.status(200).json(updatedPost);
     }
   } catch (err) {
-    res.status(500).json(err);
+    console.log(err);
+    res.status(500).json({ message: "Something went wrong" });
   }
 };
+
 
 exports.getposts = getposts;
 exports.addpost = addpost;

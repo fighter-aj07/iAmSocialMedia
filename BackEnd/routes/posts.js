@@ -6,5 +6,5 @@ const postController = require("../controllers/postController");
 
 router.post("/getposts", postController.getposts);
 router.post("/addpost", postController.addpost);
-router.put("/likeupdate", postController.likeupdate);
+router.post("/likeupdate", postController.likeupdate);
 module.exports = router;
