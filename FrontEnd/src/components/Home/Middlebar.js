@@ -8,7 +8,6 @@ const Middlebar = () => {
   const { sendRequest } = useRequest();
   const [image, setImage] = useState(null);
   const [name, setName] = useState("");
-  const [userdata, setUserdata] = useState([]);
   const [picture, setPicture] = useState("");
   const [text, setText] = useState("");
   const handleOnChange = (event) => {
@@ -57,7 +56,6 @@ const Middlebar = () => {
             "Content-Type": "application/json",
           }
         );
-        setUserdata(responseData);
         setName(responseData[0].name);
         setPicture(responseData[0].profilePicture);
       } catch (err) {
@@ -144,7 +142,6 @@ const Middlebar = () => {
               comments={element.comments}
               comment={element.comment}
               postid={element.userid}
-              userdata={userdata}
             />
           </div>
         );

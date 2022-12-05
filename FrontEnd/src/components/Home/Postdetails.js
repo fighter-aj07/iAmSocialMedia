@@ -14,7 +14,6 @@ const Postdetails = (props) => {
     comments,
     comment,
     postid,
-    userdata,
   } = props;
   const [likecounter, setLikecounter] = useState(likes);
   const [kvalue, setKvalue] = useState(0);
@@ -46,7 +45,8 @@ const Postdetails = (props) => {
   };
   let k = 0;
   let m = 0;
-
+  const [picture1, setPicture1] = useState("");
+  const [name1, setName1] = useState("");
   const [picture, setPicture] = useState("");
   const [name, setName] = useState("");
   // const userDet = users.find((user) => user.userid === userId);
@@ -70,7 +70,27 @@ const Postdetails = (props) => {
         console.log(err);
       }
     };
+
+    const fetchItems2 = async (req, res, next) => {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:5002/profile/getprof",
+          "POST",
+          JSON.stringify({
+            userid: localStorage.getItem("user"),
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+        setName1(responseData[0].name);
+        setPicture1(responseData[0].profilePicture);
+      } catch (err) {
+        console.log(err);
+      }
+    };
     fetchItems();
+    fetchItems2();
   }, [sendRequest]);
   return (
     <div className="postcontainer">
@@ -115,12 +135,8 @@ const Postdetails = (props) => {
       <div className={`commentboxx my-2 d-${dispcomment}`}>
         <ul className="displaycomment">
           <div className="addcomment">
-            <img
-              src={userdata[0].profilePicture}
-              alt="Loading"
-              className="profimgcomment"
-            />
-            <span className="commentitemsname">{userdata[0].name}</span>
+            <img src={picture1} alt="Loading" className="profimgcomment" />
+            <span className="commentitemsname">{name1}</span>
           </div>
           {comment.map((element) => {
             return (
