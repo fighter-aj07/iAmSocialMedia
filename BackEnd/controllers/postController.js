@@ -54,5 +54,22 @@ const addpost = async (req, res, next) => {
   //   res.json({ job: addJob });
 };
 
+const likeupdate = async (req, res) => {
+  try {
+    const {userid} = req.body;
+    const post = await postSc.findById({userid: userid});
+    if (!post.likeArr.includes(userid)) {
+      await post.updateOne({ $push: { likeArr: userid } });
+      res.status(200).json("The post has been liked");
+    } else {
+      await post.updateOne({ $pull: { likeArr: userid } });
+      res.status(200).json("The post has been disliked");
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
 exports.getposts = getposts;
 exports.addpost = addpost;
+exports.likeupdate = likeupdate;
