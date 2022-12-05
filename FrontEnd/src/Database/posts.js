@@ -5,7 +5,7 @@ let posts = [
     description: "Love For All, Hatred For None !",
     imageUrl:
       "https://tse4.mm.bing.net/th?id=OIP.bQQVbujEsBtUk0iWDUEHJAHaEg&pid=Api&P=0",
-    likes: 61,
+    likes: 4,
     comments: 4,
     comment: [
       {
@@ -33,7 +33,7 @@ let posts = [
       "Don't be pushed around by the fears in your mind. Be led by the dreams in your heart !",
     imageUrl:
       "https://tse2.mm.bing.net/th?id=OIP.WDbiE3jHbfYDlgg1Zt-5MAHaEK&pid=Api&P=0",
-    likes: 56,
+    likes: 3,
     comments: 1,
     comment: [
       {
@@ -49,7 +49,7 @@ let posts = [
       "Instead of worrying about what you cannot control, shift your energy to what you can create !",
     imageUrl:
       "https://tse4.mm.bing.net/th?id=OIP.w9aIHhxP0FGwBJDKvo6K2wHaE7&pid=Api&P=0",
-    likes: 69,
+    likes: 4,
     comments: 2,
     comment: [
       {
@@ -69,7 +69,7 @@ let posts = [
       "Be the reason someone smiles. Be the reason someone feels loved and believes in the goodness in people !",
     imageUrl:
       "https://tse4.mm.bing.net/th?id=OIP.fyTCzyCoP7Iw44q9fedS2QHaE8&pid=Api&P=0",
-    likes: 31,
+    likes: 1,
     comments: 2,
     comment: [
       {
@@ -88,7 +88,7 @@ let posts = [
     description: "Be mindful. Be grateful. Be positive. Be true. Be kind !",
     imageUrl:
       "https://tse1.mm.bing.net/th?id=OIP.7bU94r8pJwC2OTmyaidv9wHaE4&pid=Api&P=0",
-    likes: 11,
+    likes: 2,
     comments: 3,
     comment: [
       {
