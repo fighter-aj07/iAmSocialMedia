@@ -1,4 +1,5 @@
 const loginsc = require('../models/loginModel');
+const profileSc = require("../models/profileModel");
 const bcrypt = require('bcrypt');
 
 const signup = async (req, res, next) => {
