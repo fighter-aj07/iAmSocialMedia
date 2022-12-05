@@ -56,37 +56,35 @@ const addpost = async (req, res, next) => {
 
 const likeupdate = async (req, res) => {
   try {
-    const {postid, userid} = req.body;
+    const { postid, userid } = req.body;
     console.log(req.body);
 
-    const post = await postSc.find({userid: postid});
-    //sTORE OBJ ID FROM POST 
+    const post = await postSc.find({ userid: postid });
+    //sTORE OBJ ID FROM POST
     const objId = post[0]._id;
-    console.log("----------")
-    
+    console.log("----------");
+
     //check likeArr if it contains userid or it is empty
-    if(post[0].likeArr.includes(userid)){
+    if (post[0].likeArr.includes(userid)) {
       //if it contains userid then remove it
-      const updatedPost = await postSc.findByIdAndUpdate
-      (
+      const updatedPost = await postSc.findByIdAndUpdate(
         objId,
         {
-          $pull: {likeArr: userid},
-          $inc: {likes: -1}
+          $pull: { likeArr: userid },
+          $inc: { likes: -1 },
         },
-        {new: true}
+        { new: true }
       );
       res.status(200).json(updatedPost);
-    }else{
+    } else {
       //if it does not contain userid then add it
-      const updatedPost = await postSc.findByIdAndUpdate
-      (
+      const updatedPost = await postSc.findByIdAndUpdate(
         objId,
         {
-          $push: {likeArr: userid},
-          $inc: {likes: 1}
+          $push: { likeArr: userid },
+          $inc: { likes: 1 },
         },
-        {new: true}
+        { new: true }
       );
       res.status(200).json(updatedPost);
     }
@@ -96,7 +94,25 @@ const likeupdate = async (req, res) => {
   }
 };
 
+const updatepostscomment = async (req, res, next) => {
+  const { userid, comment } = req.body;
+  try {
+    const result = await postSc.updateOne(
+      { userid: userid },
+      {
+        $set: {
+          comment: comment,
+        },
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+  const updatedComment = await postSc.findOne({ userid: userid });
+  console.log(updatedComment);
+};
 
 exports.getposts = getposts;
 exports.addpost = addpost;
 exports.likeupdate = likeupdate;
+exports.updatepostscomment = updatepostscomment;

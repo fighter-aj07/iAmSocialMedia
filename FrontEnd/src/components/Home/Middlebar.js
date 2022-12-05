@@ -42,7 +42,7 @@ const Middlebar = () => {
       );
     }
   };
-
+  console.log(1);
   useEffect(() => {
     const fetchItems = async () => {
       try {
@@ -62,12 +62,16 @@ const Middlebar = () => {
         console.log(err);
       }
     };
+    fetchItems();
+  }, [sendRequest]);
+
+  useEffect(() => {
     const fetchItems2 = async () => {
       try {
         const responseData = await sendRequest(
           "http://localhost:5002/posts/getposts",
-          "POST",
-          JSON.stringify({}),
+          "GET",
+          null,
           {
             "Content-Type": "application/json",
           }
@@ -77,9 +81,8 @@ const Middlebar = () => {
         console.log(err);
       }
     };
-    fetchItems();
     fetchItems2();
-  }, [sendRequest, post]);
+  }, [sendRequest]);
   return (
     <div className="middle container">
       <div className="middletop my-1">
