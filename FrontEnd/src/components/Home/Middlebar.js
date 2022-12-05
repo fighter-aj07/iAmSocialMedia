@@ -13,6 +13,7 @@ const Middlebar = () => {
   const handleOnChange = (event) => {
     setText(event.target.value);
   };
+
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       setImage(URL.createObjectURL(event.target.files[0]));
@@ -40,7 +41,6 @@ const Middlebar = () => {
         }
       );
     }
-    window.location.reload(true);
   };
 
   useEffect(() => {
@@ -79,7 +79,7 @@ const Middlebar = () => {
     };
     fetchItems();
     fetchItems2();
-  }, [sendRequest]);
+  }, [sendRequest, post]);
   return (
     <div className="middle container">
       <div className="middletop my-1">

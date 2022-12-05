@@ -18,6 +18,7 @@ const Postdetails = (props) => {
   const [likecounter, setLikecounter] = useState(likes);
   const [kvalue, setKvalue] = useState(0);
   const [lvalue, setLvalue] = useState(0);
+  const [comm, setComm] = useState("");
   let [likecolor, setLikecolor] = useState("dark");
   let [dispcomment, setDispcomment] = useState("none");
   // const userDet = users.find((user) => user.name === sendName);
@@ -43,6 +44,12 @@ const Postdetails = (props) => {
       setDispcomment("none");
     }
   };
+  const handleOnChangeComment = (event) => {
+    setComm(event.target.value);
+  };
+
+  const addcommenthandler = () => {};
+
   let k = 0;
   let m = 0;
   const [picture1, setPicture1] = useState("");
@@ -137,6 +144,21 @@ const Postdetails = (props) => {
           <div className="addcomment">
             <img src={picture1} alt="Loading" className="profimgcomment" />
             <span className="commentitemsname">{name1}</span>
+          </div>
+          <div className="addcommenthere">
+            <div className="hereee">
+              <input
+                type="text"
+                placeholder="Write a comment "
+                className="adcom"
+                onChange={handleOnChangeComment}
+              />
+              <span className="commentitemsname">
+                <button className="addcombutt" onClick={addcommenthandler}>
+                  Post
+                </button>
+              </span>
+            </div>
           </div>
           {comment.map((element) => {
             return (
