@@ -34,6 +34,7 @@ const Middlebar = () => {
           likes: 0,
           comments: 0,
           comment: [],
+          likeArr: [],
         }),
         {
           "Content-Type": "application/json",
