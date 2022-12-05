@@ -14,27 +14,69 @@ const Postdetails = (props) => {
     comments,
     comment,
     postid,
+    likeArr,
   } = props;
+
   const [likecounter, setLikecounter] = useState(likes);
   const [kvalue, setKvalue] = useState(0);
   const [lvalue, setLvalue] = useState(0);
   const [comm, setComm] = useState("");
   let [likecolor, setLikecolor] = useState("dark");
   let [dispcomment, setDispcomment] = useState("none");
+  const [disabled, setDisabled] = useState(false);
+
   // const userDet = users.find((user) => user.name === sendName);
-
-  const likeHandler = () => {
-    if (kvalue === 0) {
-      setLikecounter(likecounter + 1);
-      setKvalue(1);
+  const { sendRequest } = useRequest();
+  const [likeA, setLikeA] = useState(likeArr);
+  useEffect(() => {
+    if (likeA.includes(localStorage.getItem("user"))) {
       setLikecolor("primary");
-    } else {
-      setLikecounter(likecounter - 1);
-      setKvalue(0);
+      setLikecounter(likecounter + 1);
+    }else{
       setLikecolor("dark");
+      setLikecounter(likecounter - 1);
     }
+  }, [likeA]);
+  const likeHandler = async () => {
+    if(!disabled){
+    if(likeA.includes(localStorage.getItem("user"))){
+      setDisabled(true);
+      const responseData = await sendRequest(
+        "http://localhost:5002/posts/likeupdate",
+        "POST",
+        JSON.stringify({
+          postid: postid,
+          userid: localStorage.getItem("user"),
+        }),
+        {
+          "Content-Type": "application/json",
+        }
+      );
+      setLikeA(responseData.likeArr);
+      console.log("like removed");
+      setDisabled(false);
+      // setKvalue(0);
+    }else{
+      setDisabled(true);
+      const responseData = await sendRequest(
+        "http://localhost:5002/posts/likeupdate",
+        "POST",
+        JSON.stringify({
+          postid: postid,
+          userid: localStorage.getItem("user"),
+        }),
+        {
+          "Content-Type": "application/json",
+        }
+      );
+      console.log("Like added");
+      setLikeA(responseData.likeArr);
+      setDisabled(false);
+      // setKvalue(1);
+    }
+    setDisabled(false);
+  }
   };
-
   const commentHandler = () => {
     if (lvalue === 0) {
       setLvalue(1);
@@ -57,7 +99,6 @@ const Postdetails = (props) => {
   const [picture, setPicture] = useState("");
   const [name, setName] = useState("");
   // const userDet = users.find((user) => user.userid === userId);
-  const { sendRequest } = useRequest();
   useEffect(() => {
     const fetchItems = async (req, res, next) => {
       try {
@@ -122,7 +163,7 @@ const Postdetails = (props) => {
         <div className="postbottombar">
           <div
             className={`postleftsidetop text-${likecolor}`}
-            onClick={likeHandler}
+            onClick={likeHandler} 
           >
             <i className="fa-regular fa-thumbs-up"></i>
           </div>
@@ -131,7 +172,7 @@ const Postdetails = (props) => {
           </div>
         </div>
         <div className="comment">
-          <div className="postleftsidetop commenttop" onClick={commentHandler}>
+          <div className="postleftsidetop commenttop" onClick = {commentHandler} >
             <i className="fa-regular fa-comment"></i>
           </div>
           <div className="likerighttime commentpost">

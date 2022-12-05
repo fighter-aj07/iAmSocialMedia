@@ -142,6 +142,7 @@ const Middlebar = () => {
               comments={element.comments}
               comment={element.comment}
               postid={element.userid}
+              likeArr={element.likeArr}
             />
           </div>
         );
