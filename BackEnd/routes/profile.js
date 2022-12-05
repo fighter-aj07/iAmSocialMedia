@@ -6,5 +6,6 @@ const profileController = require("../controllers/profileController");
 
 router.post("/getprofiles", profileController.getprofiles);
 router.post("/getprof", profileController.getprof);
+router.post("/updateProfile", profileController.updateProfile);
 
 module.exports = router;
