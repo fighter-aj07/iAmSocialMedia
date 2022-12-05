@@ -8,6 +8,7 @@ const Middlebar = () => {
   const { sendRequest } = useRequest();
   const [image, setImage] = useState(null);
   const [name, setName] = useState("");
+  const [userdata, setUserdata] = useState([]);
   const [picture, setPicture] = useState("");
   const [text, setText] = useState("");
   const handleOnChange = (event) => {
@@ -55,8 +56,7 @@ const Middlebar = () => {
             "Content-Type": "application/json",
           }
         );
-        console.log(responseData);
-
+        setUserdata(responseData);
         setName(responseData[0].name);
         setPicture(responseData[0].profilePicture);
       } catch (err) {
@@ -81,7 +81,6 @@ const Middlebar = () => {
     fetchItems();
     fetchItems2();
   }, [sendRequest]);
-  console.log(post);
   return (
     <div className="middle container">
       <div className="middletop my-1">
@@ -143,7 +142,8 @@ const Middlebar = () => {
               likes={element.likes}
               comments={element.comments}
               comment={element.comment}
-              userid={element.userid}
+              postid={element.userid}
+              userdata={userdata}
             />
           </div>
         );

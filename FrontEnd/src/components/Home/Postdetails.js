@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Postdetails.css";
 import Comment from "./Comment";
-// import users from "../../Database/profile";
+
 import { useRequest } from "../../hooks/request-hook";
 
 const Postdetails = (props) => {
@@ -13,14 +13,14 @@ const Postdetails = (props) => {
     likes,
     comments,
     comment,
-    userid,
+    postid,
+    userdata,
   } = props;
   const [likecounter, setLikecounter] = useState(likes);
   const [kvalue, setKvalue] = useState(0);
   const [lvalue, setLvalue] = useState(0);
   let [likecolor, setLikecolor] = useState("dark");
   let [dispcomment, setDispcomment] = useState("none");
-
   // const userDet = users.find((user) => user.name === sendName);
 
   const likeHandler = () => {
@@ -52,20 +52,18 @@ const Postdetails = (props) => {
   // const userDet = users.find((user) => user.userid === userId);
   const { sendRequest } = useRequest();
   useEffect(() => {
-    const fetchItems = async () => {
+    const fetchItems = async (req, res, next) => {
       try {
         const responseData = await sendRequest(
           "http://localhost:5002/profile/getprof",
           "POST",
           JSON.stringify({
-            userid: userid,
+            userid: postid,
           }),
           {
             "Content-Type": "application/json",
           }
         );
-        console.log(responseData);
-
         setName(responseData[0].name);
         setPicture(responseData[0].profilePicture);
       } catch (err) {
@@ -74,7 +72,6 @@ const Postdetails = (props) => {
     };
     fetchItems();
   }, [sendRequest]);
-
   return (
     <div className="postcontainer">
       <div className="posttopbar">
@@ -117,6 +114,14 @@ const Postdetails = (props) => {
       </div>
       <div className={`commentboxx my-2 d-${dispcomment}`}>
         <ul className="displaycomment">
+          <div className="addcomment">
+            <img
+              src={userdata[0].profilePicture}
+              alt="Loading"
+              className="profimgcomment"
+            />
+            <span className="commentitemsname">{userdata[0].name}</span>
+          </div>
           {comment.map((element) => {
             return (
               <li className="commentitems">

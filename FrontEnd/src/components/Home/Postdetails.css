@@ -84,3 +84,10 @@
   flex-direction: column;
   border-bottom: 0.5px solid #adadad;
 }
+
+.addcomment {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
