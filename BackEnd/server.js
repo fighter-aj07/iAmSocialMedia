@@ -5,6 +5,7 @@ const postRoutes = require("./routes/posts");
 const userdataRoutes = require("./routes/userdata");
 const profileRoutes = require("./routes/profile");
 const loginRoutes = require("./routes/login");
+const signupRoutes = require("./routes/signup");
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use("/posts", postRoutes);
 app.use("/userdata", userdataRoutes);
 app.use("/profile", profileRoutes);
 app.use("/login", loginRoutes);
+app.use("/signup", signupRoutes);
 
 app.use((req, res, next) => {
   const error = new HttpError("Could not find this route.", 404);
