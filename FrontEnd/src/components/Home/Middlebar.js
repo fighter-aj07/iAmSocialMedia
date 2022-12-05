@@ -1,28 +1,24 @@
 import React, { useState, useEffect } from "react";
 import "./Middlebar.css";
 import Postdetails from "./Postdetails";
-// import posts from "../../Database/posts";
-import users from "../../Database/profile";
 import { useRequest } from "../../hooks/request-hook";
 
 const Middlebar = () => {
   const [post, setPost] = useState([]);
   const { sendRequest } = useRequest();
   const [image, setImage] = useState(null);
+  const [name, setName] = useState("");
+  const [picture, setPicture] = useState("");
   const [text, setText] = useState("");
   const handleOnChange = (event) => {
     setText(event.target.value);
   };
-  const userDet = users.find(
-    (user) => user.userid === localStorage.getItem("user")
-  );
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       setImage(URL.createObjectURL(event.target.files[0]));
     }
   };
   const addpostHandller = async (e) => {
-    // console.log(image);
     e.preventDefault();
     if (localStorage.hasOwnProperty("userid")) {
       const response = await sendRequest(
@@ -30,7 +26,7 @@ const Middlebar = () => {
         "POST",
         JSON.stringify({
           userid: localStorage.getItem("user"),
-          sendName: userDet.name,
+          sendName: name,
           time: 0,
           description: text,
           imageUrl: image,
@@ -50,6 +46,26 @@ const Middlebar = () => {
     const fetchItems = async () => {
       try {
         const responseData = await sendRequest(
+          "http://localhost:5002/profile/getprof",
+          "POST",
+          JSON.stringify({
+            userid: localStorage.getItem("user"),
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+        console.log(responseData);
+
+        setName(responseData[0].name);
+        setPicture(responseData[0].profilePicture);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    const fetchItems2 = async () => {
+      try {
+        const responseData = await sendRequest(
           "http://localhost:5002/posts/getposts",
           "POST",
           JSON.stringify({}),
@@ -63,18 +79,15 @@ const Middlebar = () => {
       }
     };
     fetchItems();
+    fetchItems2();
   }, [sendRequest]);
-
+  console.log(post);
   return (
     <div className="middle container">
       <div className="middletop my-1">
         <div className="middletopbar">
           <div className="middleleftsidetop">
-            <img
-              src={userDet.profilePicture}
-              alt="Loading"
-              className="middleimageleft"
-            />
+            <img src={picture} alt="Loading" className="middleimageleft" />
           </div>
           <div className="middlerightsidetop">
             <textarea
@@ -130,6 +143,7 @@ const Middlebar = () => {
               likes={element.likes}
               comments={element.comments}
               comment={element.comment}
+              userid={element.userid}
             />
           </div>
         );

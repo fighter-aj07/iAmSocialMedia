@@ -1,18 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Postdetails.css";
 import Comment from "./Comment";
-import users from "../../Database/profile";
+// import users from "../../Database/profile";
+import { useRequest } from "../../hooks/request-hook";
 
 const Postdetails = (props) => {
-  let { sendName, time, description, imageUrl, likes, comments, comment } =
-    props;
+  let {
+    sendName,
+    time,
+    description,
+    imageUrl,
+    likes,
+    comments,
+    comment,
+    userid,
+  } = props;
   const [likecounter, setLikecounter] = useState(likes);
   const [kvalue, setKvalue] = useState(0);
   const [lvalue, setLvalue] = useState(0);
   let [likecolor, setLikecolor] = useState("dark");
   let [dispcomment, setDispcomment] = useState("none");
 
-  const userDet = users.find((user) => user.name === sendName);
+  // const userDet = users.find((user) => user.name === sendName);
 
   const likeHandler = () => {
     if (kvalue === 0) {
@@ -37,15 +46,40 @@ const Postdetails = (props) => {
   };
   let k = 0;
   let m = 0;
+
+  const [picture, setPicture] = useState("");
+  const [name, setName] = useState("");
+  // const userDet = users.find((user) => user.userid === userId);
+  const { sendRequest } = useRequest();
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:5002/profile/getprof",
+          "POST",
+          JSON.stringify({
+            userid: userid,
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+        console.log(responseData);
+
+        setName(responseData[0].name);
+        setPicture(responseData[0].profilePicture);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchItems();
+  }, [sendRequest]);
+
   return (
     <div className="postcontainer">
       <div className="posttopbar">
         <div className="postleftsidetop">
-          <img
-            src={userDet.profilePicture}
-            alt="Loading"
-            className="postimageleft"
-          />
+          <img src={picture} alt="Loading" className="postimageleft" />
         </div>
         <div className="postrightsidetop">
           <p className="nameuser fw-bold">{sendName}</p>
