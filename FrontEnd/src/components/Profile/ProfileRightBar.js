@@ -137,12 +137,35 @@ export default function Profile(props) {
   const showModal = e => {
     setShow(!show);
   };
+  async function updateProfile(values){
+    try {
+      const responseData = await sendRequest(
+        "http://localhost:5002/profile/updateprofile",
+        "POST",
+        JSON.stringify({
+          userid: id,
+          name: values.Name,
+          city: values.City,
+          from: values.From,
+          relationship: values.Relationship,
+          dob: values.dob
+        }),
+        {
+          "Content-Type": "application/json",
+        }
+      );
+      console.log(responseData);
+    } catch (err) {
+      console.log(err);
+    }
+  }
   const handleChanges = (values) => {
     setName(values.Name);
     setRelationship(values.Relationship);
     setFrom(values.From);
     setDob(values.dob);
     setCity(values.City);
+    updateProfile(values);
     props.handleNameChange(values.Name);
   }
   return (
