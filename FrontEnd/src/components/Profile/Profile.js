@@ -71,7 +71,7 @@ export default function Profile() {
             </div>
           </div>
           <div className="profileRightBottom">
-            <Middlebar />
+            <Middlebar dispID = {useridpr} />
             <ProfileRightBar
               handleNameChange={handleNameChange}
               id={id}

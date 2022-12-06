@@ -3,7 +3,7 @@ import "./Middlebar.css";
 import Postdetails from "./Postdetails";
 import { useRequest } from "../../hooks/request-hook";
 
-const Middlebar = () => {
+const Middlebar = (props) => {
   const [post, setPost] = useState([]);
   const [csstyle, setCsstyle] = useState("none");
   const { sendRequest } = useRequest();
@@ -157,6 +157,8 @@ const Middlebar = () => {
         </div>
       </div>
       {post.map((element) => {
+        if(props.dispID === element.userid || props.dispID === "all"){ 
+          console.log(element);
         return (
           <div className="middlebottom" key={element.imageUrl}>
             <Postdetails
@@ -173,6 +175,7 @@ const Middlebar = () => {
             />
           </div>
         );
+        }
       })}
     </div>
   );
