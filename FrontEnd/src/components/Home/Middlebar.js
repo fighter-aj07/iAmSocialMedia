@@ -10,6 +10,7 @@ const Middlebar = () => {
   const [name, setName] = useState("");
   const [picture, setPicture] = useState("");
   const [text, setText] = useState("");
+  const [cha, setCha] = useState(true);
   const handleOnChange = (event) => {
     setText(event.target.value);
   };
@@ -21,7 +22,7 @@ const Middlebar = () => {
   };
   const addpostHandller = async (e) => {
     e.preventDefault();
-    if (localStorage.hasOwnProperty("userid")) {
+    if (localStorage.hasOwnProperty("user")) {
       const response = await sendRequest(
         "http://localhost:5002/posts/addpost",
         "POST",
@@ -41,6 +42,7 @@ const Middlebar = () => {
         }
       );
     }
+    setCha((prev) => !prev);
   };
   console.log(1);
   useEffect(() => {
@@ -82,7 +84,7 @@ const Middlebar = () => {
       }
     };
     fetchItems2();
-  }, [sendRequest]);
+  }, [sendRequest, cha]);
   return (
     <div className="middle container">
       <div className="middletop my-1">
@@ -146,6 +148,7 @@ const Middlebar = () => {
               comment={element.comment}
               postid={element.userid}
               likeArr={element.likeArr}
+              setCha={setCha}
             />
           </div>
         );

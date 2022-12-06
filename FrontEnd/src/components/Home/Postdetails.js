@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Postdetails.css";
 import Comment from "./Comment";
 
@@ -15,8 +15,10 @@ const Postdetails = (props) => {
     comment,
     postid,
     likeArr,
+    setCha,
   } = props;
 
+  const [count, setCount] = useState(comment.length);
   const [likecounter, setLikecounter] = useState(likes);
   const [kvalue, setKvalue] = useState(0);
   const [lvalue, setLvalue] = useState(0);
@@ -84,42 +86,52 @@ const Postdetails = (props) => {
   };
   const [comm, setComm] = useState("");
   const [commarr, setCommarr] = useState(comment);
+  const dataFetchedRef = useRef(false);
   const handleOnChangeComment = (event) => {
     setComm(event.target.value);
-    setNewComm((data) => {
-      data.content = comm;
-      return data;
-    });
   };
   const [newComm, setNewComm] = useState({
     id: localStorage.getItem("user"),
     content: "",
   });
   const addcommenthandler = async () => {
-    setNewComm((data) => {
-      data.content = comm;
-      return data;
-    });
-    setCommarr((prevstate) => {
-      let newState = [...prevstate, newComm];
-      return newState;
-    });
-    console.log(newComm);
-    console.log(commarr);
-    const response = await sendRequest(
-      "http://localhost:5002/posts/updatepostscomment",
-      "POST",
-      JSON.stringify({
-        userid: postid,
-        comment: commarr,
-      }),
-      {
-        "Content-Type": "application/json",
-      }
-    );
+    setNewComm((prevState) => ({
+      ...prevState,
+      content: comm,
+    }));
   };
+  useEffect(() => {
+    if (newComm.content !== "") {
+      setCommarr((prevstate) => {
+        let newState = [...prevstate, newComm];
+        return newState;
+      });
+    }
+  }, [newComm]);
+  useEffect(() => {
+    console.log("111 ", commarr);
+    const fetchItems = async (req, res, next) => {
+      try {
+        const response = await sendRequest(
+          "http://localhost:5002/posts/updatepostscomment",
+          "POST",
+          JSON.stringify({
+            userid: postid,
+            comment: [...commarr],
+            comments: count,
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+        setCha((prev) => !prev);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchItems();
+  }, [commarr, count]);
 
-  // const userDet = users.find((user) => user.userid === userId);
   useEffect(() => {
     if (likeA.includes(localStorage.getItem("user"))) {
       setLikecolor("primary");
@@ -130,15 +142,22 @@ const Postdetails = (props) => {
     }
   }, [likeA]);
 
+  // useEffect(() => {
+  //   if (dataFetchedRef.current) {
+  //     return;
+  //   }
+  //   dataFetchedRef.current = true;
+  //   setNewComm((data) => {
+  //     data.content = comm;
+  //     return data;
+  //   });
+  //   setCommarr((prevstate) => {
+  //     let newState = [...prevstate, newComm];
+  //     return newState;
+  //   });
+  // }, [newComm]);
+
   useEffect(() => {
-    setNewComm((data) => {
-      data.content = comm;
-      return data;
-    });
-    setCommarr((prevstate) => {
-      let newState = [...prevstate, newComm];
-      return newState;
-    });
     const fetchItems = async (req, res, next) => {
       try {
         const responseData = await sendRequest(
@@ -157,7 +176,6 @@ const Postdetails = (props) => {
         console.log(err);
       }
     };
-
     const fetchItems2 = async (req, res, next) => {
       try {
         const responseData = await sendRequest(
@@ -215,7 +233,7 @@ const Postdetails = (props) => {
             <i className="fa-regular fa-comment"></i>
           </div>
           <div className="likerighttime commentpost">
-            <p className="text-muted">{comments} Comments</p>
+            <p className="text-muted">{count} Comments</p>
           </div>
         </div>
       </div>
@@ -229,7 +247,7 @@ const Postdetails = (props) => {
             <div className="hereee">
               <input
                 type="text"
-                placeholder="Write a comment "
+                placeholder="Write a comment... "
                 className="adcom"
                 onChange={handleOnChangeComment}
               />
