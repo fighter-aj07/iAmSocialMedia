@@ -115,7 +115,7 @@ export default function Profile(props) {
             {friends.map((friend) => {
               return (
                 <div className="rightbarFollowing">
-                  <Link to={`/profile/${friend}`} className="rightbarLink">
+                  <Link to={`/profile/${friend}`} className="rightbarLink" style={{ textDecoration: "none" }}>
                     <img
                       src={users.find((user) => user.userid === friend).profilePicture}
                       alt=""
