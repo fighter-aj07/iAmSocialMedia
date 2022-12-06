@@ -8,13 +8,22 @@ import {useParams} from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import users from "../../Database/profile";
 import { useRequest } from "../../hooks/request-hook";
+import { useDispatch, useSelector } from "react-redux";
+import { handledarkMode } from "../../store/actions/darkModeAction";
+
 
 export default function Profile() {
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState([]);
   const { sendRequest } = useRequest();
   const {useridpr} = useParams();
+  const dispatch = useDispatch();
+  const mode = useSelector((state) => state.darkMode);
+  const [color,setColor] = useState("");
+  console.log(mode);
+  const { isdarkMode } = mode;
   const id = useridpr;
+  const [modes, setMode] = useState("dark");
   console.log("rendering", useridpr);
   useEffect(() => {
     const fetchItems = async () => {
@@ -40,9 +49,27 @@ export default function Profile() {
   const handleNameChange = (name) => {
     setMyname(name);
   };
+  const switchDarkMode = () => {
+    isdarkMode
+      ? dispatch(handledarkMode(false))
+      : dispatch(handledarkMode(true));
+  };
+  useEffect(() => {
+    document.body.style.background = isdarkMode
+      ? "radial-gradient(circle, rgba(32,32,32,1) 0%, rgba(9,9,9,1) 100%)"
+      : "#f5f5f5";
+    if (isdarkMode) {
+      setMode("light");
+      setColor("white");
+    } else {
+      setMode("dark");
+      setColor("black");
+    }
+  }, [isdarkMode]);
   return (
     <>
       <Navbar />
+      <div style={{color:color}}>
       <div className="profile">
         <Leftsidebar />
         <div className="profileRight">
@@ -80,6 +107,7 @@ export default function Profile() {
             />
           </div>
         </div>
+      </div>
       </div>
     </>
   );
