@@ -95,6 +95,7 @@ const Postdetails = (props) => {
     content: "",
   });
   const addcommenthandler = async () => {
+    setCount(count + 1);
     setNewComm((prevState) => ({
       ...prevState,
       content: comm,
@@ -130,6 +131,7 @@ const Postdetails = (props) => {
       }
     };
     fetchItems();
+    setComm("");
   }, [commarr, count]);
 
   useEffect(() => {
@@ -249,6 +251,7 @@ const Postdetails = (props) => {
                 type="text"
                 placeholder="Write a comment... "
                 className="adcom"
+                value={comm}
                 onChange={handleOnChangeComment}
               />
               <span className="commentitemsname">
