@@ -23,7 +23,6 @@ const getposts = async (req, res, next) => {
 };
 
 const addpost = async (req, res, next) => {
-  console.log(req.body);
   const {
     userid,
     sendName,
@@ -33,7 +32,9 @@ const addpost = async (req, res, next) => {
     likes,
     comments,
     comment,
+    likeArr,
   } = req.body;
+  console.log(req.body);
 
   const newPosts = new postSc({
     userid: userid,
@@ -44,6 +45,7 @@ const addpost = async (req, res, next) => {
     likes: likes,
     comments: comments,
     comment: comment,
+    likeArr: likeArr,
   });
   try {
     await newPosts.save();
@@ -57,7 +59,6 @@ const addpost = async (req, res, next) => {
 const likeupdate = async (req, res) => {
   try {
     const { postid, userid } = req.body;
-    console.log(req.body);
 
     const post = await postSc.find({ userid: postid });
     //sTORE OBJ ID FROM POST
@@ -95,21 +96,22 @@ const likeupdate = async (req, res) => {
 };
 
 const updatepostscomment = async (req, res, next) => {
-  const { userid, comment } = req.body;
+  const { userid, comment, comments } = req.body;
+  console.log(comment);
   try {
-    const result = await postSc.updateOne(
+    const result = await postSc.updateMany(
       { userid: userid },
       {
         $set: {
+          comments: comments,
           comment: comment,
         },
       }
     );
+    res.json("success");
   } catch (err) {
     console.log(err);
   }
-  const updatedComment = await postSc.findOne({ userid: userid });
-  console.log(updatedComment);
 };
 
 exports.getposts = getposts;
