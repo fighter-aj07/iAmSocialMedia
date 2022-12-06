@@ -61,7 +61,7 @@ export default function Navbar() {
             <i className="fa-solid fa-right-from-bracket"></i>
           </div>
         </div>
-        <Link to="/profile">
+        <Link to={"/profile/" + localStorage.getItem("user")}>
           <img
             src={userDet.profilePicture ? userDet.profilePicture : "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"}
             alt="Loading"

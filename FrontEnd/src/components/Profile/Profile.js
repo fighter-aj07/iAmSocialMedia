@@ -4,6 +4,7 @@ import Leftsidebar from "../../components/Home/Leftsidebar";
 import Middlebar from "../../components/Home/Middlebar";
 import ProfileRightBar from "../../components/Profile/ProfileRightBar";
 import { useEffect, useState } from "react";
+import {useParams} from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import users from "../../Database/profile";
 import { useRequest } from "../../hooks/request-hook";
@@ -11,8 +12,10 @@ import { useRequest } from "../../hooks/request-hook";
 export default function Profile() {
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState([]);
-  const id = localStorage.getItem("user");
   const { sendRequest } = useRequest();
+  const {useridpr} = useParams();
+  const id = useridpr;
+  console.log("rendering", useridpr);
   useEffect(() => {
     const fetchItems = async () => {
       try {
@@ -32,7 +35,7 @@ export default function Profile() {
       }
     };
     fetchItems();
-  }, [sendRequest]);
+  }, [sendRequest, useridpr]);
   const [myname, setMyname] = useState(currentUser.name);
   const handleNameChange = (name) => {
     setMyname(name);
@@ -73,6 +76,7 @@ export default function Profile() {
               handleNameChange={handleNameChange}
               id={id}
               profile
+              useridpr = {useridpr}
             />
           </div>
         </div>
