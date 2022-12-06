@@ -126,6 +126,7 @@ const Postdetails = (props) => {
           }
         );
         setCha((prev) => !prev);
+        setComm("");
       } catch (err) {
         console.log(err);
       }
