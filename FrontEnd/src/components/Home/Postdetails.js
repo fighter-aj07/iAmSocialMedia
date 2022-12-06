@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./Postdetails.css";
 import Comment from "./Comment";
 
@@ -17,7 +17,6 @@ const Postdetails = (props) => {
     likeArr,
     setCha,
   } = props;
-
   const [count, setCount] = useState(comment.length);
   const [likecounter, setLikecounter] = useState(likes);
   const [kvalue, setKvalue] = useState(0);
@@ -52,6 +51,8 @@ const Postdetails = (props) => {
         );
         setLikeA(responseData.likeArr);
         console.log("like removed");
+        setLikecolor("dark");
+        setLikecounter((prev) => prev - 1);
         setDisabled(false);
         // setKvalue(0);
       } else {
@@ -69,6 +70,8 @@ const Postdetails = (props) => {
         );
         console.log("Like added");
         setLikeA(responseData.likeArr);
+        setLikecolor("primary");
+        setLikecounter((prev) => prev + 1);
         setDisabled(false);
         // setKvalue(1);
       }
@@ -126,6 +129,7 @@ const Postdetails = (props) => {
           }
         );
         setCha((prev) => !prev);
+        setComm("");
       } catch (err) {
         console.log(err);
       }
@@ -136,10 +140,8 @@ const Postdetails = (props) => {
   useEffect(() => {
     if (likeA.includes(localStorage.getItem("user"))) {
       setLikecolor("primary");
-      setLikecounter(likecounter + 1);
     } else {
       setLikecolor("dark");
-      setLikecounter(likecounter - 1);
     }
   }, [likeA]);
 

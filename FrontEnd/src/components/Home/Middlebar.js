@@ -156,27 +156,30 @@ const Middlebar = (props) => {
           </ul>
         </div>
       </div>
-      {post.map((element) => {
-        if(props.dispID === element.userid || props.dispID === "all"){ 
-          console.log(element);
-        return (
-          <div className="middlebottom" key={element.imageUrl}>
-            <Postdetails
-              sendName={element.sendName}
-              time={element.time}
-              description={element.description}
-              imageUrl={element.imageUrl}
-              likes={element.likes}
-              comments={element.comments}
-              comment={element.comment}
-              postid={element.userid}
-              likeArr={element.likeArr}
-              setCha={setCha}
-            />
-          </div>
-        );
-        }
-      })}
+      {post
+        .slice(0)
+        .reverse()
+        .map((element) => {
+          if (props.dispID === element.userid || props.dispID === "all") {
+            console.log(element);
+            return (
+              <div className="middlebottom" key={element.imageUrl}>
+                <Postdetails
+                  sendName={element.sendName}
+                  time={element.time}
+                  description={element.description}
+                  imageUrl={element.imageUrl}
+                  likes={element.likes}
+                  comments={element.comments}
+                  comment={element.comment}
+                  postid={element.userid}
+                  likeArr={element.likeArr}
+                  setCha={setCha}
+                />
+              </div>
+            );
+          }
+        })}
     </div>
   );
 };
