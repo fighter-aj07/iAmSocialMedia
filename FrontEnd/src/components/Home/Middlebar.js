@@ -25,12 +25,15 @@ const Middlebar = (props) => {
 
   const addpostHandller = async (e) => {
     e.preventDefault();
+    let date = new Date();
+    let time = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + "/" + date.getHours() + "/" + date.getMinutes() + "/" + date.getSeconds();
+
     setCha((prev) => !prev);
     if (localStorage.hasOwnProperty("user")) {
       const data = {
         userid: localStorage.getItem("user"),
         sendName: name,
-        time: 0,
+        time: time,
         description: text,
         imageUrl: image,
         likes: 0,

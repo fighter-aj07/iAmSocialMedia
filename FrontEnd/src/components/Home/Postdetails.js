@@ -29,10 +29,8 @@ const Postdetails = (props) => {
   useEffect(() => {
     if (likeA.includes(localStorage.getItem("user"))) {
       setLikecolor("primary");
-      setLikecounter(likecounter + 1);
     }else{
       setLikecolor("dark");
-      setLikecounter(likecounter - 1);
     }
   }, [likeA]);
   function timeSince(date) {
