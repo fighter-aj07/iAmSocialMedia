@@ -72,10 +72,12 @@ const Leftsidebar = () => {
         {userdata.map((element) => {
           return (
             <li className="leftitemsbottom">
-              <div className="imgsrc">
-                <img src={element.profilePicture} className="profimg" />
-                <span className="leftitemsname2">{element.name}</span>
-              </div>
+              <Link to={"/profile/" + element.userid} style={{ textDecoration: "none" }}>
+                <div className="imgsrc">
+                  <img src={element.profilePicture} className="profimg" />
+                  <span className="leftitemsname2">{element.name}</span>
+                </div>
+              </Link>
             </li>
           );
         })}

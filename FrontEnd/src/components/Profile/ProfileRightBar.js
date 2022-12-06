@@ -17,7 +17,7 @@ export default function Profile(props) {
   const [users, setUsers] = useState([]);
   const [show, setShow] = useState(false);
   const [name, setName] = useState("");
-  const id = localStorage.getItem("user");
+  const id = props.useridpr;
   const { sendRequest } = useRequest();
   useEffect(() => {
     const fetchItems = async () => {
@@ -46,7 +46,7 @@ export default function Profile(props) {
       }
     };
     fetchItems();
-  }, [sendRequest]);
+  }, [sendRequest, id]);
   const showModal = e => {
     setShow(!show);
   };
@@ -104,7 +104,7 @@ export default function Profile(props) {
               <span className="rightbarInfoKey">Date of Birth:</span>
               <span className="rightbarInfoValue">{dob}</span>
             </div>
-            {props.useridpr === id && <button className="edit-btn-rightbar"  onClick={e => {
+            {props.useridpr === localStorage.getItem("user") && <button className="edit-btn-rightbar"  onClick={e => {
                 showModal();
           }}
             > Edit details </button>}
@@ -115,7 +115,7 @@ export default function Profile(props) {
             {friends.map((friend) => {
               return (
                 <div className="rightbarFollowing">
-                  <Link to={`/profile/${friend}`} className="rightbarLink">
+                  <Link to={`/profile/${friend}`} className="rightbarLink" style={{ textDecoration: "none" }}>
                     <img
                       src={users.find((user) => user.userid === friend).profilePicture}
                       alt=""

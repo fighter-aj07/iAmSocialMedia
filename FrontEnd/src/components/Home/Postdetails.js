@@ -126,13 +126,13 @@ const Postdetails = (props) => {
           }
         );
         setCha((prev) => !prev);
+        setCount(count + 1);
       } catch (err) {
         console.log(err);
       }
     };
     fetchItems();
-    setComm("");
-  }, [commarr, count]);
+  }, [commarr]);
 
   useEffect(() => {
     if (likeA.includes(localStorage.getItem("user"))) {
