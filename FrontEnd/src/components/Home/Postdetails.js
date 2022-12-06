@@ -52,6 +52,8 @@ const Postdetails = (props) => {
         );
         setLikeA(responseData.likeArr);
         console.log("like removed");
+      setLikecolor("dark");
+      setLikecounter((prev) => prev - 1);
         setDisabled(false);
         // setKvalue(0);
       } else {
@@ -69,6 +71,9 @@ const Postdetails = (props) => {
         );
         console.log("Like added");
         setLikeA(responseData.likeArr);
+        
+      setLikecolor("primary");
+      setLikecounter((prev) => prev + 1);
         setDisabled(false);
         // setKvalue(1);
       }
@@ -137,10 +142,8 @@ const Postdetails = (props) => {
   useEffect(() => {
     if (likeA.includes(localStorage.getItem("user"))) {
       setLikecolor("primary");
-      setLikecounter(likecounter + 1);
     } else {
       setLikecolor("dark");
-      setLikecounter(likecounter - 1);
     }
   }, [likeA]);
 
