@@ -89,7 +89,6 @@ const Postdetails = (props) => {
   };
   const [comm, setComm] = useState("");
   const [commarr, setCommarr] = useState(comment);
-  const dataFetchedRef = useRef(false);
   const handleOnChangeComment = (event) => {
     setComm(event.target.value);
   };
