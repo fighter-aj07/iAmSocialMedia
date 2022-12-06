@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const postSchema = new Schema({
   userid: { type: String, required: true },
   sendName: { type: String, required: true },
-  time: { type: Number, required: true },
+  time: { type: String, required: true },
   description: { type: String, required: true },
   imageUrl: { type: String, required: true },
   likes: { type: Number, required: true },

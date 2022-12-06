@@ -18,7 +18,6 @@ const Postdetails = (props) => {
   } = props;
 
   const [likecounter, setLikecounter] = useState(likes);
-  const [kvalue, setKvalue] = useState(0);
   const [lvalue, setLvalue] = useState(0);
   const [comm, setComm] = useState("");
   let [likecolor, setLikecolor] = useState("dark");
@@ -37,6 +36,33 @@ const Postdetails = (props) => {
       setLikecounter(likecounter - 1);
     }
   }, [likeA]);
+  function timeSince(date) {
+   
+    let splitted = date.split("/");
+    let time = new Date(splitted[2], splitted[1], splitted[0], splitted[3], splitted[4], splitted[5]);
+    let seconds = Math.floor((new Date  - time) / 1000);
+    let interval = seconds / 31536000;
+    if (interval > 1) {
+      return Math.floor(interval) + " years";
+    }
+    interval = seconds / 2592000;
+    if (interval > 1) {
+      return Math.floor(interval) + " months";
+    }
+    interval = seconds / 86400;
+    if (interval > 1) {
+      return Math.floor(interval) + " days";
+    }
+    interval = seconds / 3600;
+    if (interval > 1) {
+      return Math.floor(interval) + " hours";
+    }
+    interval = seconds / 60;
+    if (interval > 1) {
+      return Math.floor(interval) + " minutes";
+    }
+    return Math.floor(seconds) + " seconds";
+  }
   const likeHandler = async () => {
     if(!disabled){
     if(likeA.includes(localStorage.getItem("user"))){
@@ -140,6 +166,7 @@ const Postdetails = (props) => {
     fetchItems();
     fetchItems2();
   }, [sendRequest]);
+  let timeago = timeSince(time);
   return (
     <div className="postcontainer">
       <div className="posttopbar">
@@ -150,7 +177,7 @@ const Postdetails = (props) => {
           <p className="nameuser fw-bold">{sendName}</p>
         </div>
         <div className="postrighttime">
-          <p className="text-muted">{time} mins ago</p>
+          <p className="text-muted">{timeago} ago</p>
         </div>
       </div>
       <div className="postdescription my-3">

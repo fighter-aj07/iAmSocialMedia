@@ -19,16 +19,19 @@ const Middlebar = () => {
       setImage(URL.createObjectURL(event.target.files[0]));
     }
   };
+
   const addpostHandller = async (e) => {
     e.preventDefault();
     if (localStorage.hasOwnProperty("userid")) {
+      let date = new Date();
+      let time = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + "/" + date.getHours() + "/" + date.getMinutes() + "/" + date.getSeconds();
       const response = await sendRequest(
         "http://localhost:5002/posts/addpost",
         "POST",
         JSON.stringify({
           userid: localStorage.getItem("user"),
           sendName: name,
-          time: 0,
+          time: time,
           description: text,
           imageUrl: image,
           likes: 0,
