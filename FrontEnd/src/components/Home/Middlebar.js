@@ -5,6 +5,7 @@ import { useRequest } from "../../hooks/request-hook";
 
 const Middlebar = () => {
   const [post, setPost] = useState([]);
+  const [csstyle, setCsstyle] = useState("none");
   const { sendRequest } = useRequest();
   const [image, setImage] = useState(null);
   const [name, setName] = useState("");
@@ -18,33 +19,41 @@ const Middlebar = () => {
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       setImage(URL.createObjectURL(event.target.files[0]));
+      setCsstyle("block");
     }
   };
   const addpostHandller = async (e) => {
     e.preventDefault();
+    setCha((prev) => !prev);
     if (localStorage.hasOwnProperty("user")) {
+      const data = {
+        userid: localStorage.getItem("user"),
+        sendName: name,
+        time: 0,
+        description: text,
+        imageUrl: image,
+        likes: 0,
+        comments: 0,
+        comment: [],
+        likeArr: [],
+      };
+      console.log("40 ", data);
+      setPost((prevState) => {
+        return [...prevState, data];
+      });
+      setText("");
       const response = await sendRequest(
         "http://localhost:5002/posts/addpost",
         "POST",
-        JSON.stringify({
-          userid: localStorage.getItem("user"),
-          sendName: name,
-          time: 0,
-          description: text,
-          imageUrl: image,
-          likes: 0,
-          comments: 0,
-          comment: [],
-          likeArr: [],
-        }),
+        JSON.stringify(data),
         {
           "Content-Type": "application/json",
         }
       );
+      console.log("data ", data);
     }
-    setCha((prev) => !prev);
   };
-  console.log(1);
+  console.log("post ", post);
   useEffect(() => {
     const fetchItems = async () => {
       try {
@@ -99,23 +108,35 @@ const Middlebar = () => {
               className="postdesc2"
               rows="4"
               onChange={handleOnChange}
+              value={text}
             ></textarea>
           </div>
         </div>
         <div className="middletopbottom">
           <ul className="middletopbottomul">
             <li className="middletopbottomli">
-              <i className="fa-solid fa-photo-film"></i>
-              <span className="mx-2 fw-bold">
-                <label className="custom-file-upload">
-                  <input
-                    type="file"
-                    className="mx-2"
-                    onChange={onImageChange}
+              <div className="containnnnn">
+                <div className="llll">
+                  <i className="fa-solid fa-photo-film"></i>
+                </div>
+                <div className="labelll">
+                  <label className="custom-file-upload mx-2 fw-bold">
+                    <input
+                      type="file"
+                      className="mx-2"
+                      onChange={onImageChange}
+                    />
+                    Add Photo or Video
+                  </label>
+                </div>
+                <div className="postimggg">
+                  <img
+                    src={image}
+                    alt="Loading"
+                    className={`imageinput d-${csstyle}`}
                   />
-                  Add Photo or Video
-                </label>
-              </span>
+                </div>
+              </div>
             </li>
             <li className="middletopbottomli">
               {/* <i className="fa-solid fa-tag"></i>
