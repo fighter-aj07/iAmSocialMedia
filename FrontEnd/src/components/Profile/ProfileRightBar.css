@@ -86,3 +86,6 @@
     background-color: rgb(158, 158, 234);
     border-radius: 3px;
   }
+  .rightbarLink{
+    all: unset;
+  }

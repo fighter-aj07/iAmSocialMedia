@@ -22,8 +22,6 @@ const Comment = (props) => {
             "Content-Type": "application/json",
           }
         );
-        console.log(responseData);
-
         setName(responseData[0].name);
         setPicture(responseData[0].profilePicture);
       } catch (err) {

@@ -23,7 +23,6 @@ const getposts = async (req, res, next) => {
 };
 
 const addpost = async (req, res, next) => {
-  console.log(req.body);
   const {
     userid,
     sendName,
@@ -33,7 +32,9 @@ const addpost = async (req, res, next) => {
     likes,
     comments,
     comment,
+    likeArr,
   } = req.body;
+  console.log(req.body);
 
   const newPosts = new postSc({
     userid: userid,
@@ -44,6 +45,7 @@ const addpost = async (req, res, next) => {
     likes: likes,
     comments: comments,
     comment: comment,
+    likeArr: likeArr,
   });
   try {
     await newPosts.save();
@@ -56,37 +58,34 @@ const addpost = async (req, res, next) => {
 
 const likeupdate = async (req, res) => {
   try {
-    const {postid, userid} = req.body;
-    console.log(req.body);
+    const { postid, userid } = req.body;
 
-    const post = await postSc.find({userid: postid});
-    //sTORE OBJ ID FROM POST 
+    const post = await postSc.find({ userid: postid });
+    //sTORE OBJ ID FROM POST
     const objId = post[0]._id;
-    console.log("----------")
-    
+    console.log("----------");
+
     //check likeArr if it contains userid or it is empty
-    if(post[0].likeArr.includes(userid)){
+    if (post[0].likeArr.includes(userid)) {
       //if it contains userid then remove it
-      const updatedPost = await postSc.findByIdAndUpdate
-      (
+      const updatedPost = await postSc.findByIdAndUpdate(
         objId,
         {
-          $pull: {likeArr: userid},
-          $inc: {likes: -1}
+          $pull: { likeArr: userid },
+          $inc: { likes: -1 },
         },
-        {new: true}
+        { new: true }
       );
       res.status(200).json(updatedPost);
-    }else{
+    } else {
       //if it does not contain userid then add it
-      const updatedPost = await postSc.findByIdAndUpdate
-      (
+      const updatedPost = await postSc.findByIdAndUpdate(
         objId,
         {
-          $push: {likeArr: userid},
-          $inc: {likes: 1}
+          $push: { likeArr: userid },
+          $inc: { likes: 1 },
         },
-        {new: true}
+        { new: true }
       );
       res.status(200).json(updatedPost);
     }
@@ -96,7 +95,26 @@ const likeupdate = async (req, res) => {
   }
 };
 
+const updatepostscomment = async (req, res, next) => {
+  const { userid, comment, comments } = req.body;
+  console.log(comment);
+  try {
+    const result = await postSc.updateMany(
+      { userid: userid },
+      {
+        $set: {
+          comments: comments,
+          comment: comment,
+        },
+      }
+    );
+    res.json("success");
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 exports.getposts = getposts;
 exports.addpost = addpost;
 exports.likeupdate = likeupdate;
+exports.updatepostscomment = updatepostscomment;

@@ -27,7 +27,7 @@ function App() {
           }
         />
         <Route
-          path="/profile"
+          path="/profile/:useridpr"
           element={
             localStorage.getItem("user") ? (
               <Profile />
@@ -70,6 +70,7 @@ function App() {
         />
       </Routes>
     </Router>
+    
   );
 }
 

@@ -3,13 +3,15 @@ import "./Middlebar.css";
 import Postdetails from "./Postdetails";
 import { useRequest } from "../../hooks/request-hook";
 
-const Middlebar = () => {
+const Middlebar = (props) => {
   const [post, setPost] = useState([]);
+  const [csstyle, setCsstyle] = useState("none");
   const { sendRequest } = useRequest();
   const [image, setImage] = useState(null);
   const [name, setName] = useState("");
   const [picture, setPicture] = useState("");
   const [text, setText] = useState("");
+  const [cha, setCha] = useState(true);
   const handleOnChange = (event) => {
     setText(event.target.value);
   };
@@ -17,35 +19,42 @@ const Middlebar = () => {
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       setImage(URL.createObjectURL(event.target.files[0]));
+      setCsstyle("block");
     }
   };
 
   const addpostHandller = async (e) => {
     e.preventDefault();
-    if (localStorage.hasOwnProperty("userid")) {
-      let date = new Date();
-      let time = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + "/" + date.getHours() + "/" + date.getMinutes() + "/" + date.getSeconds();
+    setCha((prev) => !prev);
+    if (localStorage.hasOwnProperty("user")) {
+      const data = {
+        userid: localStorage.getItem("user"),
+        sendName: name,
+        time: 0,
+        description: text,
+        imageUrl: image,
+        likes: 0,
+        comments: 0,
+        comment: [],
+        likeArr: [],
+      };
+      console.log("40 ", data);
+      setPost((prevState) => {
+        return [...prevState, data];
+      });
+      setText("");
       const response = await sendRequest(
         "http://localhost:5002/posts/addpost",
         "POST",
-        JSON.stringify({
-          userid: localStorage.getItem("user"),
-          sendName: name,
-          time: time,
-          description: text,
-          imageUrl: image,
-          likes: 0,
-          comments: 0,
-          comment: [],
-          likeArr: [],
-        }),
+        JSON.stringify(data),
         {
           "Content-Type": "application/json",
         }
       );
+      console.log("data ", data);
     }
   };
-
+  console.log("post ", post);
   useEffect(() => {
     const fetchItems = async () => {
       try {
@@ -65,12 +74,16 @@ const Middlebar = () => {
         console.log(err);
       }
     };
+    fetchItems();
+  }, [sendRequest]);
+
+  useEffect(() => {
     const fetchItems2 = async () => {
       try {
         const responseData = await sendRequest(
           "http://localhost:5002/posts/getposts",
-          "POST",
-          JSON.stringify({}),
+          "GET",
+          null,
           {
             "Content-Type": "application/json",
           }
@@ -80,9 +93,8 @@ const Middlebar = () => {
         console.log(err);
       }
     };
-    fetchItems();
     fetchItems2();
-  }, [sendRequest, post]);
+  }, [sendRequest, cha]);
   return (
     <div className="middle container">
       <div className="middletop my-1">
@@ -97,23 +109,35 @@ const Middlebar = () => {
               className="postdesc2"
               rows="4"
               onChange={handleOnChange}
+              value={text}
             ></textarea>
           </div>
         </div>
         <div className="middletopbottom">
           <ul className="middletopbottomul">
             <li className="middletopbottomli">
-              <i className="fa-solid fa-photo-film"></i>
-              <span className="mx-2 fw-bold">
-                <label className="custom-file-upload">
-                  <input
-                    type="file"
-                    className="mx-2"
-                    onChange={onImageChange}
+              <div className="containnnnn">
+                <div className="llll">
+                  <i className="fa-solid fa-photo-film"></i>
+                </div>
+                <div className="labelll">
+                  <label className="custom-file-upload mx-2 fw-bold">
+                    <input
+                      type="file"
+                      className="mx-2"
+                      onChange={onImageChange}
+                    />
+                    Add Photo or Video
+                  </label>
+                </div>
+                <div className="postimggg">
+                  <img
+                    src={image}
+                    alt="Loading"
+                    className={`imageinput d-${csstyle}`}
                   />
-                  Add Photo or Video
-                </label>
-              </span>
+                </div>
+              </div>
             </li>
             <li className="middletopbottomli">
               {/* <i className="fa-solid fa-tag"></i>
@@ -133,23 +157,30 @@ const Middlebar = () => {
           </ul>
         </div>
       </div>
-      {post.map((element) => {
-        return (
-          <div className="middlebottom" key={element.imageUrl}>
-            <Postdetails
-              sendName={element.sendName}
-              time={element.time}
-              description={element.description}
-              imageUrl={element.imageUrl}
-              likes={element.likes}
-              comments={element.comments}
-              comment={element.comment}
-              postid={element.userid}
-              likeArr={element.likeArr}
-            />
-          </div>
-        );
-      })}
+      {post
+        .slice(0)
+        .reverse()
+        .map((element) => {
+          if (props.dispID === element.userid || props.dispID === "all") {
+            console.log(element);
+            return (
+              <div className="middlebottom" key={element.imageUrl}>
+                <Postdetails
+                  sendName={element.sendName}
+                  time={element.time}
+                  description={element.description}
+                  imageUrl={element.imageUrl}
+                  likes={element.likes}
+                  comments={element.comments}
+                  comment={element.comment}
+                  postid={element.userid}
+                  likeArr={element.likeArr}
+                  setCha={setCha}
+                />
+              </div>
+            );
+          }
+        })}
     </div>
   );
 };

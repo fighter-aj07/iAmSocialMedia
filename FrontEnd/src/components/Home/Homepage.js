@@ -10,7 +10,7 @@ const Homepage = () => {
       <Navbar />
       <div className="mainpage">
         <Leftsidebar />
-        <Middlebar />
+        <Middlebar dispID={"all"} />
         <Rightsidebar />
       </div>
     </div>
