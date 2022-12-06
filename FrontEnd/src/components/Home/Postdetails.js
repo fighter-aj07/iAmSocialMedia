@@ -34,10 +34,9 @@ const Postdetails = (props) => {
     }
   }, [likeA]);
   function timeSince(date) {
-   
     let splitted = date.split("/");
-    let time = new Date(splitted[2], splitted[1], splitted[0], splitted[3], splitted[4], splitted[5]);
-    let seconds = Math.floor((new Date  - time) / 1000);
+    let time = new Date(splitted[2], splitted[1]-1, splitted[0], splitted[3], splitted[4], splitted[5]);
+    let seconds = Math.floor((new Date()  - time) / 1000);
     let interval = seconds / 31536000;
     if (interval > 1) {
       return Math.floor(interval) + " years";
