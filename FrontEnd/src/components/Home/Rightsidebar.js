@@ -1,7 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Rightsidebar.css";
+import { Link } from "react-router-dom";
+import { useRequest } from "../../hooks/request-hook";
 
 const Rightsidebar = () => {
+  const { sendRequest } = useRequest();
+  const [userdata, setUserdata] = useState([]);
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:5002/userdata/getdetails",
+          "POST",
+          JSON.stringify({
+            userid: localStorage.getItem("user"),
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+        setUserdata(responseData);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchItems();
+  }, [sendRequest]);
+
   return (
     <div className="right">
       <div className="righttop">
@@ -32,61 +58,26 @@ const Rightsidebar = () => {
           <li className="rightitems">
             <p className="onlinefr">Online Friends</p>
           </li>
-          <li className="rightitems">
-            <div className="imgsrc">
-              <div className="onli"></div>
-              <img
-                src="https://tse3.mm.bing.net/th?id=OIP.WkuGv4-iR5uPKZFcs7UjvAHaHs&pid=Api&P=0"
-                alt="Loading"
-                className="profimg"
-              />
-              <span className="rightitemsname2">Meet Jain</span>
-            </div>
-          </li>
-          <li className="rightitems">
-            <div className="imgsrc">
-              <div className="onli"></div>
-              <img
-                src="https://tse3.mm.bing.net/th?id=OIP.WkuGv4-iR5uPKZFcs7UjvAHaHs&pid=Api&P=0"
-                alt="Loading"
-                className="profimg"
-              />
-              <span className="rightitemsname2">Meet Jain</span>
-            </div>
-          </li>
-          <li className="rightitems">
-            <div className="imgsrc">
-              <div className="onli"></div>
-              <img
-                src="https://tse3.mm.bing.net/th?id=OIP.WkuGv4-iR5uPKZFcs7UjvAHaHs&pid=Api&P=0"
-                alt="Loading"
-                className="profimg"
-              />
-              <span className="rightitemsname2">Meet Jain</span>
-            </div>
-          </li>
-          <li className="rightitems">
-            <div className="imgsrc">
-              <div className="onli"></div>
-              <img
-                src="https://tse3.mm.bing.net/th?id=OIP.WkuGv4-iR5uPKZFcs7UjvAHaHs&pid=Api&P=0"
-                alt="Loading"
-                className="profimg"
-              />
-              <span className="rightitemsname2">Meet Jain</span>
-            </div>
-          </li>
-          <li className="rightitems">
-            <div className="imgsrc">
-              <div className="onli"></div>
-              <img
-                src="https://tse3.mm.bing.net/th?id=OIP.WkuGv4-iR5uPKZFcs7UjvAHaHs&pid=Api&P=0"
-                alt="Loading"
-                className="profimg"
-              />
-              <span className="rightitemsname2">Meet Jain</span>
-            </div>
-          </li>
+          {userdata.slice(1).map((element) => {
+            return (
+              <li className="rightitems">
+                <div className="imgsrc">
+                  <div className="onli"></div>
+                  <Link
+                    to={"/profile/" + element.userid}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <img
+                      src={element.profilePicture}
+                      alt="Loading"
+                      className="profimg"
+                    />
+                  </Link>
+                  <span className="rightitemsname2">{element.name}</span>
+                </div>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>

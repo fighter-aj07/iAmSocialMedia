@@ -112,42 +112,7 @@ const Middlebartimeline = () => {
     };
     fetchItems2();
   }, [sendRequest, cha]);
-  // const userDet = users.find(
-  //   (user) => user.userid === localStorage.getItem("user")
-  // );
-  // const myPost = posts.filter((user) => user.sendName === userDet.name);
-  // const [post, setPost] = useState(myPost);
-  // console.log(post);
-  // const [image, setImage] = useState(null);
-  // const [text, setText] = useState("");
-  // const handleOnChange = (event) => {
-  //   setText(event.target.value);
-  // };
-  // const onImageChange = (event) => {
-  //   if (event.target.files && event.target.files[0]) {
-  //     setImage(URL.createObjectURL(event.target.files[0]));
-  //   }
-  // };
-  // const addpostHandller = (e) => {
-  //   // console.log(image);
-  //   e.preventDefault();
-  //   setPost((prevstate) => {
-  //     let newState = [
-  //       {
-  //         sendName: userDet.name,
-  //         time: 0,
-  //         description: text,
-  //         imageUrl: image,
-  //         likes: 0,
-  //         comments: 0,
-  //         comment: [],
-  //       },
-  //       ...prevstate,
-  //     ];
-  //     setImage(null);
-  //     return newState;
-  //   });
-  // };
+
   return (
     <>
       <div className="container d-flex justify-content-center">
