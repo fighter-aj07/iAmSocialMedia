@@ -5,6 +5,7 @@ import Middlebartimeline from "./Middlebartimeline";
 const Timeline = () => {
   return (
     <div>
+      <Navbar />
       <Middlebartimeline />
     </div>
   );

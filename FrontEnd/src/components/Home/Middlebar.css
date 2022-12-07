@@ -66,6 +66,7 @@ input[type="file"] {
   border: none;
   box-shadow: 0 0 10px rgb(0, 0, 0, 0.2);
   border-radius: 8px;
+  background-color: transparent;
   transform: translateY(-25%);
 }
 
