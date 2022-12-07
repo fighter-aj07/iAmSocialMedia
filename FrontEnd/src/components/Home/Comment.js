@@ -35,7 +35,7 @@ const Comment = (props) => {
       <div className="commentimg">
         <img src={picture} alt="Loading" className="profimgcomment" />
         <span className="commentitemsname">{name}</span>
-        <span className="commentitemsname2 text-muted">2 mins ago</span>
+        {/* <span className="commentitemsname2 text-muted">2 mins ago</span> */}
       </div>
       <div className="commenttext">
         <div className="ptag">
