@@ -43,6 +43,7 @@ const addpost = async (req, res, next) => {
   });
   try {
     await newPosts.save();
+    res.send(newPosts);
   } catch (err) {
     console.log("saving error");
   }

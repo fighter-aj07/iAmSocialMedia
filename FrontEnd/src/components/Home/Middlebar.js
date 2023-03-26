@@ -2,13 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 import "./Middlebar.css";
 import Postdetails from "./Postdetails";
 import { useRequest } from "../../hooks/request-hook";
-import axios from "axios";
+// import axios from "axios";
 
 const Middlebar = (props) => {
   const [post, setPost] = useState([]);
   const [csstyle, setCsstyle] = useState("none");
   const { sendRequest } = useRequest();
   const [image1, setImage1] = useState(null);
+  const [added, setAdded] = useState(false);
   const [name, setName] = useState("");
   const [picture, setPicture] = useState("");
   const [text, setText] = useState("");
@@ -88,6 +89,7 @@ const Middlebar = (props) => {
       });
       setText("");
       setCsstyle("none");
+      setImage1(null);
       // const response = await sendRequest(
       //   "http://localhost:5002/posts/addpost",
       //   "POST",
@@ -104,6 +106,12 @@ const Middlebar = (props) => {
           "POST",
           formData
         );
+        setTimeout(() => {
+          setAdded(true);
+        }, 250);
+        // setTimeout(function () {
+        //   window.location = window.location;
+        // }, 3500);
       } catch (err) {
         console.log(err);
       }
@@ -151,7 +159,7 @@ const Middlebar = (props) => {
       }
     };
     fetchItems2();
-  }, [sendRequest, cha, formData]);
+  }, [sendRequest, cha, added]);
   return (
     <div className="middle container">
       <div className="middletop my-1">
