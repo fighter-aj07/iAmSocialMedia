@@ -4,9 +4,11 @@ const bcrypt = require('bcrypt');
 const login = async (req, res, next) => {
     const { email, password } = req.body;
     const user = await loginsc.findOne({email});
-    console.log(password);
+    // console.log(password+"ass"+user.password);
+
     if (user) {
         const isMatch = await bcrypt.compare(password, user.password);
+
         if (isMatch) {
             res.json(
                 {

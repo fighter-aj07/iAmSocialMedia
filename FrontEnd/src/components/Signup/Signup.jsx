@@ -26,7 +26,6 @@ export default function Signup() {
         setFetching(true);
         try {
             const { username, email, password } = values;
-            const hashedPassword = await bcrypt.hash(password, 10);
             //if email or username already exists in database then show error
             //post req to backend
             const userid = (Date.now() + Math.random()).toString().split(".")[0];
@@ -36,7 +35,7 @@ export default function Signup() {
                 JSON.stringify({
                     username,
                     email,
-                    password: hashedPassword,
+                    password,
                     userid,
                 }),
                 {
