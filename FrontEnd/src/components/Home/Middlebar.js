@@ -1,32 +1,64 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Middlebar.css";
 import Postdetails from "./Postdetails";
 import { useRequest } from "../../hooks/request-hook";
+import axios from "axios";
 
 const Middlebar = (props) => {
   const [post, setPost] = useState([]);
   const [csstyle, setCsstyle] = useState("none");
   const { sendRequest } = useRequest();
-  const [image, setImage] = useState(null);
+  const [image1, setImage1] = useState(null);
   const [name, setName] = useState("");
   const [picture, setPicture] = useState("");
   const [text, setText] = useState("");
   const [cha, setCha] = useState(true);
+  const fileRef = useRef(null);
+  let formData = new FormData();
   const handleOnChange = (event) => {
     setText(event.target.value);
   };
 
-  const onImageChange = (event) => {
+  const onImageChange = async (event) => {
+    console.log("meet", event);
+    event.preventDefault();
     if (event.target.files && event.target.files[0]) {
-      setImage(URL.createObjectURL(event.target.files[0]));
+      setImage1(URL.createObjectURL(event.target.files[0]));
       setCsstyle("block");
     }
+    // const file = event.target.files[0];
+    // const base64img = await setFileToBase(file);
+    // console.log(base64img);
+    // setImage(base64img);
   };
-
+  // const setFileToBase = (file) => {
+  //   return new Promise((resolve, reject) => {
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(file);
+  //     reader.onloadend = () => {
+  //       resolve(reader.result);
+  //     };
+  //     reader.onerror = (error) => {
+  //       reject(error);
+  //     };
+  //   });
+  // };
   const addpostHandller = async (e) => {
     e.preventDefault();
+    console.log("meet", formData);
     let date = new Date();
-    let time = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + "/" + date.getHours() + "/" + date.getMinutes() + "/" + date.getSeconds();
+    let time =
+      date.getDate() +
+      "/" +
+      (date.getMonth() + 1) +
+      "/" +
+      date.getFullYear() +
+      "/" +
+      date.getHours() +
+      "/" +
+      date.getMinutes() +
+      "/" +
+      date.getSeconds();
 
     setCha((prev) => !prev);
     if (localStorage.hasOwnProperty("user")) {
@@ -35,29 +67,42 @@ const Middlebar = (props) => {
         sendName: name,
         time: time,
         description: text,
-        imageUrl: image,
         likes: 0,
         comments: 0,
         comment: [],
         likeArr: [],
       };
-      console.log("40 ", data);
+      formData.append("userid", localStorage.getItem("user"));
+      formData.append("file", fileRef.current.files[0]);
+      formData.append("sendName", name);
+      formData.append("time", time);
+      formData.append("description", text);
+      formData.append("likes", 0);
+      formData.append("comments", 0);
+      formData.append("comment", []);
+      formData.append("likeArr", []);
+      // console.log("40 ", data);
+      console.log(formData.get("file"), "chut");
       setPost((prevState) => {
         return [...prevState, data];
       });
       setText("");
-      const response = await sendRequest(
-        "http://localhost:5002/posts/addpost",
-        "POST",
-        JSON.stringify(data),
-        {
-          "Content-Type": "application/json",
-        }
-      );
-      console.log("data ", data);
+      setCsstyle("none");
+      // const response = await sendRequest(
+      //   "http://localhost:5002/posts/addpost",
+      //   "POST",
+      //   formData
+      // );
+      axios
+        .post("http://localhost:5002/posts/addpost", formData)
+        .then((res) => {
+          console.log(res);
+        });
+
+      // console.log("data ", data);
     }
   };
-  console.log("post ", post);
+  // console.log("post ", post);
   useEffect(() => {
     const fetchItems = async () => {
       try {
@@ -97,7 +142,7 @@ const Middlebar = (props) => {
       }
     };
     fetchItems2();
-  }, [sendRequest, cha]);
+  }, [sendRequest, cha, formData]);
   return (
     <div className="middle container">
       <div className="middletop my-1">
@@ -129,13 +174,15 @@ const Middlebar = (props) => {
                       type="file"
                       className="mx-2"
                       onChange={onImageChange}
+                      ref={fileRef}
+                      name="file"
                     />
                     Add Photo or Video
                   </label>
                 </div>
                 <div className="postimggg">
                   <img
-                    src={image}
+                    src={image1}
                     alt="Loading"
                     className={`imageinput d-${csstyle}`}
                   />
@@ -148,7 +195,7 @@ const Middlebar = (props) => {
               <button
                 className="addpost btn btn-outline-info"
                 onClick={addpostHandller}
-                disabled={image ? false : true}
+                disabled={image1 ? false : true}
               >
                 Add Post
               </button>
@@ -165,7 +212,6 @@ const Middlebar = (props) => {
         .reverse()
         .map((element) => {
           if (props.dispID === element.userid || props.dispID === "all") {
-            console.log(element);
             return (
               <div className="middlebottom" key={element.imageUrl}>
                 <Postdetails

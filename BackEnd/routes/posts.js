@@ -3,9 +3,10 @@ const express = require("express");
 const router = express.Router();
 
 const postController = require("../controllers/postController");
+const singleUpload = require("../middlewares/multer");
 
 router.get("/getposts", postController.getposts);
-router.post("/addpost", postController.addpost);
+router.post("/addpost", singleUpload, postController.addpost);
 router.post("/likeupdate", postController.likeupdate);
 router.post("/updatepostscomment", postController.updatepostscomment);
 module.exports = router;

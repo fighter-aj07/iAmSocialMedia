@@ -1,47 +1,41 @@
 const postSc = require("../models/postModel");
 const profileSc = require("../models/profileModel");
+const cloudinary = require("../utils/cloudinary");
+const getDataUri = require("../utils/dataUri");
 
 const getposts = async (req, res, next) => {
   const getpost = await postSc.find({});
   res.json(getpost);
-
-  //   try {
-  //     const { userid } = req.body;
-  //     const currUser = await profileSc.find({ userid: userid });
-  //     const getpost = await postSc.find({ userid: userid });
-  //     // console.log(getpost)
-  //     const friendposts = await Promise.all(
-  //       currUser[0].friends.map(async (friend) => {
-  //         return await postSc.find({ userid: friend });
-  //       })
-  //     );
-  //     res.status(200).json(getpost.concat(friendposts));
-  //   } catch (err) {
-  //     console.log(err);
-  //     res.status(500).json({ message: "Something went wrong" });
-  //   }
 };
 
 const addpost = async (req, res, next) => {
+  // console.log(req.body);
+  // console.log(req.file);
   const {
     userid,
     sendName,
     time,
     description,
-    imageUrl,
     likes,
     comments,
     comment,
     likeArr,
   } = req.body;
-  console.log(req.body);
+  const file = req.file;
+  console.log("postcontroller");
+  console.log(file);
+  const fileUri = getDataUri(file);
+  console.log("fileUri ", fileUri);
+  const mycloud = await cloudinary.uploader.upload(fileUri.content);
+
+  const cloudimageurl = mycloud.secure_url;
 
   const newPosts = new postSc({
     userid: userid,
     sendName: sendName,
     time: time,
     description: description,
-    imageUrl: imageUrl,
+    imageUrl: cloudimageurl,
     likes: likes,
     comments: comments,
     comment: comment,
@@ -97,7 +91,7 @@ const likeupdate = async (req, res) => {
 
 const updatepostscomment = async (req, res, next) => {
   const { userid, comment, comments } = req.body;
-  console.log(comment);
+  // console.log(comment);
   try {
     const result = await postSc.updateMany(
       { userid: userid },

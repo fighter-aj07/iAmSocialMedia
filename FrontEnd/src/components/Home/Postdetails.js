@@ -144,7 +144,7 @@ const Postdetails = (props) => {
     }
   }, [newComm]);
   useEffect(() => {
-    console.log("111 ", commarr);
+    // console.log("111 ", commarr);
     const fetchItems = async (req, res, next) => {
       try {
         const response = await sendRequest(
@@ -175,21 +175,6 @@ const Postdetails = (props) => {
       setLikecolor("dark");
     }
   }, [likeA]);
-
-  // useEffect(() => {
-  //   if (dataFetchedRef.current) {
-  //     return;
-  //   }
-  //   dataFetchedRef.current = true;
-  //   setNewComm((data) => {
-  //     data.content = comm;
-  //     return data;
-  //   });
-  //   setCommarr((prevstate) => {
-  //     let newState = [...prevstate, newComm];
-  //     return newState;
-  //   });
-  // }, [newComm]);
 
   useEffect(() => {
     const fetchItems = async (req, res, next) => {
