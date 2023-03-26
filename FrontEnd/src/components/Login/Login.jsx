@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import CircularProgress from "@mui/material/CircularProgress";
-
+import bcrypt from "bcryptjs";
 import { Link } from "react-router-dom";
 import {useRequest} from "../../hooks/request-hook.js";
 
@@ -34,7 +34,7 @@ export default function Login() {
                 "POST",
                 JSON.stringify({
                     email,
-                    password
+                    password,
                 }),
                 {
                     "Content-Type": "application/json",

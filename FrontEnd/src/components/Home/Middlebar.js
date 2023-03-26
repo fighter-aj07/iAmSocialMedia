@@ -83,7 +83,7 @@ const Middlebar = (props) => {
       formData.append("comment", []);
       formData.append("likeArr", []);
       // console.log("40 ", data);
-      console.log(formData.get("file"), "chut");
+      console.log(formData.get("comment"), "DDEBUG");
       setPost((prevState) => {
         return [...prevState, data];
       });

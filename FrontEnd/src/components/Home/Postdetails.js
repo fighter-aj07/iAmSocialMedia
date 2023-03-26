@@ -17,7 +17,7 @@ const Postdetails = (props) => {
     likeArr,
     setCha,
   } = props;
-  const [count, setCount] = useState(comment.length);
+  const [count, setCount] = useState(comments);
   console.log(sendName, comment.length);
   const [likecounter, setLikecounter] = useState(likes);
   const [lvalue, setLvalue] = useState(0);

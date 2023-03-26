@@ -1,13 +1,14 @@
 import React from "react";
 import "./Navbar.css";
 import { Link, useNavigate } from "react-router-dom";
-import users from "../../Database/profile";
+
 import { useDispatch, useSelector } from "react-redux";
 import { handledarkMode } from "../../store/actions/darkModeAction";
 import { useState } from "react";
 import { useEffect } from "react";
-
+import { useRequest } from "../../hooks/request-hook";
 export default function Navbar() {
+  const { sendRequest } = useRequest();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const mode = useSelector((state) => state.darkMode);
@@ -20,14 +21,43 @@ export default function Navbar() {
     navigate("/login");
     window.location.reload();
   };
-  const userDet = users.find(
-    (user) => user.userid === localStorage.getItem("user")
-  );
+
   const switchDarkMode = () => {
     isdarkMode
       ? dispatch(handledarkMode(false))
       : dispatch(handledarkMode(true));
   };
+  const [picture, setPicture] = useState("");
+  const [name, setName] = useState("");
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:5002/profile/getprof",
+          "POST",
+          JSON.stringify({
+            userid: localStorage.getItem("user"),
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+        setName(responseData[0].name);
+        setPicture(()=>{
+          if(responseData[0].profilePicture){
+            return responseData[0].profilePicture
+          }
+          else{
+            return "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
+          }
+        }
+          );
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchItems();
+  }, []);
   useEffect(() => {
     document.body.style.background = isdarkMode
       ? "radial-gradient(circle, rgba(32,32,32,1) 0%, rgba(9,9,9,1) 100%)"
@@ -109,9 +139,9 @@ export default function Navbar() {
           <Link to={"/profile/" + localStorage.getItem("user")}>
             <img
               src={
-                userDet.profilePicture
-                  ? userDet.profilePicture
-                  : "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"
+                picture
+                  ? picture
+                  :"https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"
               }
               alt="Loading"
               className="topbarImg"

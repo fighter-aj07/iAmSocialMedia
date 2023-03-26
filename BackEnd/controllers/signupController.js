@@ -6,12 +6,13 @@ const signup = async (req, res, next) => {
     try {
         console.log(req.body);
         const { email, password, userid, username } = req.body;
+        const hashedPassword = await bcrypt.hash(password, '$2b$12$0nH6Joxv6U00I6UJm6gbk.6UxLJlmTbh37wT/cY8mwJW.cxxv3/N2');
+
         const temp = await loginsc.findOne({ email });
         if (temp) {
             return res.status(403).json({ message: 'Email already exists' });
         }
-        hashedPassword = await bcrypt.hash(password, 10);
-        console.log(hashedPassword)
+
         const user = new loginsc({
             email,
             password: hashedPassword,
