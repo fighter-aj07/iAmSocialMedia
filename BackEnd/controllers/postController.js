@@ -22,10 +22,10 @@ const addpost = async (req, res, next) => {
     likeArr,
   } = req.body;
   const file = req.file;
-  console.log("postcontroller");
-  console.log(file);
+  // console.log("postcontroller");
+  // console.log(file);
   const fileUri = getDataUri(file);
-  console.log("fileUri ", fileUri);
+  // console.log("fileUri ", fileUri);
   const mycloud = await cloudinary.uploader.upload(fileUri.content);
 
   const cloudimageurl = mycloud.secure_url;

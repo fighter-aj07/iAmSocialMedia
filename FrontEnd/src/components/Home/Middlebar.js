@@ -93,11 +93,20 @@ const Middlebar = (props) => {
       //   "POST",
       //   formData
       // );
-      axios
-        .post("http://localhost:5002/posts/addpost", formData)
-        .then((res) => {
-          console.log(res);
-        });
+      // axios
+      //   .post("http://localhost:5002/posts/addpost", formData)
+      //   .then((res) => {
+      //     console.log(res);
+      //   });
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:5002/posts/addpost",
+          "POST",
+          formData
+        );
+      } catch (err) {
+        console.log(err);
+      }
 
       // console.log("data ", data);
     }
