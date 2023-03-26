@@ -6,6 +6,9 @@ const userdataRoutes = require("./routes/userdata");
 const profileRoutes = require("./routes/profile");
 const loginRoutes = require("./routes/login");
 const signupRoutes = require("./routes/signup");
+var fs = require('fs')
+var morgan = require('morgan')
+var path = require('path')
 
 const app = express();
 
@@ -21,6 +24,9 @@ app.use((req, res, next) => {
 
   next();
 }); //cors error
+
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+app.use(morgan('combined', { stream: accessLogStream }))
 
 app.use("/posts", postRoutes);
 app.use("/userdata", userdataRoutes);
