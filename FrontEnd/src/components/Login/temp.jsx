@@ -2,13 +2,12 @@ import "./login.css";
 import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import bcrypt from "bcryptjs";
 import CircularProgress from "@mui/material/CircularProgress";
-
+import login from "../../Database/login";
 import { Link } from "react-router-dom";
-import {useRequest} from "../../hooks/request-hook.js";
 
 export default function Login() {
-    const { sendRequest } = useRequest();
     const [fetching, setFetching] = useState(false);
     const [isError, setIsError] = useState(false);
     const [error, setError] = useState("");
@@ -29,24 +28,15 @@ export default function Login() {
         onSubmit: async (values) => {
             setFetching(true);
             const { email, password } = values;
-            const response = await sendRequest(
-                "http://localhost:5002/login",
-                "POST",
-                JSON.stringify({
-                    email,
-                    password
-                }),
-                {
-                    "Content-Type": "application/json",
-                }
+            const hashedPassword = bcrypt.hashSync(password, "$2a$10$CwTycUXWue0Thq9StjUM0u");
+            const user = login.find(
+                (user) => user.email === email && user.password === hashedPassword
             );
-            console.log(response);
-            const user = response.userid;
             if (user) {
                 setError("");
                 setIsError(false);
                 window.location.replace("/");
-                localStorage.setItem("user", user);
+                localStorage.setItem("user", user.userid);
             } else {
                 setError("Invalid email or password");
                 setIsError(true);
@@ -67,12 +57,11 @@ export default function Login() {
                 <div className="loginRight">
                     <div className="loginBox">
                         <h3 className="loginBoxTitle">Log In</h3>
-                        <form onSubmit={formik.handleSubmit} className="loginForm">
+                        <form onSubmit={formik.handleSubmit}>
                             <input
                                 placeholder="Email"
                                 type="email"
                                 id="email"
-                                className="loginInput"
                                 {...formik.getFieldProps("email")}
                             />
                             {formik.touched.email && formik.errors.email && (
@@ -82,7 +71,6 @@ export default function Login() {
                                 placeholder="Password"
                                 type="password"
                                 id="password"
-                                className="loginInput"
                                 {...formik.getFieldProps("password")}
                             />
                             {formik.touched.password && formik.errors.password && (
