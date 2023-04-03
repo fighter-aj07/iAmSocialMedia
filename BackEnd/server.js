@@ -11,6 +11,9 @@ var morgan = require('morgan')
 var path = require('path')
 const swaggerUI = require("swagger-ui-express");
 const swaggerJSDoc = require("swagger-jsdoc");
+require("dotenv").config({
+  path: "./.env",
+});
 const app = express();
 
 app.use(bodyParser.json());
@@ -70,7 +73,7 @@ app.use((error, req, res, next) => {
 });
 
 const dbUrl =
-  "mongodb+srv://meetjain:meetjain@iamsocialmedia.drwlypm.mongodb.net/test";
+  process.env.MONGO_URL;
 
 mongoose
   .connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
