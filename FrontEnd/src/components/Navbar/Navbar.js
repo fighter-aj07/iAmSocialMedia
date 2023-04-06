@@ -1,7 +1,7 @@
 import React from "react";
 import "./Navbar.css";
 import { Link, useNavigate } from "react-router-dom";
-
+import Select from "react-select";
 import { useDispatch, useSelector } from "react-redux";
 import { handledarkMode } from "../../store/actions/darkModeAction";
 import { useState } from "react";
@@ -13,20 +13,83 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const mode = useSelector((state) => state.darkMode);
   const [color, setColor] = useState("");
-  console.log(mode);
+  // console.log(mode);
   const { isdarkMode } = mode;
   const [modes, setMode] = useState("dark");
+  const [flag, setFlag] = useState(false);
+  const [text, setText] = useState("");
+  const [userdata, setUserdata] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState();
+  let usernames = [];
+
+  // const optionnn = [
+  //   { value: "red", label: "Red" },
+  //   { value: "green", label: "Green" },
+  //   { value: "yellow", label: "Yellow" },
+  //   { value: "blue", label: "Blue" },
+  //   { value: "white", label: "White" },
+  // ];
+  const optionListtt = [];
+
   const logoutHandler = () => {
     localStorage.removeItem("user");
     navigate("/login");
     window.location.reload();
   };
 
+  const [optionList, setOptionList] = useState([]);
+
+  function handleSelect(data) {
+    setSelectedOptions(data);
+    console.log("you selected", data);
+    navigate(`/profile/${data.id}`);
+  }
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:5002/userdata/getdetails",
+          "POST",
+          JSON.stringify({
+            userid: localStorage.getItem("user"),
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+        setUserdata(responseData);
+        // setOptionList(responseData);
+        // console.log("mettttttttt", optionList);
+        console.log("meet jain", userdata);
+        setFlag(true);
+        for (let i = 0; i < userdata.length; i++) {
+          usernames.push(userdata[i].name);
+        }
+        for (let i = 0; i < userdata.length; i++) {
+          optionListtt.push({
+            value: usernames[i].toLowerCase(),
+            label: usernames[i],
+            id: userdata[i].userid,
+          });
+        }
+        setOptionList(optionListtt);
+        for (let i = 0; i < optionListtt.length; i++) {
+          console.log("meet", optionList[i].label);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchItems();
+  }, [flag]);
+
   const switchDarkMode = () => {
     isdarkMode
       ? dispatch(handledarkMode(false))
       : dispatch(handledarkMode(true));
   };
+
   const [picture, setPicture] = useState("");
   const [name, setName] = useState("");
   useEffect(() => {
@@ -42,22 +105,22 @@ export default function Navbar() {
             "Content-Type": "application/json",
           }
         );
+        setFlag(true);
         setName(responseData[0].name);
-        setPicture(()=>{
-          if(responseData[0].profilePicture){
-            return responseData[0].profilePicture
+        setPicture(() => {
+          if (responseData[0].profilePicture) {
+            return responseData[0].profilePicture;
+          } else {
+            return "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png";
           }
-          else{
-            return "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
-          }
-        }
-          );
+        });
       } catch (err) {
         console.log(err);
       }
     };
     fetchItems();
   }, []);
+
   useEffect(() => {
     document.body.style.background = isdarkMode
       ? "radial-gradient(circle, rgba(32,32,32,1) 0%, rgba(9,9,9,1) 100%)"
@@ -100,12 +163,22 @@ export default function Navbar() {
 
         <div className="topbarCenter">
           <div className="searchbar">
-            <i className="fa-solid fa-magnifying-glass mx-3"></i>
             {/* <Search className="searchIcon" /> */}
-            <input
+            {/* <input
               placeholder="Search for friend, post or video"
               className="searchInput"
+              value={text}
+              onChange={searchHandler}
+            /> */}
+            {console.log(optionList)}
+            <Select
+              options={optionList}
+              placeholder="Search for Profiles"
+              value={selectedOptions}
+              onChange={handleSelect}
+              isSearchable={true}
             />
+            {/* <i className="fa-solid fa-magnifying-glass mx-3"></i> */}
           </div>
         </div>
 
@@ -141,7 +214,7 @@ export default function Navbar() {
               src={
                 picture
                   ? picture
-                  :"https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"
+                  : "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"
               }
               alt="Loading"
               className="topbarImg"

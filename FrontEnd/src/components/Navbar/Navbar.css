@@ -28,6 +28,8 @@
 
 .topbarCenter {
   flex: 5;
+  display: flex;
+  flex-direction: column;
 }
 
 .topbarRight {
@@ -38,18 +40,24 @@
   color: white;
 }
 
+/* .dropdown-container {
+} */
+
 .searchbar {
-  width: 100%;
-  height: 40px;
-  background-color: white;
-  border-radius: 30px;
-  display: flex;
+  /* display: flex;
+  flex-direction: row; */
   align-items: center;
+  width: 100%;
+  /* height: 40px;
+  background-color: white;
+  border-radius: 30px; */
+  justify-content: space-between;
 }
 
 .fa-magnifying-glass {
   font-size: 20px !important;
-  padding-left: 10;
+  float: right;
+  cursor: pointer;
 }
 
 .fa-right-from-bracket {
@@ -60,7 +68,25 @@
 .searchInput {
   border: none;
   width: 70%;
+  background-color: transparent;
+  padding-left: 1rem;
 }
+
+/* .dropdown {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+} */
+
+/* .dropdown:empty {
+  border: none;
+} */
+
+/* .dropdown-user {
+  cursor: pointer;
+  text-align: start;
+  margin: 2px 1px;
+} */
 
 .searchInput:focus {
   outline: none;
@@ -114,7 +140,7 @@
   cursor: pointer;
 }
 
-.darkmode{
+.darkmode {
   display: flex;
   justify-content: center;
 }
@@ -130,9 +156,9 @@
 #darkmode .label {
   width: 48px;
   height: 23px;
-  background-color:#111;
+  background-color: #111;
   display: flex;
-  border-radius:50px;
+  border-radius: 50px;
   align-items: center;
   justify-content: space-between;
   padding: 5px;
@@ -152,6 +178,6 @@
   transition: transform 0.2s linear;
 }
 
-#darkmode .checkbox:checked + .label .ball{
+#darkmode .checkbox:checked + .label .ball {
   transform: translateX(24px);
 }

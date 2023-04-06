@@ -10,7 +10,7 @@ const Leftsidebar = () => {
   const [userdata, setUserdata] = useState([]);
 
   const mode = useSelector((state) => state.darkMode);
-  console.log(mode);
+  // console.log(mode);
   const { isdarkMode } = mode;
 
   useEffect(() => {
