@@ -1,4 +1,6 @@
 const profileSc = require("../models/profileModel");
+const cloudinary = require("../utils/cloudinary");
+const getDataUri = require("../utils/dataUri");
 
 const getprofiles = async (req, res, next) => {
   const getprofile = await profileSc.find({});
@@ -29,6 +31,24 @@ const updateProfile = async (req, res, next) => {
   res.json(updateprofile);
 };
 
+const updateProfilePicture = async (req, res, next) => {
+  const file = req.file;
+  const { userid } = req.body;
+  const fileUri = getDataUri(file);
+  const mycloud = await cloudinary.uploader.upload(fileUri.content);
+  const cloudimageurl = mycloud.secure_url;
+  const updateprofile = await profileSc.updateOne(
+    { userid: userid },
+    {
+      $set: {
+        profilePicture: cloudimageurl,
+      },
+    }
+  );
+  res.json(updateprofile);
+};
+
 exports.getprofiles = getprofiles;
 exports.getprof = getprof;
 exports.updateProfile = updateProfile;
+exports.updateProfilePicture = updateProfilePicture;

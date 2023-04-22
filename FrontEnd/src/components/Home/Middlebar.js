@@ -27,23 +27,7 @@ const Middlebar = (props) => {
       setImage1(URL.createObjectURL(event.target.files[0]));
       setCsstyle("block");
     }
-    // const file = event.target.files[0];
-    // const base64img = await setFileToBase(file);
-    // console.log(base64img);
-    // setImage(base64img);
   };
-  // const setFileToBase = (file) => {
-  //   return new Promise((resolve, reject) => {
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL(file);
-  //     reader.onloadend = () => {
-  //       resolve(reader.result);
-  //     };
-  //     reader.onerror = (error) => {
-  //       reject(error);
-  //     };
-  //   });
-  // };
   const addpostHandller = async (e) => {
     e.preventDefault();
     console.log("meet", formData);

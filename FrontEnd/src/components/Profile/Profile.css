@@ -1,5 +1,5 @@
-.profile{
-    display: flex;
+.profile {
+  display: flex;
 }
 /* .left{
     flex: 2;
@@ -7,90 +7,110 @@
 .middle {
     flex: 6;
 } */
-.profileRight{
-    flex: 9;
+.profileRight {
+  flex: 9;
 }
 
-.profileCover{
-    height: 320px;
-    position: relative;
+.profileCover {
+  height: 320px;
+  position: relative;
 }
 
-.profileCoverImg{
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
+.profileCoverImg {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
 }
 
-.profileUserImg{
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: auto;
-    top: 150px;
-    border: 3px solid white;
+.profileUserImg {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 171px;
+  border: 3px solid white;
 }
 
-.profileInfo{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.postimgggg {
+  /* display: flex; */
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
-.profileInfoName{
-    font-size: 24px;
+.newimggg {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
-.profileInfoDesc{
-    font-weight: 300;
+.updatePict {
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
 }
 
-.profileRightBottom{
-    display: flex;
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-.darkmode{
-    display: flex;
-    justify-content: center;
-  }
-  
-  #darkmode .dark {
-    background-color: #292c35;
-  }
-  #darkmode .checkbox {
-    opacity: 0;
-    position: absolute;
-  }
 
-  #darkmode .label {
-    width: 48px;
-    height: 23px;
-    background-color:#111;
-    display: flex;
-    border-radius:50px;
-    align-items: center;
-    justify-content: space-between;
-    padding: 5px;
-    position: relative;
-    transform: scale(1.5);
-    cursor: pointer;
-  }
-  
-  #darkmode .ball {
-    width: 20px;
-    height: 20px;
-    background-color: white;
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    border-radius: 50%;
-    transition: transform 0.2s linear;
-  }
-  
-  #darkmode .checkbox:checked + .label .ball{
-    transform: translateX(24px);
-  }
+.profileInfoName {
+  font-size: 24px;
+}
+
+.profileInfoDesc {
+  font-weight: 300;
+}
+
+.profileRightBottom {
+  display: flex;
+}
+.darkmode {
+  display: flex;
+  justify-content: center;
+}
+
+#darkmode .dark {
+  background-color: #292c35;
+}
+#darkmode .checkbox {
+  opacity: 0;
+  position: absolute;
+}
+
+#darkmode .label {
+  width: 48px;
+  height: 23px;
+  background-color: #111;
+  display: flex;
+  border-radius: 50px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  position: relative;
+  transform: scale(1.5);
+  cursor: pointer;
+}
+
+#darkmode .ball {
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  border-radius: 50%;
+  transition: transform 0.2s linear;
+}
+
+#darkmode .checkbox:checked + .label .ball {
+  transform: translateX(24px);
+}
