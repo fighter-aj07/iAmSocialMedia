@@ -86,7 +86,7 @@ export default function Profile() {
         else{
           setFollow("Follow");
         }
-  
+        window.location.reload();
       } catch (err) {
         console.log(err);
       }

@@ -105,7 +105,9 @@ const Leftsidebar = () => {
           <li style={{ color: color }} className="leftitems friends">
             Friends
           </li>
-          {userdata.map((element) => {
+          {userdata
+            .filter((element) => element.friends.includes(userprof))
+            .map((element) => {
             return (
               <li className="leftitemsbottom">
                 <Link
@@ -113,7 +115,7 @@ const Leftsidebar = () => {
                   style={{ textDecoration: "none" }}
                 >
                   <div className="imgsrc">
-                    <img src={element.profilePicture} className="profimg" />
+                    <img src={element.profilePicture} className="profimg" alt="profile" />
                     <span style={{ color: color }} className="leftitemsname2">
                       {element.name}
                     </span>
