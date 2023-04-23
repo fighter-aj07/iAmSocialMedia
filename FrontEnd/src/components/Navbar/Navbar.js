@@ -190,6 +190,9 @@ export default function Navbar() {
             <Link to="/timeline" style={{ textDecoration: "none" }}>
               <span className="topbarLink">Timeline</span>
             </Link>
+            <Link to="/messenger" style={{ textDecoration: "none" }}>
+              <span className="topbarLink">Messenger</span>
+            </Link>
           </div>
           <div className="topbarIcons">
             {/* <div className="topbarIconItem">
