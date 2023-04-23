@@ -104,6 +104,9 @@ export default function Profile() {
         if (currentUser.friends.includes(localStorage.getItem("user"))) {
           setFollow("Unfollow");
         }
+        else{
+          setFollow("Follow");
+        }
         setMyname(responseData.find((user) => user.userid === id).name);
       } catch (err) {
         console.log(err);
