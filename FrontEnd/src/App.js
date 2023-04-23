@@ -4,6 +4,7 @@ import Profile from "./components/Profile/Profile";
 import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
 import Questions from "./components/Questions/Questions";
+import Messenger from "./components/Messenger/Messenger";
 import {
   BrowserRouter as Router,
   Routes,
@@ -63,6 +64,16 @@ function App() {
           element={
             localStorage.getItem("user") ? (
               <Questions />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/messenger"
+          element={
+            localStorage.getItem("user") ? (
+              <Messenger />
             ) : (
               <Navigate to="/login" />
             )

@@ -6,6 +6,8 @@ const userdataRoutes = require("./routes/userdata");
 const profileRoutes = require("./routes/profile");
 const loginRoutes = require("./routes/login");
 const signupRoutes = require("./routes/signup");
+const conversationRoute = require("./routes/conversation");
+const messageRoute = require("./routes/message");
 var fs = require('fs')
 var morgan = require('morgan')
 var path = require('path')
@@ -58,6 +60,8 @@ app.use("/userdata", userdataRoutes);
 app.use("/profile", profileRoutes);
 app.use("/login", loginRoutes);
 app.use("/signup", signupRoutes);
+app.use("/conversation", conversationRoute);
+app.use("/message", messageRoute);
 
 app.use((req, res, next) => {
   const error = new HttpError("Could not find this route.", 404);
