@@ -85,10 +85,12 @@ const Leftsidebar = () => {
           <span style={{color:color}} className="leftitemsname">Groups</span>
         </li> */}
           <li className="leftitems">
-            <i className="iconsss fa-regular fa-calendar"></i>
-            <span style={{ color: color }} className="leftitemsname">
-              Events
-            </span>
+            <i className="iconsss fa-regular fa-comment-dots"></i>
+            <Link to="/messenger" style={{ textDecoration: "none" }}>
+              <span style={{ color: color }} className="leftitemsname">
+                Messenger
+              </span>
+            </Link>
           </li>
           <li className="leftitems quest">
             <i className="iconsss fa-regular fa-question"></i>
