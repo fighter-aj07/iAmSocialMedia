@@ -23,13 +23,14 @@ export default function Profile() {
   const [csstyle, setCsstyle] = useState("none");
   const [image1, setImage1] = useState(null);
   const [added, setAdded] = useState(false);
+  // const [useriddd, setUseriddd] = useState(false);
   console.log(mode);
   const { isdarkMode } = mode;
   const id = useridpr;
   const [modes, setMode] = useState("dark");
   const fileRef = useRef(null);
   let formData = new FormData();
-  console.log("rendering", useridpr);
+  // console.log("rendering", useridpr);
   const onImageChange = async (event) => {
     // console.log("meet", event);
     event.preventDefault();
@@ -72,6 +73,7 @@ export default function Profile() {
         );
         setUsers(responseData);
         setCurrentUser(responseData.find((user) => user.userid === id));
+
         setMyname(responseData.find((user) => user.userid === id).name);
       } catch (err) {
         console.log(err);
@@ -126,18 +128,22 @@ export default function Profile() {
                   alt=""
                 />
               </div>
-              <div className={`updatePict d-${divblock}`}>
-                <label className="btn btn-outline-info my-2">
-                  <input
-                    type="file"
-                    // className="updatePict"
-                    onChange={onImageChange}
-                    name="file"
-                    ref={fileRef}
-                  />
-                  Update Profile Photo
-                </label>
-              </div>
+              {localStorage.getItem("user") === id ? (
+                <div className={`updatePict d-${divblock}`}>
+                  <label className="btn btn-outline-info my-2">
+                    <input
+                      type="file"
+                      // className="updatePict"
+                      onChange={onImageChange}
+                      name="file"
+                      ref={fileRef}
+                    />
+                    Update Profile Photo
+                  </label>
+                </div>
+              ) : (
+                <div></div>
+              )}
               <div className={`postimgggg my-2 d-${csstyle}`}>
                 <img className="newimggg mx-3" src={image1} alt="Loading" />
                 <button

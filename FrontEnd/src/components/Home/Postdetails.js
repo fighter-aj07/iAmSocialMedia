@@ -6,6 +6,7 @@ import { useRequest } from "../../hooks/request-hook";
 
 const Postdetails = (props) => {
   let {
+    postMongoid,
     sendName,
     time,
     description,
@@ -17,6 +18,7 @@ const Postdetails = (props) => {
     likeArr,
     setCha,
   } = props;
+  console.log("heloooooo", postMongoid);
   const [count, setCount] = useState(comments);
   const [likecounter, setLikecounter] = useState(likes);
   const [lvalue, setLvalue] = useState(0);
@@ -72,6 +74,7 @@ const Postdetails = (props) => {
   const [name1, setName1] = useState("");
   const [picture, setPicture] = useState("");
   const [name, setName] = useState("");
+  const [added, setAdded] = useState(false);
 
   const likeHandler = async () => {
     if (!disabled) {
@@ -142,6 +145,34 @@ const Postdetails = (props) => {
       content: comm,
     }));
   };
+
+  const deletePostHandler = async () => {
+    if (localStorage.hasOwnProperty("user")) {
+      // setPost((prevState) => {
+      //   return [...prevState, data];
+      // });
+      try {
+        console.log(localStorage.getItem("user"), postMongoid);
+        const responseData = await sendRequest(
+          "http://localhost:5002/posts/deletePost",
+          "DELETE",
+          JSON.stringify({
+            userid: localStorage.getItem("user"),
+            postid: postMongoid,
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+        setTimeout(() => {
+          setAdded(true);
+        }, 250);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
   useEffect(() => {
     if (newComm.content !== "") {
       setCommarr((prevstate) => {
@@ -173,7 +204,7 @@ const Postdetails = (props) => {
       }
     };
     fetchItems();
-  }, [commarr]);
+  }, [commarr, added]);
 
   useEffect(() => {
     if (likeA.includes(localStorage.getItem("user"))) {
@@ -227,14 +258,25 @@ const Postdetails = (props) => {
   return (
     <div className="postcontainer">
       <div className="posttopbar">
-        <div className="postleftsidetop">
-          <img src={picture} alt="Loading" className="postimageleft" />
+        <div className="toppppleftbarr">
+          <div className="postleftsidetop">
+            <img src={picture} alt="Loading" className="postimageleft" />
+          </div>
+          <div className="postrightsidetop">
+            <p className="nameuser fw-bold">{sendName}</p>
+          </div>
+          <div className="postrighttime">
+            <p className="text-muted">{timeago} ago</p>
+          </div>
         </div>
-        <div className="postrightsidetop">
-          <p className="nameuser fw-bold">{sendName}</p>
-        </div>
-        <div className="postrighttime">
-          <p className="text-muted">{timeago} ago</p>
+        <div className="topppprightbarr">
+          {localStorage.getItem("user") === postid ? (
+            <div className="postrightdelete" onClick={deletePostHandler}>
+              <i className="fa-sharp fa-regular fa-trash"></i>
+            </div>
+          ) : (
+            <div></div>
+          )}
         </div>
       </div>
       <div className="postdescription my-3">

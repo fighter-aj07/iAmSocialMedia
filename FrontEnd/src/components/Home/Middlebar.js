@@ -216,6 +216,7 @@ const Middlebar = (props) => {
             return (
               <div className="middlebottom" key={element.imageUrl}>
                 <Postdetails
+                  postMongoid={element._id}
                   sendName={element.sendName}
                   time={element.time}
                   description={element.description}

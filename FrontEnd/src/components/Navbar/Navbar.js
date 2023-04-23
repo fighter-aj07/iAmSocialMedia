@@ -41,7 +41,7 @@ export default function Navbar() {
 
   function handleSelect(data) {
     setSelectedOptions(data);
-    console.log("you selected", data);
+    // console.log("you selected", data);
     navigate(`/profile/${data.id}`);
   }
 
@@ -61,7 +61,7 @@ export default function Navbar() {
         setUserdata(responseData);
         // setOptionList(responseData);
         // console.log("mettttttttt", optionList);
-        console.log("meet jain", userdata);
+        // console.log("meet jain", userdata);
         setFlag(true);
         for (let i = 0; i < userdata.length; i++) {
           usernames.push(userdata[i].name);
@@ -75,7 +75,7 @@ export default function Navbar() {
         }
         setOptionList(optionListtt);
         for (let i = 0; i < optionListtt.length; i++) {
-          console.log("meet", optionList[i].label);
+          // console.log("meet", optionList[i].label);
         }
       } catch (err) {
         console.log(err);
@@ -170,7 +170,7 @@ export default function Navbar() {
               value={text}
               onChange={searchHandler}
             /> */}
-            {console.log(optionList)}
+            {/* {console.log(optionList)} */}
             <Select
               options={optionList}
               placeholder="Search for Profiles"

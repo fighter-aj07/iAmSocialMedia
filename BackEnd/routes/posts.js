@@ -105,4 +105,5 @@ router.post("/likeupdate", postController.likeupdate);
  */
 
 router.post("/updatepostscomment", postController.updatepostscomment);
+router.delete("/deletePost", postController.deletePost);
 module.exports = router;

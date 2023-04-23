@@ -12,12 +12,28 @@
 .posttopbar {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 .postbottombar {
   display: flex;
   flex-direction: row;
   margin-top: 1.5rem;
+}
+
+.toppppleftbarr {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.topppprightbarr {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  opacity: 75%;
 }
 
 .postleftsidetop {
@@ -28,6 +44,11 @@
   margin-left: 15px;
   font-size: 0.85rem;
   transform: translateY(25%);
+}
+
+.postrightdelete {
+  display: flex;
+  align-items: center;
 }
 
 .likerighttime {
@@ -58,8 +79,9 @@
 
 .postimagecon {
   padding: 2px;
-  width: 100%;
-  max-height: 45rem;
+  width: 90%;
+  max-height: 35rem;
+  border-radius: 20px;
 }
 
 .fa-thumbs-up {
