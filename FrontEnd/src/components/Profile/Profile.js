@@ -203,14 +203,14 @@ export default function Profile() {
               <div className="profileInfo">
                 <h4 className="profileInfoName">{myname}</h4>
                 <span className="profileInfoDesc">Hello my friends!</span>
+                {localStorage.getItem("user") !== id ? (
+                  <button className="profileFollowBtn" onClick={addFriend}>
+                    {follow}
+                  </button>
+                ) : (
+                  null
+                )}
               </div>
-              {localStorage.getItem("user") !== id ? (
-                <button className="profileFollowBtn" onClick={addFriend}>
-                  {follow}
-                </button>
-              ) : (
-                null
-              )}
             </div>
             <div className="profileRightBottom">
               <Middlebar dispID={useridpr} />

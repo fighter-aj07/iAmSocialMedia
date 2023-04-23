@@ -3,6 +3,7 @@ import "./Postdetails.css";
 import Comment from "./Comment";
 
 import { useRequest } from "../../hooks/request-hook";
+import { Link } from "react-router-dom";
 
 const Postdetails = (props) => {
   let {
@@ -258,6 +259,7 @@ const Postdetails = (props) => {
   return (
     <div className="postcontainer">
       <div className="posttopbar">
+      <Link to={`/profile/${postid}`} style={{ textDecoration: 'none', color: 'inherit' }}>
         <div className="toppppleftbarr">
           <div className="postleftsidetop">
             <img src={picture} alt="Loading" className="postimageleft" />
@@ -266,9 +268,10 @@ const Postdetails = (props) => {
             <p className="nameuser fw-bold">{sendName}</p>
           </div>
           <div className="postrighttime">
-            <p className="text-muted">{timeago} ago</p>
+          <p className="text-muted">{timeago} ago</p>
           </div>
-        </div>
+          </div>
+          </Link>
         <div className="topppprightbarr">
           {localStorage.getItem("user") === postid ? (
             <div className="postrightdelete" onClick={deletePostHandler}>
