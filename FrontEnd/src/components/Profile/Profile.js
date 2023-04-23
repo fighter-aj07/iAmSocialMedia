@@ -78,7 +78,15 @@ export default function Profile() {
             "Content-Type": "application/json",
           }
         );
-        setFollow((prev) => (prev === "Follow" ? "Unfollow" : "Follow"));
+        console.log(responseData);
+        //flip follow
+        if (follow === "Follow") {
+          setFollow("Unfollow");
+        }
+        else{
+          setFollow("Follow");
+        }
+  
       } catch (err) {
         console.log(err);
       }
@@ -87,6 +95,7 @@ export default function Profile() {
 
 
   useEffect(() => {
+    console.log("rendering", useridpr);
     const fetchItems = async () => {
       try {
         const responseData = await sendRequest(
@@ -97,17 +106,21 @@ export default function Profile() {
             "Content-Type": "application/json",
           }
         );
+        console.log(responseData[9].userid);
         setUsers(responseData);
-        setCurrentUser(responseData.find((user) => user.userid === id));
-       
+        //set current user
+        let curr = responseData.find((user) => user.userid === id);
+        setCurrentUser(curr);
         //if user.friends contains id then set follow to unfollow
-        if (currentUser.friends.includes(localStorage.getItem("user"))) {
+        if (curr.friends.includes(localStorage.getItem("user"))) {
+          console.log("unfollow");
           setFollow("Unfollow");
         }
         else{
+          console.log("follow");
           setFollow("Follow");
         }
-        setMyname(responseData.find((user) => user.userid === id).name);
+        setMyname(curr.name);
       } catch (err) {
         console.log(err);
       }
