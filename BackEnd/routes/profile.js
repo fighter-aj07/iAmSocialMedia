@@ -13,5 +13,6 @@ router.post(
   singleUpload,
   profileController.updateProfilePicture
 );
+router.post("/addFriend", profileController.addFriend);
 
 module.exports = router;

@@ -47,7 +47,37 @@ const updateProfilePicture = async (req, res, next) => {
   );
   res.json(updateprofile);
 };
+const addOrRemoveFriend = async (userId, friendId, shouldAdd) => {
+  const updateQuery = shouldAdd
+    ? { $addToSet: { friends: friendId } }
+    : { $pull: { friends: friendId } };
+  const updateResult = await profileSc.updateMany(
+    { userid: { $in: [userId, friendId] } },
+    updateQuery
+  );
+  return updateResult;
+};
 
+const addFriend = async (req, res, next) => {
+  console.log(req.body);
+  const { userid, friendid } = req.body;
+  const checkFriend = await profileSc.find({
+    userid: userid,
+    friends: friendid,
+  });
+  console.log(checkFriend);
+  if (checkFriend.length > 0) {
+    const removeFriend = await addOrRemoveFriend(userid, friendid, false);
+    res.json(removeFriend);
+    console.log("removing friend");
+    return;
+  }
+  console.log("adding friend");
+  const addFriend = await addOrRemoveFriend(userid, friendid, true);
+  res.json(addFriend);
+};
+
+exports.addFriend = addFriend;
 exports.getprofiles = getprofiles;
 exports.getprof = getprof;
 exports.updateProfile = updateProfile;

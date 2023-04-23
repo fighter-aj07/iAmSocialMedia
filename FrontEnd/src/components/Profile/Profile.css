@@ -10,7 +10,13 @@
 .profileRight {
   flex: 9;
 }
-
+.profileFollowBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    background-color: #2e81f4;
+}
 .profileCover {
   height: 320px;
   position: relative;

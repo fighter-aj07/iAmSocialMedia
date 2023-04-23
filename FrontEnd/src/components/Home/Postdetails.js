@@ -84,7 +84,7 @@ const Postdetails = (props) => {
           "http://localhost:5002/posts/likeupdate",
           "POST",
           JSON.stringify({
-            postid: postid,
+            postMongoid: postMongoid,
             userid: localStorage.getItem("user"),
           }),
           {
@@ -103,7 +103,7 @@ const Postdetails = (props) => {
           "http://localhost:5002/posts/likeupdate",
           "POST",
           JSON.stringify({
-            postid: postid,
+            postMongoid: postMongoid,
             userid: localStorage.getItem("user"),
           }),
           {

@@ -23,6 +23,7 @@ export default function Profile() {
   const [csstyle, setCsstyle] = useState("none");
   const [image1, setImage1] = useState(null);
   const [added, setAdded] = useState(false);
+  const [follow, setFollow] = useState("Follow");
   // const [useriddd, setUseriddd] = useState(false);
   console.log(mode);
   const { isdarkMode } = mode;
@@ -60,6 +61,31 @@ export default function Profile() {
       }
     }
   };
+  
+  const addFriend = async (e) => {
+    e.preventDefault();
+    alert("Friend Request Sent");
+    if (localStorage.hasOwnProperty("user")) {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:5002/profile/addFriend",
+          "POST",
+          JSON.stringify({
+            userid: localStorage.getItem("user"),
+            friendid: id,
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+        setFollow((prev) => (prev === "Follow" ? "Unfollow" : "Follow"));
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
+
   useEffect(() => {
     const fetchItems = async () => {
       try {
@@ -73,7 +99,11 @@ export default function Profile() {
         );
         setUsers(responseData);
         setCurrentUser(responseData.find((user) => user.userid === id));
-
+       
+        //if user.friends contains id then set follow to unfollow
+        if (currentUser.friends.includes(localStorage.getItem("user"))) {
+          setFollow("Unfollow");
+        }
         setMyname(responseData.find((user) => user.userid === id).name);
       } catch (err) {
         console.log(err);
@@ -158,6 +188,13 @@ export default function Profile() {
                 <h4 className="profileInfoName">{myname}</h4>
                 <span className="profileInfoDesc">Hello my friends!</span>
               </div>
+              {localStorage.getItem("user") !== id ? (
+                <button className="profileFollowBtn" onClick={addFriend}>
+                  {follow}
+                </button>
+              ) : (
+                null
+              )}
             </div>
             <div className="profileRightBottom">
               <Middlebar dispID={useridpr} />
