@@ -48,15 +48,46 @@ const updateProfilePicture = async (req, res, next) => {
   res.json(updateprofile);
 };
 const addOrRemoveFriend = async (userId, friendId, shouldAdd) => {
-  const updateQuery = shouldAdd
-    ? { $addToSet: { friends: friendId } }
-    : { $pull: { friends: friendId } };
-  const updateResult = await profileSc.updateMany(
-    { userid: { $in: [userId, friendId] } },
-    updateQuery
-  );
-  return updateResult;
+  if(shouldAdd){
+    const addFriend = await profileSc.updateOne(
+      { userid: userId },
+      {
+        $push: {
+          friends: friendId,
+        },
+      }
+    );
+    const addFriend2 = await profileSc.updateOne(
+      { userid: friendId },
+      {
+        $push: {
+          friends: userId,
+        },
+      }
+    );
+    return addFriend;
+  }
+  else{
+    const removeFriend = await profileSc.updateOne(
+      { userid: userId },
+      {
+        $pull: {
+          friends: friendId,
+        },
+      }
+    );
+    const removeFriend2 = await profileSc.updateOne(
+      { userid: friendId },
+      {
+        $pull: {
+          friends: userId,
+        },
+      }
+    );
+    return removeFriend;
+  }
 };
+
 
 const addFriend = async (req, res, next) => {
   console.log(req.body);
