@@ -64,7 +64,7 @@ export default function Profile() {
   
   const addFriend = async (e) => {
     e.preventDefault();
-    alert("Friend Request Sent");
+    // alert("Friend Request Sent");
     if (localStorage.hasOwnProperty("user")) {
       try {
         const responseData = await sendRequest(
