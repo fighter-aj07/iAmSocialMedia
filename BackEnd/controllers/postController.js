@@ -109,7 +109,29 @@ const updatepostscomment = async (req, res, next) => {
   }
 };
 
+const deletePost = async (req, res, next) => {
+  const { userid, postid } = req.body;
+  console.log(req.body);
+  console.log("meetjainnnnn", userid, postid);
+  // console.log(comment);
+  try {
+    let post = await postSc.findById(postid);
+    if (!post) {
+      return res.status(404).send("Not Found");
+    }
+    if (post.userid !== userid) {
+      return res.status(401).send("Not Allowed");
+    }
+    post = await postSc.findByIdAndDelete(postid);
+    res.json({ Success: "Post has been Removed" });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
 exports.getposts = getposts;
 exports.addpost = addpost;
 exports.likeupdate = likeupdate;
 exports.updatepostscomment = updatepostscomment;
+exports.deletePost = deletePost;
