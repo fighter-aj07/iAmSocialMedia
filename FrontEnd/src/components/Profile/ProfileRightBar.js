@@ -111,12 +111,15 @@ export default function Profile(props) {
                   }}
                 >
                   {" "}
-                  Edit details{" "}
+                  <i class="fas fa-edit"></i>
+                  {" "}
+                  Edit{" "}
                 </button>
               )}
               <EditDetails
                 onClose={showModal}
                 show={show}
+                setshow = {setShow}
                 key={users}
                 handleChanges={handleChanges}
                 id={props.id}

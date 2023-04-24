@@ -9,6 +9,7 @@ export default class Modal extends React.Component {
             e.preventDefault();
             console.log("Form submitted");
             this.props.handleChanges(this.state);
+            this.props.setshow(false);
         }
         this.currentUser = users.find(user => user.userid === this.props.id);
         console.log(this.props);
