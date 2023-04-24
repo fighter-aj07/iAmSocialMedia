@@ -10,7 +10,7 @@ const getprofiles = async (req, res, next) => {
 const getprof = async (req, res, next) => {
   const { userid, projection } = req.body;
   const getprofiledet = await profileSc.find({ userid: userid }, projection);
-  console.log("prof: ", getprofiledet);
+  // console.log("prof: ", getprofiledet);
   if(getprofiledet.length > 0)res.status(200).json(getprofiledet);
   else res.status(404).json({message: "User not found"});
 };

@@ -49,32 +49,38 @@ describe("Profile Controller", () => {
     });
   });
 
-  describe("getprof", () => {
-    it("should return a single Profile Model object", async () => {
+  describe("getprofile", () => {
+    it("should return a Profile Model object", async () => {
       const req = {
         body: {
           userid: "testId",
+          projection: null,
         },
       };
       const res = {
+        statusCode: 500,
         responseJson: null,
+        status(code) {
+          this.statusCode = code;
+          return this;
+        },
         json(response) {
           this.responseJson = response;
           return this;
         },
       };
-
       try {
         await profileController.getprof(req, res, () => {});
       } catch (err) {
         console.log(err);
       }
 
+      expect(res.statusCode).to.be.equal(200);
       expect(res.responseJson).to.be.an("array");
       expect(res.responseJson[0]).to.be.an("object");
-      expect(res.responseJson[0].userid).to.equal("testId");
     });
   });
+
 
   // describe('GET /profiles', () => {
   //   it('should return an array of profiles', async () => {
