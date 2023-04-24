@@ -111,8 +111,8 @@ const updatepostscomment = async (req, res, next) => {
 
 const deletePost = async (req, res, next) => {
   const { userid, postid } = req.body;
-  console.log(req.body);
-  console.log("meetjainnnnn", userid, postid);
+  // console.log(req.body);
+  // console.log("meetjainnnnn", userid, postid);
   // console.log(comment);
   try {
     let post = await postSc.findById(postid);
