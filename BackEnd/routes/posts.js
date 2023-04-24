@@ -105,5 +105,50 @@ router.post("/likeupdate", postController.likeupdate);
  */
 
 router.post("/updatepostscomment", postController.updatepostscomment);
+
+
+// deletion swagger
+
+/**
+ * @swagger
+ * /posts/deletePost:
+ *   get:
+ *     parameters: 
+ *       -  in: query
+ *          name: id
+ *          schema: 
+ *            type: string
+ *          required: true
+ *          description: delete post
+ *     summary: delete the post.
+ *     responses:
+ *       200:
+ *         description: API to delete post.
+ *         content:
+ *           application/json:
+ *             schema: 
+ *                type: object
+ *                properties:
+ *                  status: 
+ *                    type: integer
+ *                    example: 200
+ *                  message: 
+ *                    type: string
+ *                    example: delete post!
+ *       400:
+ *         description: delete post.
+ *         content:
+ *           application/json:
+ *             schema: 
+ *                type: object
+ *                properties:
+ *                  status: 
+ *                    type: integer
+ *                    example: 400
+ *                  message: 
+ *                    type: string
+ *                    example: post can not be deleted!
+ * 
+ */
 router.delete("/deletePost", postController.deletePost);
 module.exports = router;
