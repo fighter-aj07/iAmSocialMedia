@@ -41,7 +41,7 @@ export default function Profile() {
     setDivblock("none");
     setCsstyle("flex");
   };
-  const addpostHandller = async (e) => {
+  const updateProfHandller = async (e) => {
     e.preventDefault();
     // console.log("meet", formData);
     if (localStorage.hasOwnProperty("user")) {
@@ -56,12 +56,13 @@ export default function Profile() {
         setAdded(true);
         setDivblock("flex");
         setCsstyle("none");
+        setImage1(null);
       } catch (err) {
         console.log(err);
       }
     }
   };
-  
+
   const addFriend = async (e) => {
     e.preventDefault();
     // alert("Friend Request Sent");
@@ -82,8 +83,7 @@ export default function Profile() {
         //flip follow
         if (follow === "Follow") {
           setFollow("Unfollow");
-        }
-        else{
+        } else {
           setFollow("Follow");
         }
         window.location.reload();
@@ -92,7 +92,6 @@ export default function Profile() {
       }
     }
   };
-
 
   useEffect(() => {
     console.log("rendering", useridpr);
@@ -115,8 +114,7 @@ export default function Profile() {
         if (curr.friends.includes(localStorage.getItem("user"))) {
           console.log("unfollow");
           setFollow("Unfollow");
-        }
-        else{
+        } else {
           console.log("follow");
           setFollow("Follow");
         }
@@ -150,7 +148,7 @@ export default function Profile() {
   }, [isdarkMode]);
   return (
     <>
-      <Navbar />
+      <Navbar image1={image1} />
       <div style={{ color: color }}>
         <div className="profile">
           <Leftsidebar />
@@ -194,7 +192,7 @@ export default function Profile() {
                 <img className="newimggg mx-3" src={image1} alt="Loading" />
                 <button
                   className="addpost btn btn-outline-info"
-                  onClick={addpostHandller}
+                  onClick={updateProfHandller}
                   disabled={image1 ? false : true}
                 >
                   Change Image
@@ -207,13 +205,11 @@ export default function Profile() {
                   <button className="profileFollowBtn" onClick={addFriend}>
                     {follow}
                   </button>
-                ) : (
-                  null
-                )}
+                ) : null}
               </div>
             </div>
             <div className="profileRightBottom">
-              <Middlebar dispID={useridpr} />
+              <Middlebar dispID={useridpr} image22={image1} />
               <ProfileRightBar
                 handleNameChange={handleNameChange}
                 id={id}

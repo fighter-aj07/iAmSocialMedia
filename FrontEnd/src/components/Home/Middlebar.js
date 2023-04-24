@@ -5,6 +5,7 @@ import { useRequest } from "../../hooks/request-hook";
 // import axios from "axios";
 
 const Middlebar = (props) => {
+  const { image22 } = props;
   const [post, setPost] = useState([]);
   const [csstyle, setCsstyle] = useState("none");
   const { sendRequest } = useRequest();
@@ -124,7 +125,7 @@ const Middlebar = (props) => {
       }
     };
     fetchItems();
-  }, [sendRequest]);
+  }, [sendRequest, image22]);
 
   useEffect(() => {
     const fetchItems2 = async () => {
