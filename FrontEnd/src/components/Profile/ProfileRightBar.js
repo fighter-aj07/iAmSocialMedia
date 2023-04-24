@@ -6,7 +6,6 @@ import users from "../../Database/profile";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-
 export default function Profile(props) {
   const [city, setCity] = useState([]);
   const [relationship, setRelationship] = useState([]);
@@ -47,10 +46,10 @@ export default function Profile(props) {
     };
     fetchItems();
   }, [sendRequest, id]);
-  const showModal = e => {
+  const showModal = (e) => {
     setShow(!show);
   };
-  async function updateProfile(values){
+  async function updateProfile(values) {
     try {
       const responseData = await sendRequest(
         "http://localhost:5002/profile/updateprofile",
@@ -61,7 +60,7 @@ export default function Profile(props) {
           city: values.City,
           from: values.From,
           relationship: values.Relationship,
-          dob: values.dob
+          dob: values.dob,
         }),
         {
           "Content-Type": "application/json",
@@ -80,54 +79,77 @@ export default function Profile(props) {
     setCity(values.City);
     updateProfile(values);
     props.handleNameChange(values.Name);
-  }
+  };
   return (
     <>
       <div className="rightbar">
         <div className="rightbarWrapper">
-        <>
-          <h4 className="rightbarTitle">User information</h4>
-          <div className="rightbarInfo">
-            <div className="rightbarInfoItem">
-              <span className="rightbarInfoKey">City:</span>
-              <span className="rightbarInfoValue">{city}</span>
+          <>
+            <h4 className="rightbarTitle">User information</h4>
+            <div className="rightbarInfo">
+              <div className="rightbarInfoItem">
+                <span className="rightbarInfoKey">City:</span>
+                <span className="rightbarInfoValue">{city}</span>
+              </div>
+              <div className="rightbarInfoItem">
+                <span className="rightbarInfoKey">From:</span>
+                <span className="rightbarInfoValue">{from}</span>
+              </div>
+              <div className="rightbarInfoItem">
+                <span className="rightbarInfoKey">Relationship status:</span>
+                <span className="rightbarInfoValue">{relationship}</span>
+              </div>
+              <div className="rightbarInfoItem">
+                <span className="rightbarInfoKey">Date of Birth:</span>
+                <span className="rightbarInfoValue">{dob}</span>
+              </div>
+              {props.useridpr === localStorage.getItem("user") && (
+                <button
+                  className="edit-btn-rightbar"
+                  onClick={(e) => {
+                    showModal();
+                  }}
+                >
+                  {" "}
+                  Edit details{" "}
+                </button>
+              )}
+              <EditDetails
+                onClose={showModal}
+                show={show}
+                key={users}
+                handleChanges={handleChanges}
+                id={props.id}
+                rel={relationship}
+                from={from}
+                city={city}
+                dob={dob}
+                name={name}
+              />
             </div>
-            <div className="rightbarInfoItem">
-              <span className="rightbarInfoKey">From:</span>
-              <span className="rightbarInfoValue">{from}</span>
+            <h4 className="rightbarTitle">User friends</h4>
+            <div className="rightbarFollowings">
+              {friends.map((friend) => {
+                return (
+                  <div className="rightbarFollowing">
+                    <Link to={`/profile/${friend}`} className="rightbarLink">
+                      <img
+                        src={
+                          users.find((user) => user.userid === friend)
+                            .profilePicture
+                        }
+                        alt=""
+                        className="rightbarFollowingImg"
+                      />
+                    </Link>
+                    <p className="rightbarFollowingName">
+                      {users.find((user) => user.userid === friend).name}
+                    </p>
+                  </div>
+                );
+              })}
             </div>
-            <div className="rightbarInfoItem">
-              <span className="rightbarInfoKey">Relationship status:</span>
-              <span className="rightbarInfoValue">{relationship}</span>
-            </div>
-            <div className="rightbarInfoItem">
-              <span className="rightbarInfoKey">Date of Birth:</span>
-              <span className="rightbarInfoValue">{dob}</span>
-            </div>
-            {props.useridpr === localStorage.getItem("user") && <button className="edit-btn-rightbar"  onClick={e => {
-                showModal();
-          }}
-            > Edit details </button>}
-            <EditDetails onClose={showModal} show={show} key = {users} handleChanges={handleChanges} id={props.id} rel = {relationship} from = {from} city = {city} dob={dob} name={name}/>
-          </div>
-          <h4 className="rightbarTitle">User friends</h4>
-          <div className="rightbarFollowings">
-            {friends.map((friend) => {
-              return (
-                <div className="rightbarFollowing">
-                  <Link to={`/profile/${friend}`} className="rightbarLink" style={{ textDecoration: "none" }}>
-                    <img
-                      src={users.find((user) => user.userid === friend).profilePicture}
-                      alt=""
-                      className="rightbarFollowingImg"
-                    />
-                    <span className="rightbarFollowingName">{users.find((user) => user.userid === friend).name}</span>
-                  </Link>
-                </div>
-              );
-            })}
-          </div>
-        </>
+          </>
         </div>
       </div>
     </>
