@@ -1,0 +1,29 @@
+name: node integration and unit tests
+
+on:
+  push:
+    branches: main
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+        with:
+          node-version: 17
+      - name: backend dependencies
+        run: |
+          cd BackEnd
+          npm ci
+
+      - name: frontend dependencies
+        run: |
+          cd FrontEnd
+          npm ci
+          
+      - name: Unit tests
+        run: |
+          cd BackEnd
+          npm test
