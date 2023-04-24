@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Rightsidebar.css";
 import { Link } from "react-router-dom";
 import { useRequest } from "../../hooks/request-hook";
-import Carousel from 'react-bootstrap/Carousel';
+import Carousel from "react-bootstrap/Carousel";
 
 const Rightsidebar = () => {
   const { sendRequest } = useRequest();
@@ -47,39 +47,49 @@ const Rightsidebar = () => {
           </div>
         </div>
         <div className="lastt">
-        <Carousel>
-          <Carousel.Item interval={1000}>
-            <img
-              className="d-block w-100"
-              src="https://newspaperads.ads2publish.com/wp-content/uploads/2021/03/boat-your-favourite-indian-brand-by-karthik-aryan-kiara-advani-hardik-pandye-k-l-rahul-ad-times-of-india-mumbai-31-03-2021-scaled.jpg"
-              alt="First slide"
-              style={{height:"300px", width:"400px", marginTop: "20px"}}
-            />
-            <Carousel.Caption>
-              
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item interval={500}>
-            <img
-              className="d-block"
-              src="https://i.pinimg.com/550x/03/6e/4a/036e4ac5e17c4408d8efe8ac6f6b7633.jpg"
-              alt="Second slide"
-              style={{height:"300px", width:"400px", marginTop: "20px"}}
-            />
-          
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block"
-              src="https://pbs.twimg.com/media/EeLLkVkUEAQrZDN.png"
-              alt="Third slide"
-              style={{height:"300px", width:"400px", marginTop: "20px"}}
-            />
-            <Carousel.Caption>
-          
-            </Carousel.Caption>
-          </Carousel.Item>
-        </Carousel>
+          <Carousel>
+            <Carousel.Item interval={5000}>
+              <img
+                className="d-block w-100"
+                src="https://newspaperads.ads2publish.com/wp-content/uploads/2021/03/boat-your-favourite-indian-brand-by-karthik-aryan-kiara-advani-hardik-pandye-k-l-rahul-ad-times-of-india-mumbai-31-03-2021-scaled.jpg"
+                alt="First slide"
+                style={{
+                  height: "300px",
+                  width: "400px",
+                  marginTop: "20px",
+                  borderRadius: "20px",
+                }}
+              />
+              <Carousel.Caption></Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item interval={5000}>
+              <img
+                className="d-block"
+                src="https://i.pinimg.com/550x/03/6e/4a/036e4ac5e17c4408d8efe8ac6f6b7633.jpg"
+                alt="Second slide"
+                style={{
+                  height: "300px",
+                  width: "400px",
+                  marginTop: "20px",
+                  borderRadius: "20px",
+                }}
+              />
+            </Carousel.Item>
+            <Carousel.Item interval={5000}>
+              <img
+                className="d-block"
+                src="https://pbs.twimg.com/media/EeLLkVkUEAQrZDN.png"
+                alt="Third slide"
+                style={{
+                  height: "300px",
+                  width: "400px",
+                  marginTop: "20px",
+                  borderRadius: "20px",
+                }}
+              />
+              <Carousel.Caption></Carousel.Caption>
+            </Carousel.Item>
+          </Carousel>
         </div>
       </div>
       <div className="rightbottom">
