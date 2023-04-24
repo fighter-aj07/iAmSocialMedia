@@ -18,6 +18,10 @@ export default function Conversation({ conversation, currentUser }) {
             "POST",
             JSON.stringify({
               userid: friendId,
+              projection: {
+                name: 1,
+                profilePicture: 1,
+              }
             }),
             {
               "Content-Type": "application/json",

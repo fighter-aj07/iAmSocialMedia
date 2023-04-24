@@ -105,7 +105,6 @@ export default function Profile() {
             "Content-Type": "application/json",
           }
         );
-        console.log(responseData[9].userid);
         setUsers(responseData);
         //set current user
         let curr = responseData.find((user) => user.userid === id);

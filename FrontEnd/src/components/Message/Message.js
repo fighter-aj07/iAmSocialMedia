@@ -4,7 +4,7 @@ import { useRequest } from "../../hooks/request-hook";
 import {format} from "timeago.js";
 // import { format } from "timeago.js";
 
-export default function Message({ message, own, senderpfp, otherid }) {
+export default function Message({ message, own, senderpfp, otherid, currentChat }) {
     const [otherpfp, setOtherpfp] = useState("https://images.pexels.com/photos/3686769/pexels-photo-3686769.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");
     const {sendRequest} = useRequest();
     useEffect(() => {
@@ -26,7 +26,7 @@ export default function Message({ message, own, senderpfp, otherid }) {
             }
           };
           fetchItems();
-        }, []);
+        }, [currentChat]);
   return (
     <div className={own ? "message own" : "message"}>
       <div className="messageTop">

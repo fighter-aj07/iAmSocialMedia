@@ -18,6 +18,11 @@ export default function ChatOnline({ onlineUsers, currentId, setCurrentChat }) {
             "POST",
             JSON.stringify({
               userid: id,
+              projection: {
+                name: 1,
+                profilePicture: 1,
+                userid: 1,
+              }
             }),
             {
               "Content-Type": "application/json",

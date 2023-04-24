@@ -22,6 +22,7 @@ export default function Messenger() {
   const scrollRef = useRef();
   const userid = localStorage.getItem("user");
   const [user, setUser] = useState([]);
+  const [otherid, setOtherid] = useState([]);
   useEffect(() => {
     const fetchItems = async () => {
         try {
@@ -152,7 +153,7 @@ export default function Messenger() {
             <span className="chatMenuConversations">Conversations</span>
             </div>
             {conversations.map((c) => (
-              <div onClick={() => setCurrentChat(c)}>
+              <div onClick={() => (setCurrentChat(c), setOtherid(c.members.find((member) => member !== user.userid)))}>
                 <Conversation conversation={c} currentUser={user} />
               </div>
             ))}
@@ -165,7 +166,7 @@ export default function Messenger() {
                 <div className="chatBoxTop">
                   {messages.map((m) => (
                     <div ref={scrollRef}>
-                      <Message message={m} own={m.sender === user.userid} senderpfp = {user.profilePicture} otherid = {currentChat.members.find((member) => member !== user.userid)} />
+                      <Message message={m} own={m.sender === user.userid} senderpfp = {user.profilePicture} otherid = {otherid} currentChat={currentChat} />
                     </div>
                   ))}
                 </div>
