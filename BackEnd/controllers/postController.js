@@ -38,7 +38,7 @@ const addpost = async (req, res, next) => {
     imageUrl: cloudimageurl,
     likes: likes,
     comments: comments,
-    comment: comment,
+    comment: [],
     likeArr: likeArr,
   });
   try {
