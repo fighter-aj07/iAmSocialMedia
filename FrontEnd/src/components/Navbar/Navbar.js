@@ -50,7 +50,7 @@ export default function Navbar(props) {
     const fetchItems = async () => {
       try {
         const responseData = await sendRequest(
-          "http://localhost:5002/userdata/getdetails",
+          "https://backend-afak.onrender.com/userdata/getdetails",
           "POST",
           JSON.stringify({
             userid: localStorage.getItem("user"),
@@ -59,19 +59,20 @@ export default function Navbar(props) {
             "Content-Type": "application/json",
           }
         );
-        setUserdata(responseData);
+        // setUserdata(responseData);
         // setOptionList(responseData);
         // console.log("mettttttttt", optionList);
         // console.log("meet jain", userdata);
+        console.log("meet jain", responseData);
         setFlag(true);
-        for (let i = 0; i < userdata.length; i++) {
-          usernames.push(userdata[i].name);
+        for (let i = 0; i < responseData.length; i++) {
+          usernames.push(responseData[i].name);
         }
-        for (let i = 0; i < userdata.length; i++) {
+        for (let i = 0; i < responseData.length; i++) {
           optionListtt.push({
             value: usernames[i].toLowerCase(),
             label: usernames[i],
-            id: userdata[i].userid,
+            id: responseData[i].userid,
           });
         }
         setOptionList(optionListtt);
@@ -97,7 +98,7 @@ export default function Navbar(props) {
     const fetchItems = async () => {
       try {
         const responseData = await sendRequest(
-          "http://localhost:5002/profile/getprof",
+          "https://backend-afak.onrender.com/profile/getprof",
           "POST",
           JSON.stringify({
             userid: localStorage.getItem("user"),

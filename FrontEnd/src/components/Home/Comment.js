@@ -13,7 +13,7 @@ const Comment = (props) => {
     const fetchItems = async () => {
       try {
         const responseData = await sendRequest(
-          "http://localhost:5002/profile/getprof",
+          "https://backend-afak.onrender.com/profile/getprof",
           "POST",
           JSON.stringify({
             userid: userId,

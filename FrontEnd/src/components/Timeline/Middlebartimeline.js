@@ -61,7 +61,7 @@ const Middlebartimeline = () => {
       });
       setText("");
       const response = await sendRequest(
-        "http://localhost:5002/posts/addpost",
+        "https://backend-afak.onrender.com/posts/addpost",
         "POST",
         JSON.stringify(data),
         {
@@ -76,7 +76,7 @@ const Middlebartimeline = () => {
     const fetchItems = async () => {
       try {
         const responseData = await sendRequest(
-          "http://localhost:5002/profile/getprof",
+          "https://backend-afak.onrender.com/profile/getprof",
           "POST",
           JSON.stringify({
             userid: localStorage.getItem("user"),
@@ -98,7 +98,7 @@ const Middlebartimeline = () => {
     const fetchItems2 = async () => {
       try {
         const responseData = await sendRequest(
-          "http://localhost:5002/posts/getposts",
+          "https://backend-afak.onrender.com/posts/getposts",
           "GET",
           null,
           {

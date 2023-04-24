@@ -30,7 +30,7 @@ export default function Signup() {
             //post req to backend
             const userid = (Date.now() + Math.random()).toString().split(".")[0];
             const responseData = await sendRequest(
-                "http://localhost:5002/signup",
+                "https://backend-afak.onrender.com/signup",
                 "POST",
                 JSON.stringify({
                     username,

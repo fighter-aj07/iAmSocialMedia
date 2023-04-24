@@ -27,7 +27,7 @@ export default function Messenger() {
     const fetchItems = async () => {
         try {
           const responseData = await sendRequest(
-            "http://localhost:5002/profile/getprof",
+            "https://backend-afak.onrender.com/profile/getprof",
             "POST",
             JSON.stringify({
               userid: localStorage.getItem("user"),
@@ -74,7 +74,7 @@ export default function Messenger() {
     const fetchItems = async () => {
         try {
           const responseData = await sendRequest(
-            "http://localhost:5002/conversation/" + userid,
+            "https://backend-afak.onrender.com/conversation/" + userid,
             "GET",
           );
           setConversations(responseData);
@@ -90,7 +90,7 @@ export default function Messenger() {
     const fetchItems = async () => {
         try {
           const responseData = await sendRequest(
-            "http://localhost:5002/message/" + currentChat._id,
+            "https://backend-afak.onrender.com/message/" + currentChat._id,
             "GET",
           );
             setMessages(responseData);
@@ -123,7 +123,7 @@ export default function Messenger() {
     const fetchItems = async (id) => {
         try {
           const responseData = await sendRequest(
-            "http://localhost:5002/message",
+            "https://backend-afak.onrender.com/message",
             "POST",
             JSON.stringify(message),
             {

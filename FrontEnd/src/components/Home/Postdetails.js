@@ -82,7 +82,7 @@ const Postdetails = (props) => {
       if (likeA.includes(localStorage.getItem("user"))) {
         setDisabled(true);
         const responseData = await sendRequest(
-          "http://localhost:5002/posts/likeupdate",
+          "https://backend-afak.onrender.com/posts/likeupdate",
           "POST",
           JSON.stringify({
             postMongoid: postMongoid,
@@ -101,7 +101,7 @@ const Postdetails = (props) => {
       } else {
         setDisabled(true);
         const responseData = await sendRequest(
-          "http://localhost:5002/posts/likeupdate",
+          "https://backend-afak.onrender.com/posts/likeupdate",
           "POST",
           JSON.stringify({
             postMongoid: postMongoid,
@@ -155,7 +155,7 @@ const Postdetails = (props) => {
       try {
         console.log(localStorage.getItem("user"), postMongoid);
         const responseData = await sendRequest(
-          "http://localhost:5002/posts/deletePost",
+          "https://backend-afak.onrender.com/posts/deletePost",
           "DELETE",
           JSON.stringify({
             userid: localStorage.getItem("user"),
@@ -187,7 +187,7 @@ const Postdetails = (props) => {
     const fetchItems = async (req, res, next) => {
       try {
         const response = await sendRequest(
-          "http://localhost:5002/posts/updatepostscomment",
+          "https://backend-afak.onrender.com/posts/updatepostscomment",
           "POST",
           JSON.stringify({
             userid: postid,
@@ -219,7 +219,7 @@ const Postdetails = (props) => {
     const fetchItems = async (req, res, next) => {
       try {
         const responseData = await sendRequest(
-          "http://localhost:5002/profile/getprof",
+          "https://backend-afak.onrender.com/profile/getprof",
           "POST",
           JSON.stringify({
             userid: postid,
@@ -237,7 +237,7 @@ const Postdetails = (props) => {
     const fetchItems2 = async (req, res, next) => {
       try {
         const responseData = await sendRequest(
-          "http://localhost:5002/profile/getprof",
+          "https://backend-afak.onrender.com/profile/getprof",
           "POST",
           JSON.stringify({
             userid: localStorage.getItem("user"),

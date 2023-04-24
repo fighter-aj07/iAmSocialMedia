@@ -30,7 +30,7 @@ export default function Login() {
             setFetching(true);
             const { email, password } = values;
             const response = await sendRequest(
-                "http://localhost:5002/login",
+                "https://backend-afak.onrender.com/login",
                 "POST",
                 JSON.stringify({
                     email,

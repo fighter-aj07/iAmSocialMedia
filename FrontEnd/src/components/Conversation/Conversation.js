@@ -14,7 +14,7 @@ export default function Conversation({ conversation, currentUser }) {
     const fetchItems = async () => {
         try {
           const responseData = await sendRequest(
-            "http://localhost:5002/profile/getprof",
+            "https://backend-afak.onrender.com/profile/getprof",
             "POST",
             JSON.stringify({
               userid: friendId,

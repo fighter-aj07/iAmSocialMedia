@@ -14,7 +14,7 @@ export default function ChatOnline({ onlineUsers, currentId, setCurrentChat, set
     const fetchItems = async (id) => {
         try {
           const responseData = await sendRequest(
-            "http://localhost:5002/profile/getprof",
+            "https://backend-afak.onrender.com/profile/getprof",
             "POST",
             JSON.stringify({
               userid: id,
@@ -45,7 +45,7 @@ export default function ChatOnline({ onlineUsers, currentId, setCurrentChat, set
     const fetchItems = async () => {
         try {
           const responseData = await sendRequest(
-            "http://localhost:5002/conversation/find/" + currentId + "/" + user.userid,
+            "https://backend-afak.onrender.com/conversation/find/" + currentId + "/" + user.userid,
             "GET",
           );
           console.log(responseData);

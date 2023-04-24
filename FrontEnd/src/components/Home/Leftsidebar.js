@@ -17,7 +17,7 @@ const Leftsidebar = () => {
     const fetchItems = async () => {
       try {
         const responseData = await sendRequest(
-          "http://localhost:5002/userdata/getdetails",
+          "https://backend-afak.onrender.com/userdata/getdetails",
           "POST",
           JSON.stringify({
             userid: localStorage.getItem("user"),

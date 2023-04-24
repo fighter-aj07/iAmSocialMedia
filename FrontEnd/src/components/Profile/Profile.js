@@ -49,7 +49,7 @@ export default function Profile() {
       formData.append("file", fileRef.current.files[0]);
       try {
         const responseData = await sendRequest(
-          "http://localhost:5002/profile/updateProfilePicture",
+          "https://backend-afak.onrender.com/profile/updateProfilePicture",
           "POST",
           formData
         );
@@ -69,7 +69,7 @@ export default function Profile() {
     if (localStorage.hasOwnProperty("user")) {
       try {
         const responseData = await sendRequest(
-          "http://localhost:5002/profile/addFriend",
+          "https://backend-afak.onrender.com/profile/addFriend",
           "POST",
           JSON.stringify({
             userid: localStorage.getItem("user"),
@@ -98,7 +98,7 @@ export default function Profile() {
     const fetchItems = async () => {
       try {
         const responseData = await sendRequest(
-          "http://localhost:5002/profile/getprofiles",
+          "https://backend-afak.onrender.com/profile/getprofiles",
           "POST",
           JSON.stringify({}),
           {

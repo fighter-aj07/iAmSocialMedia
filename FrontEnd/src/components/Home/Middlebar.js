@@ -76,18 +76,18 @@ const Middlebar = (props) => {
       setCsstyle("none");
       setImage1(null);
       // const response = await sendRequest(
-      //   "http://localhost:5002/posts/addpost",
+      //   "https://backend-afak.onrender.com/posts/addpost",
       //   "POST",
       //   formData
       // );
       // axios
-      //   .post("http://localhost:5002/posts/addpost", formData)
+      //   .post("https://backend-afak.onrender.com/posts/addpost", formData)
       //   .then((res) => {
       //     console.log(res);
       //   });
       try {
         const responseData = await sendRequest(
-          "http://localhost:5002/posts/addpost",
+          "https://backend-afak.onrender.com/posts/addpost",
           "POST",
           formData
         );
@@ -109,7 +109,7 @@ const Middlebar = (props) => {
     const fetchItems = async () => {
       try {
         const responseData = await sendRequest(
-          "http://localhost:5002/profile/getprof",
+          "https://backend-afak.onrender.com/profile/getprof",
           "POST",
           JSON.stringify({
             userid: localStorage.getItem("user"),
@@ -131,7 +131,7 @@ const Middlebar = (props) => {
     const fetchItems2 = async () => {
       try {
         const responseData = await sendRequest(
-          "http://localhost:5002/posts/getposts",
+          "https://backend-afak.onrender.com/posts/getposts",
           "GET",
           null,
           {

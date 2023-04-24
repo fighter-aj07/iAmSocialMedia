@@ -11,7 +11,7 @@ export default function Message({ message, own, senderpfp, otherid, currentChat 
         const fetchItems = async () => {
             try {
               const responseData = await sendRequest(
-                "http://localhost:5002/profile/getprof",
+                "https://backend-afak.onrender.com/profile/getprof",
                 "POST",
                 JSON.stringify({
                   userid: otherid,
