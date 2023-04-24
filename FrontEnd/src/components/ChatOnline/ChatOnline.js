@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import "./ChatOnline.css";
 import { useRequest } from "../../hooks/request-hook";
 
-export default function ChatOnline({ onlineUsers, currentId, setCurrentChat }) {
+export default function ChatOnline({ onlineUsers, currentId, setCurrentChat, setOtherid }) {
   const [friends, setFriends] = useState([]);
   const [onlineFriends, setOnlineFriends] = useState([]);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -50,6 +50,7 @@ export default function ChatOnline({ onlineUsers, currentId, setCurrentChat }) {
           );
           console.log(responseData);
             setCurrentChat(responseData);
+            setOtherid(user.userid);
         } catch (err) {
           console.log(err);
         }

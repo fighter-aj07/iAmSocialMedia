@@ -36,6 +36,10 @@
   align-items: center;
 }
 
+.firsttleft {
+  margin-top: 1rem;
+}
+
 .firsttright {
   margin-left: 1rem;
   transform: translateY(20%);
