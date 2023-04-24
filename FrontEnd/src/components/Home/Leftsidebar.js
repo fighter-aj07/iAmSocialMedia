@@ -85,10 +85,12 @@ const Leftsidebar = () => {
           <span style={{color:color}} className="leftitemsname">Groups</span>
         </li> */}
           <li className="leftitems">
-            <i className="iconsss fa-regular fa-calendar"></i>
-            <span style={{ color: color }} className="leftitemsname">
-              Events
-            </span>
+            <i className="iconsss fa-regular fa-comment-dots"></i>
+            <Link to="/messenger" style={{ textDecoration: "none" }}>
+              <span style={{ color: color }} className="leftitemsname">
+                Messenger
+              </span>
+            </Link>
           </li>
           <li className="leftitems quest">
             <i className="iconsss fa-regular fa-question"></i>
@@ -103,7 +105,9 @@ const Leftsidebar = () => {
           <li style={{ color: color }} className="leftitems friends">
             Friends
           </li>
-          {userdata.map((element) => {
+          {userdata
+            .filter((element) => element.friends.includes(userprof))
+            .map((element) => {
             return (
               <li className="leftitemsbottom">
                 <Link
@@ -111,7 +115,7 @@ const Leftsidebar = () => {
                   style={{ textDecoration: "none" }}
                 >
                   <div className="imgsrc">
-                    <img src={element.profilePicture} className="profimg" />
+                    <img src={element.profilePicture} className="profimg" alt="profile" />
                     <span style={{ color: color }} className="leftitemsname2">
                       {element.name}
                     </span>

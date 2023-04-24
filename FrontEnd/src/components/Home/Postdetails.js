@@ -3,6 +3,7 @@ import "./Postdetails.css";
 import Comment from "./Comment";
 
 import { useRequest } from "../../hooks/request-hook";
+import { Link } from "react-router-dom";
 
 const Postdetails = (props) => {
   let {
@@ -18,7 +19,7 @@ const Postdetails = (props) => {
     likeArr,
     setCha,
   } = props;
-  console.log("heloooooo", postMongoid);
+  // console.log("heloooooo", postMongoid);
   const [count, setCount] = useState(comments);
   const [likecounter, setLikecounter] = useState(likes);
   const [lvalue, setLvalue] = useState(0);
@@ -84,7 +85,7 @@ const Postdetails = (props) => {
           "http://localhost:5002/posts/likeupdate",
           "POST",
           JSON.stringify({
-            postid: postid,
+            postMongoid: postMongoid,
             userid: localStorage.getItem("user"),
           }),
           {
@@ -103,7 +104,7 @@ const Postdetails = (props) => {
           "http://localhost:5002/posts/likeupdate",
           "POST",
           JSON.stringify({
-            postid: postid,
+            postMongoid: postMongoid,
             userid: localStorage.getItem("user"),
           }),
           {
@@ -258,6 +259,7 @@ const Postdetails = (props) => {
   return (
     <div className="postcontainer">
       <div className="posttopbar">
+      <Link to={`/profile/${postid}`} style={{ textDecoration: 'none', color: 'inherit' }}>
         <div className="toppppleftbarr">
           <div className="postleftsidetop">
             <img src={picture} alt="Loading" className="postimageleft" />
@@ -266,9 +268,10 @@ const Postdetails = (props) => {
             <p className="nameuser fw-bold">{sendName}</p>
           </div>
           <div className="postrighttime">
-            <p className="text-muted">{timeago} ago</p>
+          <p className="text-muted">{timeago} ago</p>
           </div>
-        </div>
+          </div>
+          </Link>
         <div className="topppprightbarr">
           {localStorage.getItem("user") === postid ? (
             <div className="postrightdelete" onClick={deletePostHandler}>

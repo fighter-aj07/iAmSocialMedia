@@ -11,6 +11,25 @@
   flex: 9;
 }
 
+.profileFollowBtn{
+ margin-top: 10px;
+  background-color: #1877f2;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.55rem 1.2rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+.profileFollowBtn:hover {
+  background-color: #3b5998;
+}
+
 .profileCover {
   height: 320px;
   position: relative;

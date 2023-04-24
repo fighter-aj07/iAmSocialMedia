@@ -23,6 +23,7 @@ export default function Profile() {
   const [csstyle, setCsstyle] = useState("none");
   const [image1, setImage1] = useState(null);
   const [added, setAdded] = useState(false);
+  const [follow, setFollow] = useState("Follow");
   // const [useriddd, setUseriddd] = useState(false);
   console.log(mode);
   const { isdarkMode } = mode;
@@ -40,7 +41,7 @@ export default function Profile() {
     setDivblock("none");
     setCsstyle("flex");
   };
-  const addpostHandller = async (e) => {
+  const updateProfHandller = async (e) => {
     e.preventDefault();
     // console.log("meet", formData);
     if (localStorage.hasOwnProperty("user")) {
@@ -55,12 +56,45 @@ export default function Profile() {
         setAdded(true);
         setDivblock("flex");
         setCsstyle("none");
+        setImage1(null);
       } catch (err) {
         console.log(err);
       }
     }
   };
+
+  const addFriend = async (e) => {
+    e.preventDefault();
+    // alert("Friend Request Sent");
+    if (localStorage.hasOwnProperty("user")) {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:5002/profile/addFriend",
+          "POST",
+          JSON.stringify({
+            userid: localStorage.getItem("user"),
+            friendid: id,
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+        console.log(responseData);
+        //flip follow
+        if (follow === "Follow") {
+          setFollow("Unfollow");
+        } else {
+          setFollow("Follow");
+        }
+        window.location.reload();
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
   useEffect(() => {
+    console.log("rendering", useridpr);
     const fetchItems = async () => {
       try {
         const responseData = await sendRequest(
@@ -71,10 +105,20 @@ export default function Profile() {
             "Content-Type": "application/json",
           }
         );
+        console.log(responseData[9].userid);
         setUsers(responseData);
-        setCurrentUser(responseData.find((user) => user.userid === id));
-
-        setMyname(responseData.find((user) => user.userid === id).name);
+        //set current user
+        let curr = responseData.find((user) => user.userid === id);
+        setCurrentUser(curr);
+        //if user.friends contains id then set follow to unfollow
+        if (curr.friends.includes(localStorage.getItem("user"))) {
+          console.log("unfollow");
+          setFollow("Unfollow");
+        } else {
+          console.log("follow");
+          setFollow("Follow");
+        }
+        setMyname(curr.name);
       } catch (err) {
         console.log(err);
       }
@@ -104,7 +148,7 @@ export default function Profile() {
   }, [isdarkMode]);
   return (
     <>
-      <Navbar />
+      <Navbar image1={image1} />
       <div style={{ color: color }}>
         <div className="profile">
           <Leftsidebar />
@@ -148,7 +192,7 @@ export default function Profile() {
                 <img className="newimggg mx-3" src={image1} alt="Loading" />
                 <button
                   className="addpost btn btn-outline-info"
-                  onClick={addpostHandller}
+                  onClick={updateProfHandller}
                   disabled={image1 ? false : true}
                 >
                   Change Image
@@ -157,10 +201,15 @@ export default function Profile() {
               <div className="profileInfo">
                 <h4 className="profileInfoName">{myname}</h4>
                 <span className="profileInfoDesc">Hello my friends!</span>
+                {localStorage.getItem("user") !== id ? (
+                  <button className="profileFollowBtn" onClick={addFriend}>
+                    {follow}
+                  </button>
+                ) : null}
               </div>
             </div>
             <div className="profileRightBottom">
-              <Middlebar dispID={useridpr} />
+              <Middlebar dispID={useridpr} image22={image1} />
               <ProfileRightBar
                 handleNameChange={handleNameChange}
                 id={id}

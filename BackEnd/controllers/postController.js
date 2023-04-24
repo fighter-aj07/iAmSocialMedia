@@ -38,7 +38,7 @@ const addpost = async (req, res, next) => {
     imageUrl: cloudimageurl,
     likes: likes,
     comments: comments,
-    comment: comment,
+    comment: [],
     likeArr: likeArr,
   });
   try {
@@ -53,18 +53,15 @@ const addpost = async (req, res, next) => {
 
 const likeupdate = async (req, res) => {
   try {
-    const { postid, userid } = req.body;
-
-    const post = await postSc.find({ userid: postid });
-    //sTORE OBJ ID FROM POST
-    const objId = post[0]._id;
-    console.log("----------");
-
+    const { postMongoid, userid } = req.body;
+    // const objId = mongoose.Types.ObjectId(postMongoid);
+    const post = await postSc.find({ _id: postMongoid });
+    console.log(post[0].likeArr);
     //check likeArr if it contains userid or it is empty
     if (post[0].likeArr.includes(userid)) {
       //if it contains userid then remove it
       const updatedPost = await postSc.findByIdAndUpdate(
-        objId,
+        postMongoid,
         {
           $pull: { likeArr: userid },
           $inc: { likes: -1 },
@@ -75,7 +72,7 @@ const likeupdate = async (req, res) => {
     } else {
       //if it does not contain userid then add it
       const updatedPost = await postSc.findByIdAndUpdate(
-        objId,
+        postMongoid,
         {
           $push: { likeArr: userid },
           $inc: { likes: 1 },

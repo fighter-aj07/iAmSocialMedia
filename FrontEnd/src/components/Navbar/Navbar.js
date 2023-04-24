@@ -7,7 +7,8 @@ import { handledarkMode } from "../../store/actions/darkModeAction";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useRequest } from "../../hooks/request-hook";
-export default function Navbar() {
+export default function Navbar(props) {
+  const { image1 } = props;
   const { sendRequest } = useRequest();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -119,7 +120,7 @@ export default function Navbar() {
       }
     };
     fetchItems();
-  }, []);
+  }, [image1]);
 
   useEffect(() => {
     document.body.style.background = isdarkMode
