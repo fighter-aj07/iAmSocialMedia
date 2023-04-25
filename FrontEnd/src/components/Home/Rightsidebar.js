@@ -49,6 +49,7 @@ const Rightsidebar = () => {
         <div className="lastt">
           <Carousel>
             <Carousel.Item interval={5000}>
+              <a href="https://www.boat-lifestyle.com/?utm_source=Affiliates&utm_medium=iCubesWire&utm_campaign=iCubesWire_dec2020" target="_blank" rel="noreferrer">
               <img
                 className="d-block w-100"
                 src="https://newspaperads.ads2publish.com/wp-content/uploads/2021/03/boat-your-favourite-indian-brand-by-karthik-aryan-kiara-advani-hardik-pandye-k-l-rahul-ad-times-of-india-mumbai-31-03-2021-scaled.jpg"
@@ -60,9 +61,11 @@ const Rightsidebar = () => {
                   borderRadius: "20px",
                 }}
               />
+              </a>
               <Carousel.Caption></Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item interval={5000}>
+            <a href="https://www.swiggy.com/" target="_blank" rel="noreferrer">
               <img
                 className="d-block"
                 src="https://i.pinimg.com/550x/03/6e/4a/036e4ac5e17c4408d8efe8ac6f6b7633.jpg"
@@ -74,8 +77,10 @@ const Rightsidebar = () => {
                   borderRadius: "20px",
                 }}
               />
+            </a>
             </Carousel.Item>
             <Carousel.Item interval={5000}>
+              <a href="https://unacademy.com/" target="_blank" rel="noreferrer">
               <img
                 className="d-block"
                 src="https://pbs.twimg.com/media/EeLLkVkUEAQrZDN.png"
@@ -88,6 +93,7 @@ const Rightsidebar = () => {
                 }}
               />
               <Carousel.Caption></Carousel.Caption>
+            </a>
             </Carousel.Item>
           </Carousel>
         </div>
