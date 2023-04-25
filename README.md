@@ -9,6 +9,8 @@ step3:- "npm start"
 Step4:- it will hosted on port localhost3000
 https://backend-afak.onrender.com
 
+docker: https://hub.docker.com/r/darshak4278/iamsocial/tags
+netlify: https://iamsocialmedia.netlify.app/
 
 
 
