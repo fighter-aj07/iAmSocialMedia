@@ -7,7 +7,7 @@ import Carousel from "react-bootstrap/Carousel";
 const Rightsidebar = () => {
   const { sendRequest } = useRequest();
   const [userdata, setUserdata] = useState([]);
-
+  const [friendlist, setFriendlist] = useState([]);
   useEffect(() => {
     const fetchItems = async () => {
       try {
@@ -22,6 +22,13 @@ const Rightsidebar = () => {
           }
         );
         setUserdata(responseData);
+        //add details of friends in friendlist
+        for (let i = 0; i < responseData.length; i++) {
+          if (responseData[i].friends.includes(localStorage.getItem("user"))) {
+            setFriendlist((friendlist) => [...friendlist, responseData[i]]);
+          }
+        }
+
       } catch (err) {
         console.log(err);
       }
@@ -41,9 +48,8 @@ const Rightsidebar = () => {
             />
           </div>
           <div className="firsttright">
-            <span className="fw-bold">Meet Jain</span>
-            <span> and </span> <span className="fw-bold">3 other friends </span>
-            <span>have their Birthday today !</span>
+            <span >No </span>
+            <span>Birthdays today !</span>
           </div>
         </div>
         <div className="lastt">
@@ -103,7 +109,8 @@ const Rightsidebar = () => {
           <li className="rightitems">
             <p className="onlinefr">Online Friends</p>
           </li>
-          {userdata.slice(1).map((element) => {
+          {//only display my friends          
+          friendlist.splice(1).map((element) => {
             return (
               <li className="rightitems">
                 <div className="imgsrc">
