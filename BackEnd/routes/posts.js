@@ -112,7 +112,7 @@ router.post("/updatepostscomment", postController.updatepostscomment);
 /**
  * @swagger
  * /posts/deletePost:
- *   get:
+ *   delete:
  *     parameters: 
  *       -  in: query
  *          name: id
@@ -150,5 +150,50 @@ router.post("/updatepostscomment", postController.updatepostscomment);
  *                    example: post can not be deleted!
  * 
  */
+
+// Get all posts
+
+/**
+ * @swagger
+ * /posts/deletePost:
+ *   get:
+ *     parameters: 
+ *       -  in: query
+ *          name: id
+ *          schema: 
+ *            type: string
+ *          required: true
+ *          description: get post
+ *     summary: getting the post.
+ *     responses:
+ *       200:
+ *         description: API to add post.
+ *         content:
+ *           application/json:
+ *             schema: 
+ *                type: object
+ *                properties:
+ *                  status: 
+ *                    type: integer
+ *                    example: 200
+ *                  message: 
+ *                    type: string
+ *                    example: Add post!
+ *       400:
+ *         description: add post.
+ *         content:
+ *           application/json:
+ *             schema: 
+ *                type: object
+ *                properties:
+ *                  status:
+ *                    type: integer
+ *                    example: 400
+ *                  message:
+ *                    type: string
+ *                    example: post can not be Added!
+ *
+ */
+
 router.delete("/deletePost", postController.deletePost);
 module.exports = router;
