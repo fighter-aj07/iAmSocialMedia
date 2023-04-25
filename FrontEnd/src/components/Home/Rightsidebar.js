@@ -7,7 +7,7 @@ import Carousel from "react-bootstrap/Carousel";
 const Rightsidebar = () => {
   const { sendRequest } = useRequest();
   const [userdata, setUserdata] = useState([]);
-
+  const [friendlist, setFriendlist] = useState([]);
   useEffect(() => {
     const fetchItems = async () => {
       try {
@@ -22,6 +22,13 @@ const Rightsidebar = () => {
           }
         );
         setUserdata(responseData);
+        //add details of friends in friendlist
+        for (let i = 0; i < responseData.length; i++) {
+          if (responseData[i].friends.includes(localStorage.getItem("user"))) {
+            setFriendlist((friendlist) => [...friendlist, responseData[i]]);
+          }
+        }
+
       } catch (err) {
         console.log(err);
       }
@@ -41,14 +48,14 @@ const Rightsidebar = () => {
             />
           </div>
           <div className="firsttright">
-            <span className="fw-bold">Meet Jain</span>
-            <span> and </span> <span className="fw-bold">3 other friends </span>
-            <span>have their Birthday today !</span>
+            <span >No </span>
+            <span>Birthdays today !</span>
           </div>
         </div>
         <div className="lastt">
           <Carousel>
             <Carousel.Item interval={5000}>
+              <a href="https://www.boat-lifestyle.com/?utm_source=Affiliates&utm_medium=iCubesWire&utm_campaign=iCubesWire_dec2020" target="_blank" rel="noreferrer">
               <img
                 className="d-block w-100"
                 src="https://newspaperads.ads2publish.com/wp-content/uploads/2021/03/boat-your-favourite-indian-brand-by-karthik-aryan-kiara-advani-hardik-pandye-k-l-rahul-ad-times-of-india-mumbai-31-03-2021-scaled.jpg"
@@ -60,9 +67,11 @@ const Rightsidebar = () => {
                   borderRadius: "20px",
                 }}
               />
+              </a>
               <Carousel.Caption></Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item interval={5000}>
+            <a href="https://www.swiggy.com/" target="_blank" rel="noreferrer">
               <img
                 className="d-block"
                 src="https://i.pinimg.com/550x/03/6e/4a/036e4ac5e17c4408d8efe8ac6f6b7633.jpg"
@@ -74,8 +83,10 @@ const Rightsidebar = () => {
                   borderRadius: "20px",
                 }}
               />
+            </a>
             </Carousel.Item>
             <Carousel.Item interval={5000}>
+              <a href="https://unacademy.com/" target="_blank" rel="noreferrer">
               <img
                 className="d-block"
                 src="https://pbs.twimg.com/media/EeLLkVkUEAQrZDN.png"
@@ -88,6 +99,7 @@ const Rightsidebar = () => {
                 }}
               />
               <Carousel.Caption></Carousel.Caption>
+            </a>
             </Carousel.Item>
           </Carousel>
         </div>
@@ -97,7 +109,8 @@ const Rightsidebar = () => {
           <li className="rightitems">
             <p className="onlinefr">Online Friends</p>
           </li>
-          {userdata.slice(1).map((element) => {
+          {//only display my friends          
+          friendlist.splice(1).map((element) => {
             return (
               <li className="rightitems">
                 <div className="imgsrc">

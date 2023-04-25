@@ -13,6 +13,8 @@ change directory to BackEnd and do the following
 Step1:- then "npm i"
 step2:- "nodemon server.js"
 
+docker: https://hub.docker.com/r/darshak4278/iamsocial/tags
+netlify: https://iamsocialmedia.netlify.app/
 
 
 

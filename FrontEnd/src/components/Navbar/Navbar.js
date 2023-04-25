@@ -34,7 +34,7 @@ export default function Navbar(props) {
 
   const logoutHandler = () => {
     localStorage.removeItem("user");
-    navigate("/login");
+    navigate("/");
     window.location.reload();
   };
 
