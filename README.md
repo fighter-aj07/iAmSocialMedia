@@ -30,6 +30,8 @@ Hosted Backendhttps://backend-afak.onrender.com
 
 Explore website join & support Indian socialmedia group.
 
+Screen Shots
+![image](https://github.com/fighter-aj07/iAmSocialMedia/assets/93673079/744f21ed-7159-4266-a7db-78071abd1cef)
 
 
 
